@@ -6690,7 +6690,7 @@ const TIEMPOS_RUSO = [
   { titulo: 'Pasado — perfectivo',                  color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Futuro — imperfectivo (compuesto)',     color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Futuro — perfectivo (simple)',          color1: '#9a9a98', color2: '#7a7a78' },
-  { titulo: 'Imperativo',                          color1: '#9a9a98', color2: '#7a7a78' }
+  { titulo: 'Imperativo / Condicional',              color1: '#9a9a98', color2: '#7a7a78' }
 ];
 
 // Contenido de verbos en ruso, por id de sub-tema. Cada verbo carga solo
@@ -6720,7 +6720,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',       f: 'Будь!' },
           { p: 'ustedes',  f: 'Будьте!' }
-        ], nota: 'Poco usado solo, pero muy común en fórmulas fijas: "Будь добр / Будьте добры" (por favor, literal "sé/sean amable[s]").' }
+        ], nota: 'Poco usado solo, pero muy común en fórmulas fijas: "Будь добр / Будьте добры" (por favor, literal "sé/sean amable[s]"). — Condicional: бы + este mismo pasado (ej. "был бы" = habría/sería...).' }
     ]
   },
 
@@ -6755,7 +6755,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'сможете' },
           { p: 'они',         f: 'смогут' }
         ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'мочь es un verbo modal — no tiene imperativo natural (no se dice "¡puede!" en ruso tampoco).' }
+      { subtitulo: '(no aplica)', filas: [], nota: 'мочь es un verbo modal — no tiene imperativo natural (no se dice "¡puede!" en ruso tampoco). — Condicional: бы + este mismo pasado (ej. "мог бы" = habría/sería...).' }
     ]
   },
   'khotet': {
@@ -6789,7 +6789,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'захотите' },
           { p: 'они',         f: 'захотят' }
         ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'хотеть es modal — no tiene imperativo real ("¡quiere!" no existe en ruso tampoco).' }
+      { subtitulo: '(no aplica)', filas: [], nota: 'хотеть es modal — no tiene imperativo real ("¡quiere!" no existe en ruso tampoco). — Condicional: бы + este mismo pasado (ej. "хотел бы" = habría/sería...).' }
     ]
   },
 
@@ -6835,7 +6835,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Делай! / Сделай!' },
           { p: 'ustedes', f: 'Делайте! / Сделайте!' }
-        ], nota: 'Imperfectivo = pedido de proceso/repetido; perfectivo = pedido de una vez, puntual' }
+        ], nota: 'Imperfectivo = pedido de proceso/repetido; perfectivo = pedido de una vez, puntual — Condicional: бы + este mismo pasado (ej. "делал бы" = habría/sería...).' }
     ]
   },
   'davat': {
@@ -6879,7 +6879,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Давай! / Дай!' },
           { p: 'ustedes', f: 'Давайте! / Дайте!' }
-        ], nota: '"Дайте, пожалуйста..." (Deme, por favor...) es una frase clave de hotelería/mostrador' }
+        ], nota: '"Дайте, пожалуйста..." (Deme, por favor...) es una frase clave de hotelería/mostrador — Condicional: бы + este mismo pasado (ej. "давал бы" = habría/sería...).' }
     ]
   },
   'rabotat': {
@@ -6923,7 +6923,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Работай! / Поработай!' },
           { p: 'ustedes', f: 'Работайте! / Поработайте!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "работал бы" = habría/sería...).' }
     ]
   },
   'chitat': {
@@ -6967,7 +6967,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Читай! / Прочитай!' },
           { p: 'ustedes', f: 'Читайте! / Прочитайте!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "читал бы" = habría/sería...).' }
     ]
   },
 
@@ -7013,7 +7013,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Говори! / Скажи!' },
           { p: 'ustedes', f: 'Говорите! / Скажите!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "говорил бы" = habría/sería...).' }
     ]
   },
   'videt': {
@@ -7054,7 +7054,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'увидите' },
           { p: 'они',         f: 'увидят' }
         ] },
-      { subtitulo: '(poco usado)', filas: [], nota: 'видеть es un verbo de percepción — el imperativo directo es raro/forzado en ruso (parecido a "¡ve!" en español, casi no se usa así).' }
+      { subtitulo: '(poco usado)', filas: [], nota: 'видеть es un verbo de percepción — el imperativo directo es raro/forzado en ruso (parecido a "¡ve!" en español, casi no se usa así). — Condicional: бы + este mismo pasado (ej. "видел бы" = habría/sería...).' }
     ]
   },
   'lyubit': {
@@ -7098,7 +7098,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Люби! / Полюби!' },
           { p: 'ustedes', f: 'Любите! / Полюбите!' }
-        ], nota: 'Poco usado como pedido de servicio — más en contexto emocional/personal' }
+        ], nota: 'Poco usado como pedido de servicio — más en contexto emocional/personal — Condicional: бы + este mismo pasado (ej. "любил бы" = habría/sería...).' }
     ]
   },
   'prosit': {
@@ -7142,7 +7142,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Проси! / Попроси!' },
           { p: 'ustedes', f: 'Просите! / Попросите!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "просил бы" = habría/sería...).' }
     ]
   },
   'smotret': {
@@ -7186,7 +7186,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Смотри! / Посмотри!' },
           { p: 'ustedes', f: 'Смотрите! / Посмотрите!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "смотрел бы" = habría/sería...).' }
     ]
   },
   'platit': {
@@ -7230,7 +7230,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Плати! / Заплати!' },
           { p: 'ustedes', f: 'Платите! / Заплатите!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "платил бы" = habría/sería...).' }
     ]
   },
 
@@ -7280,7 +7280,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Называй! / Назови!' },
           { p: 'ustedes', f: 'Называйте! / Назовите!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "называл бы" = habría/sería...).' }
     ]
   },
   'odevat': {
@@ -7324,7 +7324,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Одевай! / Одень!' },
           { p: 'ustedes', f: 'Одевайте! / Оденьте!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "одевал бы" = habría/sería...).' }
     ]
   },
   'vstrechat': {
@@ -7368,7 +7368,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Встречай! / Встреть!' },
           { p: 'ustedes', f: 'Встречайте! / Встретьте!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "встречал бы" = habría/sería...).' }
     ]
   },
 
@@ -7400,7 +7400,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'они',         f: 'будут находиться' }
         ] },
       { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
-      { subtitulo: '(no se usa)', filas: [], nota: 'Verbo de estado/ubicación — no tiene imperativo real ("estate ubicado" no se dice).' }
+      { subtitulo: '(no se usa)', filas: [], nota: 'Verbo de estado/ubicación — no tiene imperativo real ("estate ubicado" no se dice). — Condicional: бы + este mismo pasado (ej. "находился бы" = habría/sería...).' }
     ]
   },
   'nravitsya': {
@@ -7432,7 +7432,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'понравится' },
           { p: 'plural', f: 'понравятся' }
         ], nota: 'De nuevo concuerda con lo que va a gustar, no con la persona' },
-      { subtitulo: '(no aplica)', filas: [], nota: 'Verbo de sentimiento — no tiene imperativo real ("¡gusta!" no existe).' }
+      { subtitulo: '(no aplica)', filas: [], nota: 'Verbo de sentimiento — no tiene imperativo real ("¡gusta!" no existe). — Condicional: бы + este mismo pasado (ej. "нравился бы" = habría/sería...).' }
     ]
   },
   'boyatsya': {
@@ -7464,7 +7464,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes (negativo)', filas: [
           { p: 'tú',      f: 'Не бойся!' },
           { p: 'ustedes', f: 'Не бойтесь!' }
-        ], nota: 'Casi siempre se usa en negativo, como frase de consuelo' }
+        ], nota: 'Casi siempre se usa en negativo, como frase de consuelo — Condicional: бы + este mismo pasado (ej. "боялся бы" = habría/sería...).' }
     ]
   },
 
@@ -7504,7 +7504,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Иди! / Пойди!' },
           { p: 'ustedes', f: 'Идите! / Пойдите!' }
-        ] }
+        ], nota: 'Condicional: бы + este mismo pasado (ej. "шёл бы" = habría/sería...).' }
     ]
   },
   'hodit': {
@@ -7536,7 +7536,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Ходи!' },
           { p: 'ustedes', f: 'Ходите!' }
-        ], nota: 'Poco usado como pedido — más como descripción de hábito' }
+        ], nota: 'Poco usado como pedido — más como descripción de hábito — Condicional: бы + este mismo pasado (ej. "ходил бы" = habría/sería...).' }
     ]
   },
   'ekhat_poekhat': {
@@ -7573,7 +7573,7 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Поезжай!' },
           { p: 'ustedes', f: 'Поезжайте!' }
-        ], nota: 'ехать no tiene imperativo propio natural — se usa el de поехать' }
+        ], nota: 'ехать no tiene imperativo propio natural — se usa el de поехать — Condicional: бы + este mismo pasado (ej. "ехал бы" = habría/sería...).' }
     ]
   },
   'ezdit': {
@@ -7602,7 +7602,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'они',         f: 'будут ездить' }
         ] },
       { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
-      { subtitulo: '(poco usado)', filas: [], nota: 'Rara vez se usa como pedido directo — más como descripción de hábito.' }
+      { subtitulo: '(poco usado)', filas: [], nota: 'Rara vez se usa como pedido directo — más como descripción de hábito. — Condicional: бы + este mismo pasado (ej. "ездил бы" = habría/sería...).' }
     ]
   }
 };
