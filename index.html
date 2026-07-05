@@ -9,7 +9,7 @@
 <title>Plantilla Idiomas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
 /* =====================================================================
@@ -53,9 +53,9 @@
   --card-border-w: 3px;
 
   /* Fuente */
-  /* Quicksand no cubre cirílico: el navegador cae automáticamente a Comfortaa
-     (misma familia geométrica/redondeada) letra por letra sin marcar idioma a mano */
-  --font: 'Quicksand', 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  /* Una sola fuente para toda la app (latino + cirílico), sin fallback
+     mezclado — Nunito cubre bien los dos alfabetos. */
+  --font: 'Nunito', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
 
 html, body {
@@ -1188,6 +1188,12 @@ body.unidad-personas .tarjeta-titulo {
   align-items: start; /* el alto por fila ahora lo empareja JS con la medición real */
 }
 
+/* Verbos en ruso: 6 tiempos reales (sin Infinitivo ni Nota de aspecto),
+   grilla de 3×2 en vez de 4×2. */
+.mesa-fija-ruso {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .tarjeta-fija .tarjeta-titulo {
   cursor: default;
   text-align: center;
@@ -1391,7 +1397,7 @@ function hablar(texto) {
   window.speechSynthesis.cancel(); // corta cualquier lectura previa en curso
   const utter = new SpeechSynthesisUtterance(texto);
   utter.lang = IDIOMA_TTS;
-  utter.rate = 0.92; // levemente más lento, para entrenar el oído
+  utter.rate = 0.46; // la mitad de la velocidad anterior (0.92), para acostumbrar el oído
   window.speechSynthesis.speak(utter);
 }
 
@@ -1545,19 +1551,23 @@ const UNIDADES = {
         'delat': { nombre: 'Hacer', verbo: 'делать / сделать' },
         'davat':  { nombre: 'Dar',  verbo: 'давать / дать' },
         'rabotat': { nombre: 'Trabajar', verbo: 'работать / поработать' },
-        'chitat': { nombre: 'Leer', verbo: 'читать / прочитать' }
+        'chitat': { nombre: 'Leer', verbo: 'читать / прочитать' },
+        'nazyvat': { nombre: 'Llamar (a algo/alguien)', verbo: 'называть / назвать' },
+        'odevat':  { nombre: 'Vestir (a otro)', verbo: 'одевать / одеть' },
+        'vstrechat': { nombre: 'Recibir/Encontrarse con', verbo: 'встречать / встретить' }
       } },
       'J3': { nombre: '2ª Conjugación', subtemas: {
         'govorit': { nombre: 'Hablar/Decir', verbo: 'говорить / сказать' },
         'videt':   { nombre: 'Ver',          verbo: 'видеть / увидеть' },
         'lyubit':  { nombre: 'Amar/Gustar',  verbo: 'любить / полюбить' },
-        'prosit':  { nombre: 'Pedir',        verbo: 'просить / попросить' }
+        'prosit':  { nombre: 'Pedir',        verbo: 'просить / попросить' },
+        'smotret': { nombre: 'Mirar',        verbo: 'смотреть / посмотреть' },
+        'platit':  { nombre: 'Pagar',        verbo: 'платить / заплатить' }
       } },
-      'J4': { nombre: 'Reflexivos', subtemas: {
-        'nazyvatsya':  { nombre: 'Llamarse',       verbo: 'называться / назваться' },
+      'J4': { nombre: 'Reflexivos (genuinos, sin base sin -ся)', subtemas: {
         'nakhoditsya': { nombre: 'Estar situado',  verbo: 'находиться' },
-        'odevatsya':   { nombre: 'Vestirse',       verbo: 'одеваться / одеться' },
-        'vstrechatsya': { nombre: 'Encontrarse/Reunirse', verbo: 'встречаться / встретиться' }
+        'nravitsya':   { nombre: 'Gustar',          verbo: 'нравиться / понравиться' },
+        'boyatsya':    { nombre: 'Tener miedo',     verbo: 'бояться' }
       } },
       'J5': { nombre: 'Movimiento', subtemas: {
         'idti_poyti':    { nombre: 'Ir a pie (una vez)',       verbo: 'идти / пойти' },
@@ -1649,7 +1659,8 @@ const CONTENIDO_TARJETAS = {
     { id: 'subjuntivo-cuando-usar',        tipo: 'informatica', titulo: 'Subjuntivo — cuándo se usa',                  render: renderTarjetaSubjuntivoCuandoUsar },
     { id: 'subjuntivo-presente-regulares', tipo: 'columnas',    titulo: 'Subjuntivo presente — verbos regulares',      render: renderTarjetaSubjuntivoPresenteRegulares },
     { id: 'subjuntivo-presente-irregulares', tipo: 'columnas',  titulo: 'Subjuntivo presente — verbos irregulares clave', render: renderTarjetaSubjuntivoPresenteIrregulares },
-    { id: 'nado-nuzhno',                   tipo: 'columnas',    titulo: 'Надо / нужно (hace falta / hay que)',         render: renderTarjetaNadoNuzhno }
+    { id: 'nado-nuzhno',                   tipo: 'columnas',    titulo: 'Надо / нужно (hace falta / hay que)',         render: renderTarjetaNadoNuzhno },
+    { id: 'dolzhen',                       tipo: 'columnas',    titulo: 'Должен (deber / tener que)',                   render: renderTarjetaDolzhen }
   ],
   'E-E3': [
     { id: 'interrogacion-niveles', tipo: 'columnas', titulo: 'Interrogación: 3 niveles de registro', render: renderTarjetaInterrogacionNiveles },
@@ -3871,6 +3882,23 @@ function renderTarjetaNadoNuzhno() {
       { fr: 'мне надо / мне нужно',     es: 'me hace falta / necesito',  extra: 'Мне надо идти. (Me tengo que ir.)' },
       { fr: 'вам нужно + infinitivo',   es: 'usted necesita',            extra: 'Вам нужно подписать здесь. (Usted necesita firmar aquí.)' },
       { fr: 'не надо',                  es: 'no hace falta / no hay que', extra: 'Не надо беспокоиться. (No hace falta preocuparse.)' }
+    ]
+  });
+}
+
+// должен: forma corta de adjetivo (como свободен/готов, ver F4), NO se
+// conjuga como verbo — cambia por género/número de quien tiene la
+// obligación, no por persona. + infinitivo.
+function renderTarjetaDolzhen() {
+  return crearTarjetaVocabularioExtra({
+    titulo: 'Должен + infinitivo (concuerda con la persona, no se conjuga)',
+    columnaExtra: 'Ejemplo',
+    filas: [
+      { fr: 'должен (yo/tú/él, varón)',   es: 'debo/debes/debe',   extra: 'Я должен идти. (Yo [varón] debo ir.)' },
+      { fr: 'должна (yo/tú/ella, mujer)', es: 'debo/debes/debe',   extra: 'Я должна идти. (Yo [mujer] debo ir.)' },
+      { fr: 'должно (eso, neutro)',       es: 'debe (una cosa)',   extra: 'Это должно быть готово. (Esto debe estar listo.)' },
+      { fr: 'должны (nosotros/ustedes/ellos)', es: 'debemos/deben', extra: 'Вы должны заполнить форму. (Usted debe completar el formulario.)' },
+      { fr: 'должен vs. надо/нужно',      es: 'diferencia clave',  extra: 'должен concuerda con la persona (свободен/готов); надо/нужно son invariables, van solas.' }
     ]
   });
 }
@@ -6657,14 +6685,12 @@ const VERBOS_DATA = {
 // la paleta cuando se revise el resto de la app.
 // ═══════════════════════════════════════════════════════════════════════
 const TIEMPOS_RUSO = [
-  { titulo: 'Infinitivo',                          color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Presente (imperfectivo)',              color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Pasado — imperfectivo',                color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Pasado — perfectivo',                  color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Futuro — imperfectivo (compuesto)',     color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Futuro — perfectivo (simple)',          color1: '#9a9a98', color2: '#7a7a78' },
-  { titulo: 'Imperativo',                          color1: '#9a9a98', color2: '#7a7a78' },
-  { titulo: 'Nota de aspecto',                      color1: '#9a9a98', color2: '#7a7a78' }
+  { titulo: 'Imperativo',                          color1: '#9a9a98', color2: '#7a7a78' }
 ];
 
 // Contenido de verbos en ruso, por id de sub-tema. Cada verbo carga solo
@@ -6674,7 +6700,6 @@ const VERBOS_DATA_RUSO = {
   // ── J1 Auxiliares ──────────────────────────────────────────────────
   'byt': {
     tiempos: [
-      { subtitulo: 'быть (sin pareja aspectual)', filas: [], nota: 'быть es aspectualmente "no pareado" — no tiene un perfectivo propio.' },
       { subtitulo: '(se omite)', filas: [], nota: 'En presente, "ser/estar" casi siempre se omite: "Я администратор" (Yo [soy] recepcionista). "Есть" existe pero se usa poco, sobre todo para "hay/existe".' },
       { subtitulo: 'yo era/estaba, etc.', filas: [
           { p: 'masc.',   f: 'был' },
@@ -6695,17 +6720,12 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',       f: 'Будь!' },
           { p: 'ustedes',  f: 'Будьте!' }
-        ], nota: 'Poco usado solo, pero muy común en fórmulas fijas: "Будь добр / Будьте добры" (por favor, literal "sé/sean amable[s]").' },
-      { subtitulo: 'быть es la base de todo', filas: [], nota: 'быть no tiene aspecto (no hay "hacer быть de una vez" vs "estar siendo") — por eso varias tarjetas de arriba quedan sin contenido.' }
+        ], nota: 'Poco usado solo, pero muy común en fórmulas fijas: "Будь добр / Будьте добры" (por favor, literal "sé/sean amable[s]").' }
     ]
   },
 
   'moch': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'мочь' },
-          { p: 'Perf.',   f: 'смочь' }
-        ], nota: 'poder (capacidad/posibilidad) — modal, muy irregular' },
       { subtitulo: 'yo puedo, etc.', filas: [
           { p: 'я',           f: 'могу' },
           { p: 'ты',          f: 'можешь' },
@@ -6735,16 +6755,11 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'сможете' },
           { p: 'они',         f: 'смогут' }
         ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'мочь es un verbo modal — no tiene imperativo natural (no se dice "¡puede!" en ruso tampoco).' },
-      { subtitulo: 'Вы могли бы...?', filas: [], nota: 'Frase de cortesía clave: "Вы могли бы мне помочь?" (¿Podría ayudarme?) — usa мочь con la partícula бы (ver Modos y Frases).' }
+      { subtitulo: '(no aplica)', filas: [], nota: 'мочь es un verbo modal — no tiene imperativo natural (no se dice "¡puede!" en ruso tampoco).' }
     ]
   },
   'khotet': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'хотеть' },
-          { p: 'Perf.',   f: 'захотеть' }
-        ], nota: 'querer (deseo) — conjugación mixta: singular como 1ª conjugación, plural como 2ª' },
       { subtitulo: 'yo quiero, etc.', filas: [
           { p: 'я',           f: 'хочу' },
           { p: 'ты',          f: 'хочешь' },
@@ -6774,18 +6789,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'захотите' },
           { p: 'они',         f: 'захотят' }
         ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'хотеть es modal — no tiene imperativo real ("¡quiere!" no existe en ruso tampoco).' },
-      { subtitulo: 'Я хотел(а) бы...', filas: [], nota: 'La forma de cortesía más usada de hotelería sale de acá + бы: "Я хотел бы забронировать номер" (Quisiera reservar una habitación) — ver Modos y Frases (бы).' }
+      { subtitulo: '(no aplica)', filas: [], nota: 'хотеть es modal — no tiene imperativo real ("¡quiere!" no existe en ruso tampoco).' }
     ]
   },
 
   // ── J2 1ª Conjugación ──────────────────────────────────────────────
   'delat': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'делать' },
-          { p: 'Perf.',   f: 'сделать' }
-        ], nota: 'hacer' },
       { subtitulo: 'yo hago, etc. (proceso/habitual)', filas: [
           { p: 'я',           f: 'делаю' },
           { p: 'ты',          f: 'делаешь' },
@@ -6825,16 +6835,11 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Делай! / Сделай!' },
           { p: 'ustedes', f: 'Делайте! / Сделайте!' }
-        ], nota: 'Imperfectivo = pedido de proceso/repetido; perfectivo = pedido de una vez, puntual' },
-      { subtitulo: 'делать vs. сделать', filas: [], nota: 'Делаю комнату (estoy arreglando/limpiando la habitación, en proceso) vs. Сделаю комнату (voy a dejar la habitación lista, de una vez).' }
+        ], nota: 'Imperfectivo = pedido de proceso/repetido; perfectivo = pedido de una vez, puntual' }
     ]
   },
   'davat': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'давать' },
-          { p: 'Perf.',   f: 'дать' }
-        ], nota: 'dar' },
       { subtitulo: 'yo doy, etc.', filas: [
           { p: 'я',           f: 'даю' },
           { p: 'ты',          f: 'даёшь' },
@@ -6874,16 +6879,11 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Давай! / Дай!' },
           { p: 'ustedes', f: 'Давайте! / Дайте!' }
-        ], nota: '"Дайте, пожалуйста..." (Deme, por favor...) es una frase clave de hotelería/mostrador' },
-      { subtitulo: 'давать vs. дать', filas: [], nota: 'Frase de servicio típica: "Дайте мне ключ" (Deme la llave — pedido puntual, perfectivo).' }
+        ], nota: '"Дайте, пожалуйста..." (Deme, por favor...) es una frase clave de hotelería/mostrador' }
     ]
   },
   'rabotat': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'работать' },
-          { p: 'Perf.',   f: 'поработать' }
-        ], nota: 'trabajar' },
       { subtitulo: 'yo trabajo, etc.', filas: [
           { p: 'я',           f: 'работаю' },
           { p: 'ты',          f: 'работаешь' },
@@ -6923,16 +6923,11 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Работай! / Поработай!' },
           { p: 'ustedes', f: 'Работайте! / Поработайте!' }
-        ] },
-      { subtitulo: 'Я работаю администратором', filas: [], nota: 'Con profesión se usa instrumental (ver unidad I): "Я работаю администратором" (Trabajo como recepcionista).' }
+        ] }
     ]
   },
   'chitat': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'читать' },
-          { p: 'Perf.',   f: 'прочитать' }
-        ], nota: 'leer' },
       { subtitulo: 'yo leo, etc.', filas: [
           { p: 'я',           f: 'читаю' },
           { p: 'ты',          f: 'читаешь' },
@@ -6972,18 +6967,13 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Читай! / Прочитай!' },
           { p: 'ustedes', f: 'Читайте! / Прочитайте!' }
-        ] },
-      { subtitulo: 'читать vs. прочитать', filas: [], nota: 'Я читаю книгу (estoy leyendo un libro, en proceso) vs. Я прочитал книгу (leí el libro entero, completo).' }
+        ] }
     ]
   },
 
   // ── J3 2ª Conjugación ──────────────────────────────────────────────
   'govorit': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'говорить' },
-          { p: 'Perf.',   f: 'сказать' }
-        ], nota: 'hablar / decir — par "supletivo" (raíces distintas, pasa en varios verbos comunes)' },
       { subtitulo: 'yo hablo, etc.', filas: [
           { p: 'я',           f: 'говорю' },
           { p: 'ты',          f: 'говоришь' },
@@ -7023,16 +7013,11 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Говори! / Скажи!' },
           { p: 'ustedes', f: 'Говорите! / Скажите!' }
-        ] },
-      { subtitulo: 'говорить vs. сказать', filas: [], nota: 'Он говорит по-русски (habla ruso, en general/habitual) vs. Он сказал спасибо (dijo gracias, una vez puntual).' }
+        ] }
     ]
   },
   'videt': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'видеть' },
-          { p: 'Perf.',   f: 'увидеть' }
-        ], nota: 'ver' },
       { subtitulo: 'yo veo, etc.', filas: [
           { p: 'я',           f: 'вижу' },
           { p: 'ты',          f: 'видишь' },
@@ -7069,16 +7054,11 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'увидите' },
           { p: 'они',         f: 'увидят' }
         ] },
-      { subtitulo: '(poco usado)', filas: [], nota: 'видеть es un verbo de percepción — el imperativo directo es raro/forzado en ruso (parecido a "¡ve!" en español, casi no se usa así).' },
-      { subtitulo: 'видеть vs. увидеть', filas: [], nota: 'Я вас не видел (no lo veía/no lo había visto — proceso) vs. Я вас увидел (lo vi — momento puntual).' }
+      { subtitulo: '(poco usado)', filas: [], nota: 'видеть es un verbo de percepción — el imperativo directo es raro/forzado en ruso (parecido a "¡ve!" en español, casi no se usa así).' }
     ]
   },
   'lyubit': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'любить' },
-          { p: 'Perf.',   f: 'полюбить' }
-        ], nota: 'amar / gustar mucho' },
       { subtitulo: 'yo amo/me gusta, etc.', filas: [
           { p: 'я',           f: 'люблю' },
           { p: 'ты',          f: 'любишь' },
@@ -7118,16 +7098,11 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Люби! / Полюби!' },
           { p: 'ustedes', f: 'Любите! / Полюбите!' }
-        ], nota: 'Poco usado como pedido de servicio — más en contexto emocional/personal' },
-      { subtitulo: 'Мне нравится vs. я люблю', filas: [], nota: 'Para gustos cotidianos ("me gusta") se usa más seguido "мне нравится" (con dativo); любить es más fuerte/afectivo.' }
+        ], nota: 'Poco usado como pedido de servicio — más en contexto emocional/personal' }
     ]
   },
   'prosit': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'просить' },
-          { p: 'Perf.',   f: 'попросить' }
-        ], nota: 'pedir' },
       { subtitulo: 'yo pido, etc.', filas: [
           { p: 'я',           f: 'прошу' },
           { p: 'ты',          f: 'просишь' },
@@ -7167,61 +7142,240 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Проси! / Попроси!' },
           { p: 'ustedes', f: 'Просите! / Попросите!' }
+        ] }
+    ]
+  },
+  'smotret': {
+    tiempos: [
+      { subtitulo: 'yo miro, etc.', filas: [
+          { p: 'я',           f: 'смотрю' },
+          { p: 'ты',          f: 'смотришь' },
+          { p: 'он/она/оно',  f: 'смотрит' },
+          { p: 'мы',          f: 'смотрим' },
+          { p: 'вы',          f: 'смотрите' },
+          { p: 'они',         f: 'смотрят' }
         ] },
-      { subtitulo: 'Попросите, пожалуйста...', filas: [], nota: 'Muy útil en hotelería: "Попросите администратора" (Pídale al recepcionista) / "Я хочу попросить об одолжении" (Quiero pedir un favor).' }
+      { subtitulo: 'yo miraba, etc.', filas: [
+          { p: 'masc.',  f: 'смотрел' },
+          { p: 'fem.',   f: 'смотрела' },
+          { p: 'neutro', f: 'смотрело' },
+          { p: 'plural', f: 'смотрели' }
+        ] },
+      { subtitulo: 'miré, etc.', filas: [
+          { p: 'masc.',  f: 'посмотрел' },
+          { p: 'fem.',   f: 'посмотрела' },
+          { p: 'neutro', f: 'посмотрело' },
+          { p: 'plural', f: 'посмотрели' }
+        ] },
+      { subtitulo: 'yo voy a mirar, etc.', filas: [
+          { p: 'я',           f: 'буду смотреть' },
+          { p: 'ты',          f: 'будешь смотреть' },
+          { p: 'он/она/оно',  f: 'будет смотреть' },
+          { p: 'мы',          f: 'будем смотреть' },
+          { p: 'вы',          f: 'будете смотреть' },
+          { p: 'они',         f: 'будут смотреть' }
+        ] },
+      { subtitulo: 'miraré, etc.', filas: [
+          { p: 'я',           f: 'посмотрю' },
+          { p: 'ты',          f: 'посмотришь' },
+          { p: 'он/она/оно',  f: 'посмотрит' },
+          { p: 'мы',          f: 'посмотрим' },
+          { p: 'вы',          f: 'посмотрите' },
+          { p: 'они',         f: 'посмотрят' }
+        ] },
+      { subtitulo: 'tú / ustedes', filas: [
+          { p: 'tú',      f: 'Смотри! / Посмотри!' },
+          { p: 'ustedes', f: 'Смотрите! / Посмотрите!' }
+        ] }
+    ]
+  },
+  'platit': {
+    tiempos: [
+      { subtitulo: 'yo pago, etc.', filas: [
+          { p: 'я',           f: 'плачу' },
+          { p: 'ты',          f: 'платишь' },
+          { p: 'он/она/оно',  f: 'платит' },
+          { p: 'мы',          f: 'платим' },
+          { p: 'вы',          f: 'платите' },
+          { p: 'они',         f: 'платят' }
+        ], nota: 'Consonante т cambia a ч solo en "я" (плачу)' },
+      { subtitulo: 'yo pagaba, etc.', filas: [
+          { p: 'masc.',  f: 'платил' },
+          { p: 'fem.',   f: 'платила' },
+          { p: 'neutro', f: 'платило' },
+          { p: 'plural', f: 'платили' }
+        ] },
+      { subtitulo: 'pagué, etc.', filas: [
+          { p: 'masc.',  f: 'заплатил' },
+          { p: 'fem.',   f: 'заплатила' },
+          { p: 'neutro', f: 'заплатило' },
+          { p: 'plural', f: 'заплатили' }
+        ] },
+      { subtitulo: 'yo voy a pagar, etc.', filas: [
+          { p: 'я',           f: 'буду платить' },
+          { p: 'ты',          f: 'будешь платить' },
+          { p: 'он/она/оно',  f: 'будет платить' },
+          { p: 'мы',          f: 'будем платить' },
+          { p: 'вы',          f: 'будете платить' },
+          { p: 'они',         f: 'будут платить' }
+        ] },
+      { subtitulo: 'pagaré, etc.', filas: [
+          { p: 'я',           f: 'заплачу' },
+          { p: 'ты',          f: 'заплатишь' },
+          { p: 'он/она/оно',  f: 'заплатит' },
+          { p: 'мы',          f: 'заплатим' },
+          { p: 'вы',          f: 'заплатите' },
+          { p: 'они',         f: 'заплатят' }
+        ] },
+      { subtitulo: 'tú / ustedes', filas: [
+          { p: 'tú',      f: 'Плати! / Заплати!' },
+          { p: 'ustedes', f: 'Платите! / Заплатите!' }
+        ] }
     ]
   },
 
-  // ── J4 Reflexivos ────────────────────────────────────────────────
-  'nazyvatsya': {
+  // ── (J2) Verbos con opción reflexiva — transitivos, cada uno con su
+  // par -ся correspondiente señalado en la nota. La versión con -ся
+  // (llamarse/vestirse/encontrarse mutuamente) se arma pegando -ся/-сь
+  // a cada una de estas mismas formas — no son verbos nuevos que
+  // aprender de cero, son estas mismas conjugaciones + la piecita.
+  'nazyvat': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'называться' },
-          { p: 'Perf.',   f: 'назваться' }
-        ], nota: 'llamarse (para cosas/lugares: "esto se llama...")' },
-      { subtitulo: 'se llama, etc.', filas: [
-          { p: 'я',           f: 'называюсь' },
-          { p: 'ты',          f: 'называешься' },
-          { p: 'он/она/оно',  f: 'называется' },
-          { p: 'мы',          f: 'называемся' },
-          { p: 'вы',          f: 'называетесь' },
-          { p: 'они',         f: 'называются' }
-        ], nota: 'La forma más usada de lejos es "он/она/оно называется" (3ª persona) — para hoteles, calles, platos, etc.' },
-      { subtitulo: 'se llamaba, etc.', filas: [
-          { p: 'masc.',  f: 'назывался' },
-          { p: 'fem.',   f: 'называлась' },
-          { p: 'neutro', f: 'называлось' },
-          { p: 'plural', f: 'назывались' }
+      { subtitulo: 'yo llamo/nombro, etc.', filas: [
+          { p: 'я',           f: 'называю' },
+          { p: 'ты',          f: 'называешь' },
+          { p: 'он/она/оно',  f: 'называет' },
+          { p: 'мы',          f: 'называем' },
+          { p: 'вы',          f: 'называете' },
+          { p: 'они',         f: 'называют' }
         ] },
-      { subtitulo: 'se llamó (pasó a llamarse), etc.', filas: [
-          { p: 'masc.',  f: 'назвался' },
-          { p: 'fem.',   f: 'назвалась' },
-          { p: 'neutro', f: 'назвалось' },
-          { p: 'plural', f: 'назвались' }
+      { subtitulo: 'yo llamaba/nombraba, etc.', filas: [
+          { p: 'masc.',  f: 'называл' },
+          { p: 'fem.',   f: 'называла' },
+          { p: 'neutro', f: 'называло' },
+          { p: 'plural', f: 'называли' }
         ] },
-      { subtitulo: 'se va a llamar, etc.', filas: [
-          { p: 'я',           f: 'буду называться' },
-          { p: 'ты',          f: 'будешь называться' },
-          { p: 'он/она/оно',  f: 'будет называться' },
-          { p: 'мы',          f: 'будем называться' },
-          { p: 'вы',          f: 'будете называться' },
-          { p: 'они',         f: 'будут называться' }
+      { subtitulo: 'llamé/nombré, etc.', filas: [
+          { p: 'masc.',  f: 'назвал' },
+          { p: 'fem.',   f: 'назвала' },
+          { p: 'neutro', f: 'назвало' },
+          { p: 'plural', f: 'назвали' }
         ] },
-      { subtitulo: 'se llamará, etc.', filas: [
-          { p: 'я',           f: 'назовусь' },
-          { p: 'ты',          f: 'назовёшься' },
-          { p: 'он/она/оно',  f: 'назовётся' },
-          { p: 'мы',          f: 'назовёмся' },
-          { p: 'вы',          f: 'назовётесь' },
-          { p: 'они',         f: 'назовутся' }
+      { subtitulo: 'yo voy a llamar/nombrar, etc.', filas: [
+          { p: 'я',           f: 'буду называть' },
+          { p: 'ты',          f: 'будешь называть' },
+          { p: 'он/она/оно',  f: 'будет называть' },
+          { p: 'мы',          f: 'будем называть' },
+          { p: 'вы',          f: 'будете называть' },
+          { p: 'они',         f: 'будут называть' }
         ] },
-      { subtitulo: '(poco usado)', filas: [], nota: 'Verbo mayormente usado en 3ª persona (para cosas/lugares) — el imperativo casi no se usa en la práctica.' },
-      { subtitulo: 'Отель называется...', filas: [], nota: 'Frase clave: "Отель называется..." (El hotel se llama...).' }
+      { subtitulo: 'llamaré/nombraré, etc.', filas: [
+          { p: 'я',           f: 'назову' },
+          { p: 'ты',          f: 'назовёшь' },
+          { p: 'он/она/оно',  f: 'назовёт' },
+          { p: 'мы',          f: 'назовём' },
+          { p: 'вы',          f: 'назовёте' },
+          { p: 'они',         f: 'назовут' }
+        ] },
+      { subtitulo: 'tú / ustedes', filas: [
+          { p: 'tú',      f: 'Называй! / Назови!' },
+          { p: 'ustedes', f: 'Называйте! / Назовите!' }
+        ] }
     ]
   },
+  'odevat': {
+    tiempos: [
+      { subtitulo: 'yo visto (a alguien), etc.', filas: [
+          { p: 'я',           f: 'одеваю' },
+          { p: 'ты',          f: 'одеваешь' },
+          { p: 'он/она/оно',  f: 'одевает' },
+          { p: 'мы',          f: 'одеваем' },
+          { p: 'вы',          f: 'одеваете' },
+          { p: 'они',         f: 'одевают' }
+        ] },
+      { subtitulo: 'yo vestía (a alguien), etc.', filas: [
+          { p: 'masc.',  f: 'одевал' },
+          { p: 'fem.',   f: 'одевала' },
+          { p: 'neutro', f: 'одевало' },
+          { p: 'plural', f: 'одевали' }
+        ] },
+      { subtitulo: 'vestí (a alguien), etc.', filas: [
+          { p: 'masc.',  f: 'одел' },
+          { p: 'fem.',   f: 'одела' },
+          { p: 'neutro', f: 'одело' },
+          { p: 'plural', f: 'одели' }
+        ] },
+      { subtitulo: 'yo voy a vestir (a alguien), etc.', filas: [
+          { p: 'я',           f: 'буду одевать' },
+          { p: 'ты',          f: 'будешь одевать' },
+          { p: 'он/она/оно',  f: 'будет одевать' },
+          { p: 'мы',          f: 'будем одевать' },
+          { p: 'вы',          f: 'будете одевать' },
+          { p: 'они',         f: 'будут одевать' }
+        ] },
+      { subtitulo: 'vestiré (a alguien), etc.', filas: [
+          { p: 'я',           f: 'одену' },
+          { p: 'ты',          f: 'оденешь' },
+          { p: 'он/она/оно',  f: 'оденет' },
+          { p: 'мы',          f: 'оденем' },
+          { p: 'вы',          f: 'оденете' },
+          { p: 'они',         f: 'оденут' }
+        ] },
+      { subtitulo: 'tú / ustedes', filas: [
+          { p: 'tú',      f: 'Одевай! / Одень!' },
+          { p: 'ustedes', f: 'Одевайте! / Оденьте!' }
+        ] }
+    ]
+  },
+  'vstrechat': {
+    tiempos: [
+      { subtitulo: 'yo recibo/encuentro, etc.', filas: [
+          { p: 'я',           f: 'встречаю' },
+          { p: 'ты',          f: 'встречаешь' },
+          { p: 'он/она/оно',  f: 'встречает' },
+          { p: 'мы',          f: 'встречаем' },
+          { p: 'вы',          f: 'встречаете' },
+          { p: 'они',         f: 'встречают' }
+        ] },
+      { subtitulo: 'yo recibía/encontraba, etc.', filas: [
+          { p: 'masc.',  f: 'встречал' },
+          { p: 'fem.',   f: 'встречала' },
+          { p: 'neutro', f: 'встречало' },
+          { p: 'plural', f: 'встречали' }
+        ] },
+      { subtitulo: 'recibí/encontré, etc.', filas: [
+          { p: 'masc.',  f: 'встретил' },
+          { p: 'fem.',   f: 'встретила' },
+          { p: 'neutro', f: 'встретило' },
+          { p: 'plural', f: 'встретили' }
+        ] },
+      { subtitulo: 'yo voy a recibir, etc.', filas: [
+          { p: 'я',           f: 'буду встречать' },
+          { p: 'ты',          f: 'будешь встречать' },
+          { p: 'он/она/оно',  f: 'будет встречать' },
+          { p: 'мы',          f: 'будем встречать' },
+          { p: 'вы',          f: 'будете встречать' },
+          { p: 'они',         f: 'будут встречать' }
+        ] },
+      { subtitulo: 'recibiré/encontraré, etc.', filas: [
+          { p: 'я',           f: 'встречу' },
+          { p: 'ты',          f: 'встретишь' },
+          { p: 'он/она/оно',  f: 'встретит' },
+          { p: 'мы',          f: 'встретим' },
+          { p: 'вы',          f: 'встретите' },
+          { p: 'они',         f: 'встретят' }
+        ] },
+      { subtitulo: 'tú / ustedes', filas: [
+          { p: 'tú',      f: 'Встречай! / Встреть!' },
+          { p: 'ustedes', f: 'Встречайте! / Встретьте!' }
+        ] }
+    ]
+  },
+
+  // ── J4 Reflexivos genuinos — nunca existieron sin -ся, no tienen una
+  // versión "base" con otro sentido. Por eso van aparte de los de arriba.
   'nakhoditsya': {
     tiempos: [
-      { subtitulo: 'solo imperfectivo', filas: [], nota: 'находиться (estar situado/ubicado) no tiene un perfectivo de uso corriente para este sentido — describe un estado, no una acción puntual.' },
       { subtitulo: 'está ubicado, etc.', filas: [
           { p: 'я',           f: 'нахожусь' },
           { p: 'ты',          f: 'находишься' },
@@ -7246,116 +7400,78 @@ const VERBOS_DATA_RUSO = {
           { p: 'они',         f: 'будут находиться' }
         ] },
       { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
-      { subtitulo: '(no se usa)', filas: [], nota: 'Verbo de estado/ubicación — no tiene imperativo real ("estate ubicado" no se dice).' },
-      { subtitulo: 'Отель находится в центре', filas: [], nota: 'Frase clave de recepción: "Отель находится в центре города" (El hotel está ubicado en el centro de la ciudad).' }
+      { subtitulo: '(no se usa)', filas: [], nota: 'Verbo de estado/ubicación — no tiene imperativo real ("estate ubicado" no se dice).' }
     ]
   },
-  'odevatsya': {
+  'nravitsya': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'одеваться' },
-          { p: 'Perf.',   f: 'одеться' }
-        ], nota: 'vestirse' },
-      { subtitulo: 'me visto, etc.', filas: [
-          { p: 'я',           f: 'одеваюсь' },
-          { p: 'ты',          f: 'одеваешься' },
-          { p: 'он/она/оно',  f: 'одевается' },
-          { p: 'мы',          f: 'одеваемся' },
-          { p: 'вы',          f: 'одеваетесь' },
-          { p: 'они',         f: 'одеваются' }
+      { subtitulo: 'me gusta, etc. (dativo + nravitsya)', filas: [
+          { p: 'мне',           f: 'нравлюсь' },
+          { p: 'тебе',          f: 'нравишься' },
+          { p: 'ему/ей',        f: 'нравится' },
+          { p: 'нам',           f: 'нравимся' },
+          { p: 'вам',           f: 'нравитесь' },
+          { p: 'им',            f: 'нравятся' }
+        ], nota: 'La forma concuerda con LO QUE gusta, no con quién lo disfruta: "Мне нравится отель" (el hotel, singular) / "Мне нравятся номера" (las habitaciones, plural)' },
+      { subtitulo: 'me gustaba, etc.', filas: [
+          { p: 'masc.',  f: 'нравился' },
+          { p: 'fem.',   f: 'нравилась' },
+          { p: 'neutro', f: 'нравилось' },
+          { p: 'plural', f: 'нравились' }
         ] },
-      { subtitulo: 'me vestía, etc.', filas: [
-          { p: 'masc.',  f: 'одевался' },
-          { p: 'fem.',   f: 'одевалась' },
-          { p: 'neutro', f: 'одевалось' },
-          { p: 'plural', f: 'одевались' }
+      { subtitulo: 'me gustó, etc.', filas: [
+          { p: 'masc.',  f: 'понравился' },
+          { p: 'fem.',   f: 'понравилась' },
+          { p: 'neutro', f: 'понравилось' },
+          { p: 'plural', f: 'понравились' }
         ] },
-      { subtitulo: 'me vestí, etc.', filas: [
-          { p: 'masc.',  f: 'оделся' },
-          { p: 'fem.',   f: 'оделась' },
-          { p: 'neutro', f: 'оделось' },
-          { p: 'plural', f: 'оделись' }
-        ] },
-      { subtitulo: 'me voy a vestir, etc.', filas: [
-          { p: 'я',           f: 'буду одеваться' },
-          { p: 'ты',          f: 'будешь одеваться' },
-          { p: 'он/она/оно',  f: 'будет одеваться' },
-          { p: 'мы',          f: 'будем одеваться' },
-          { p: 'вы',          f: 'будете одеваться' },
-          { p: 'они',         f: 'будут одеваться' }
-        ] },
-      { subtitulo: 'me vestiré, etc.', filas: [
-          { p: 'я',           f: 'оденусь' },
-          { p: 'ты',          f: 'оденешься' },
-          { p: 'он/она/оно',  f: 'оденется' },
-          { p: 'мы',          f: 'оденемся' },
-          { p: 'вы',          f: 'оденетесь' },
-          { p: 'они',         f: 'оденутся' }
-        ] },
-      { subtitulo: 'tú / ustedes', filas: [
-          { p: 'tú',      f: 'Одевайся! / Оденься!' },
-          { p: 'ustedes', f: 'Одевайтесь! / Оденьтесь!' }
-        ] },
-      { subtitulo: 'одеваться vs. одеть', filas: [], nota: 'одеваться (reflexivo) es "vestirse a uno mismo"; одеть (sin -ся) es "vestir a otro" — ojo con la diferencia.' }
+      { subtitulo: '(raro)', filas: [], nota: 'буду нравиться casi no se usa — para "va a gustar" se prefiere el futuro simple de понравиться.' },
+      { subtitulo: 'me gustará, etc.', filas: [
+          { p: 'masc.',  f: 'понравится' },
+          { p: 'fem.',   f: 'понравится' },
+          { p: 'neutro', f: 'понравится' },
+          { p: 'plural', f: 'понравятся' }
+        ], nota: 'De nuevo concuerda con lo que va a gustar, no con la persona' },
+      { subtitulo: '(no aplica)', filas: [], nota: 'Verbo de sentimiento — no tiene imperativo real ("¡gusta!" no existe).' }
     ]
   },
-  'vstrechatsya': {
+  'boyatsya': {
     tiempos: [
-      { subtitulo: 'imperfectivo / perfectivo', filas: [
-          { p: 'Imperf.', f: 'встречаться' },
-          { p: 'Perf.',   f: 'встретиться' }
-        ], nota: 'encontrarse / reunirse (con alguien)' },
-      { subtitulo: 'me encuentro/reúno, etc.', filas: [
-          { p: 'я',           f: 'встречаюсь' },
-          { p: 'ты',          f: 'встречаешься' },
-          { p: 'он/она/оно',  f: 'встречается' },
-          { p: 'мы',          f: 'встречаемся' },
-          { p: 'вы',          f: 'встречаетесь' },
-          { p: 'они',         f: 'встречаются' }
+      { subtitulo: 'tengo miedo, etc.', filas: [
+          { p: 'я',           f: 'боюсь' },
+          { p: 'ты',          f: 'боишься' },
+          { p: 'он/она/оно',  f: 'боится' },
+          { p: 'мы',          f: 'боимся' },
+          { p: 'вы',          f: 'боитесь' },
+          { p: 'они',         f: 'боятся' }
+        ], nota: 'Rige GENITIVO de lo que se teme: "бояться темноты" (temer a la oscuridad)' },
+      { subtitulo: 'tenía miedo, etc.', filas: [
+          { p: 'masc.',  f: 'боялся' },
+          { p: 'fem.',   f: 'боялась' },
+          { p: 'neutro', f: 'боялось' },
+          { p: 'plural', f: 'боялись' }
         ] },
-      { subtitulo: 'me encontraba/reunía, etc.', filas: [
-          { p: 'masc.',  f: 'встречался' },
-          { p: 'fem.',   f: 'встречалась' },
-          { p: 'neutro', f: 'встречалось' },
-          { p: 'plural', f: 'встречались' }
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo.' },
+      { subtitulo: 'voy a tener miedo, etc.', filas: [
+          { p: 'я',           f: 'буду бояться' },
+          { p: 'ты',          f: 'будешь бояться' },
+          { p: 'он/она/оно',  f: 'будет бояться' },
+          { p: 'мы',          f: 'будем бояться' },
+          { p: 'вы',          f: 'будете бояться' },
+          { p: 'они',         f: 'будут бояться' }
         ] },
-      { subtitulo: 'me encontré/reuní, etc.', filas: [
-          { p: 'masc.',  f: 'встретился' },
-          { p: 'fem.',   f: 'встретилась' },
-          { p: 'neutro', f: 'встретилось' },
-          { p: 'plural', f: 'встретились' }
-        ] },
-      { subtitulo: 'me voy a encontrar/reunir, etc.', filas: [
-          { p: 'я',           f: 'буду встречаться' },
-          { p: 'ты',          f: 'будешь встречаться' },
-          { p: 'он/она/оно',  f: 'будет встречаться' },
-          { p: 'мы',          f: 'будем встречаться' },
-          { p: 'вы',          f: 'будете встречаться' },
-          { p: 'они',         f: 'будут встречаться' }
-        ] },
-      { subtitulo: 'me encontraré/reuniré, etc.', filas: [
-          { p: 'я',           f: 'встречусь' },
-          { p: 'ты',          f: 'встретишься' },
-          { p: 'он/она/оно',  f: 'встретится' },
-          { p: 'мы',          f: 'встретимся' },
-          { p: 'вы',          f: 'встретитесь' },
-          { p: 'они',         f: 'встретятся' }
-        ], nota: 'Consonante т cambia a ч solo en "я" (встречусь)' },
-      { subtitulo: 'tú / ustedes', filas: [
-          { p: 'tú',      f: 'Встречайся! / Встреться!' },
-          { p: 'ustedes', f: 'Встречайтесь! / Встретьтесь!' }
-        ] },
-      { subtitulo: 'Давайте встретимся...', filas: [], nota: 'Frase muy útil: "Давайте встретимся в холле в шесть" (Encontrémonos en el lobby a las seis).' }
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo.' },
+      { subtitulo: 'tú / ustedes (negativo)', filas: [
+          { p: 'tú',      f: 'Не бойся!' },
+          { p: 'ustedes', f: 'Не бойтесь!' }
+        ], nota: 'Casi siempre se usa en negativo, como frase de consuelo' }
     ]
   },
+
 
   // ── J5 Movimiento — a pie/en vehículo, unidireccional vs. habitual ──
   'idti_poyti': {
     tiempos: [
-      { subtitulo: 'unidireccional / perfectivo', filas: [
-          { p: 'Unidir.', f: 'идти' },
-          { p: 'Perf.',   f: 'пойти' }
-        ], nota: 'ir a pie, en curso ahora o de una vez (ver ходить para el uso habitual)' },
       { subtitulo: 'voy/vas... (ahora, en curso)', filas: [
           { p: 'я',           f: 'иду' },
           { p: 'ты',          f: 'идёшь' },
@@ -7388,13 +7504,11 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Иди! / Пойди!' },
           { p: 'ustedes', f: 'Идите! / Пойдите!' }
-        ] },
-      { subtitulo: 'идти vs. ходить', filas: [], nota: 'Я иду в отель (voy al hotel, ahora mismo, una dirección) vs. Я хожу в отель каждый день (voy al hotel todos los días, habitual — ver próxima tarjeta).' }
+        ] }
     ]
   },
   'hodit': {
     tiempos: [
-      { subtitulo: 'multidireccional / habitual', filas: [], nota: 'ходить: ir a pie de forma habitual, repetida, o ida y vuelta — sin perfectivo de uso corriente para este sentido.' },
       { subtitulo: 'voy (habitualmente), etc.', filas: [
           { p: 'я',           f: 'хожу' },
           { p: 'ты',          f: 'ходишь' },
@@ -7422,16 +7536,11 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Ходи!' },
           { p: 'ustedes', f: 'Ходите!' }
-        ], nota: 'Poco usado como pedido — más como descripción de hábito' },
-      { subtitulo: 'Я хожу в бассейн', filas: [], nota: 'Я хожу в бассейн каждый день. (Voy a la pileta todos los días — hábito, ida y vuelta.)' }
+        ], nota: 'Poco usado como pedido — más como descripción de hábito' }
     ]
   },
   'ekhat_poekhat': {
     tiempos: [
-      { subtitulo: 'unidireccional / perfectivo', filas: [
-          { p: 'Unidir.', f: 'ехать' },
-          { p: 'Perf.',   f: 'поехать' }
-        ], nota: 'ir en vehículo, en curso ahora o de una vez (ver ездить para el uso habitual)' },
       { subtitulo: 'voy/vas... (ahora, en vehículo)', filas: [
           { p: 'я',           f: 'еду' },
           { p: 'ты',          f: 'едешь' },
@@ -7464,13 +7573,11 @@ const VERBOS_DATA_RUSO = {
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Поезжай!' },
           { p: 'ustedes', f: 'Поезжайте!' }
-        ], nota: 'ехать no tiene imperativo propio natural — se usa el de поехать' },
-      { subtitulo: 'ехать vs. ездить', filas: [], nota: 'Я еду в аэропорт (voy al aeropuerto, ahora, una dirección) vs. Я езжу на работу на автобусе (voy al trabajo en bus, habitual — ver próxima tarjeta).' }
+        ], nota: 'ехать no tiene imperativo propio natural — se usa el de поехать' }
     ]
   },
   'ezdit': {
     tiempos: [
-      { subtitulo: 'multidireccional / habitual', filas: [], nota: 'ездить: ir en vehículo de forma habitual, repetida, o ida y vuelta — sin perfectivo de uso corriente para este sentido.' },
       { subtitulo: 'voy (habitualmente, en vehículo), etc.', filas: [
           { p: 'я',           f: 'езжу' },
           { p: 'ты',          f: 'ездишь' },
@@ -7495,8 +7602,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'они',         f: 'будут ездить' }
         ] },
       { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
-      { subtitulo: '(poco usado)', filas: [], nota: 'Rara vez se usa como pedido directo — más como descripción de hábito.' },
-      { subtitulo: 'Я езжу на работу на автобусе', filas: [], nota: 'Я езжу на работу на автобусе. (Voy al trabajo en bus, habitualmente.)' }
+      { subtitulo: '(poco usado)', filas: [], nota: 'Rara vez se usa como pedido directo — más como descripción de hábito.' }
     ]
   }
 };
@@ -7563,7 +7669,7 @@ function renderMesaFijaVerbos(mesa) {
 // gramatical, no una palabra rusa, así que no se concatena para hablar.
 function renderMesaFijaVerbosRuso(mesa) {
   const grid = document.createElement('div');
-  grid.className = 'mesa-fija';
+  grid.className = 'mesa-fija mesa-fija-ruso';
 
   const datosVerbo = estado.subtema ? VERBOS_DATA_RUSO[estado.subtema] : null;
 
@@ -7600,8 +7706,8 @@ function renderMesaFijaVerbosRuso(mesa) {
 
   const tarjetas = Array.from(grid.children);
   tarjetas.forEach(c => c.style.height = 'auto');
-  const filaArribaR = tarjetas.slice(0, 4);
-  const filaAbajoR  = tarjetas.slice(4, 8);
+  const filaArribaR = tarjetas.slice(0, 3);
+  const filaAbajoR  = tarjetas.slice(3, 6);
   [filaArribaR, filaAbajoR].forEach(fila => {
     if (fila.length === 0) return;
     const maxAlto = Math.max(...fila.map(c => c.offsetHeight));
@@ -7723,41 +7829,41 @@ function renderTarjetaPaisRusia(mesa) {
 // Corrección real aplicada solo en el contenido lingüístico: Ь (signo
 // blando) y Ъ (signo duro) estaban invertidos en la nota original.
 const ABECEDARIO_COL_A = [
-  { cyr: 'А', lat: 'A',  ej: 'AUTO' },
-  { cyr: 'Б', lat: 'B',  ej: 'BARCO' },
-  { cyr: 'Ч', lat: 'CH', ej: 'CHOCOLATE' },
-  { cyr: 'Д', lat: 'D',  ej: 'DADO' },
-  { cyr: 'Э', lat: 'E',  ej: 'ELEFANTE' },
-  { cyr: 'Ф', lat: 'F',  ej: 'FOCO' },
-  { cyr: 'Г', lat: 'G',  ej: 'GATO' },
-  { cyr: 'Ь', lat: '(muda)', ej: '①', hablar: false },
-  { cyr: 'Ъ', lat: '(muda)', ej: '②', hablar: false },
-  { cyr: 'Ы', lat: 'i gutural', ej: '—' },
-  { cyr: 'И', lat: 'i',  ej: 'ISLA' },
-  { cyr: 'Й', lat: 'i corta', ej: 'HOY' },
-  { cyr: 'Я', lat: 'IA', ej: 'PIANO' },
-  { cyr: 'Е', lat: 'IE', ej: 'TIERRA' },
-  { cyr: 'Ё', lat: 'IO', ej: 'YOYO' },
-  { cyr: 'Ю', lat: 'IU', ej: 'VIUDA' }
+  { cyr: 'А', min: 'а', lat: 'A',  ej: 'AUTO' },
+  { cyr: 'Б', min: 'б', lat: 'B',  ej: 'BARCO' },
+  { cyr: 'Ч', min: 'ч', lat: 'CH', ej: 'CHOCOLATE' },
+  { cyr: 'Д', min: 'д', lat: 'D',  ej: 'DADO' },
+  { cyr: 'Э', min: 'э', lat: 'E',  ej: 'ELEFANTE' },
+  { cyr: 'Ф', min: 'ф', lat: 'F',  ej: 'FOCO' },
+  { cyr: 'Г', min: 'г', lat: 'G',  ej: 'GATO' },
+  { cyr: 'Ь', min: 'ь', lat: '(muda)', ej: '①', hablar: false },
+  { cyr: 'Ъ', min: 'ъ', lat: '(muda)', ej: '②', hablar: false },
+  { cyr: 'Ы', min: 'ы', lat: 'i gutural', ej: '—' },
+  { cyr: 'И', min: 'и', lat: 'i',  ej: 'ISLA' },
+  { cyr: 'Й', min: 'й', lat: 'i corta', ej: 'HOY' },
+  { cyr: 'Я', min: 'я', lat: 'IA', ej: 'PIANO' },
+  { cyr: 'Е', min: 'е', lat: 'IE', ej: 'TIERRA' },
+  { cyr: 'Ё', min: 'ё', lat: 'IO', ej: 'YOYO' },
+  { cyr: 'Ю', min: 'ю', lat: 'IU', ej: 'VIUDA' }
 ];
 const ABECEDARIO_COL_B = [
-  { cyr: 'Х', lat: 'J',  ej: '③' },
-  { cyr: 'К', lat: 'K',  ej: 'KILO / CASA' },
-  { cyr: 'Л', lat: 'L',  ej: 'normal' },
-  { cyr: 'М', lat: 'M',  ej: 'normal' },
-  { cyr: 'Н', lat: 'N',  ej: 'normal' },
-  { cyr: 'О', lat: 'O',  ej: '④' },
-  { cyr: 'П', lat: 'P',  ej: 'normal' },
-  { cyr: 'Р', lat: 'R',  ej: 'normal' },
-  { cyr: 'С', lat: 'S',  ej: 'normal, pura' },
-  { cyr: 'Ш', lat: 'SH', ej: '"sheísmo"' },
-  { cyr: 'Щ', lat: 'SH', ej: 'shhh (más largo)' },
-  { cyr: 'Т', lat: 'T',  ej: 'normal' },
-  { cyr: 'Ц', lat: 'TS', ej: 'CATS / PIZZA' },
-  { cyr: 'У', lat: 'U',  ej: 'normal' },
-  { cyr: 'В', lat: 'V',  ej: 'normal' },
-  { cyr: 'З', lat: 'Z',  ej: 'zumbido' },
-  { cyr: 'Ж', lat: 'ZH', ej: '"sho" / "shema"' }
+  { cyr: 'Х', min: 'х', lat: 'J',  ej: '③' },
+  { cyr: 'К', min: 'к', lat: 'K',  ej: 'KILO / CASA' },
+  { cyr: 'Л', min: 'л', lat: 'L',  ej: 'normal' },
+  { cyr: 'М', min: 'м', lat: 'M',  ej: 'normal' },
+  { cyr: 'Н', min: 'н', lat: 'N',  ej: 'normal' },
+  { cyr: 'О', min: 'о', lat: 'O',  ej: '④' },
+  { cyr: 'П', min: 'п', lat: 'P',  ej: 'normal' },
+  { cyr: 'Р', min: 'р', lat: 'R',  ej: 'normal' },
+  { cyr: 'С', min: 'с', lat: 'S',  ej: 'normal, pura' },
+  { cyr: 'Ш', min: 'ш', lat: 'SH', ej: '"sheísmo"' },
+  { cyr: 'Щ', min: 'щ', lat: 'SH', ej: 'shhh (más largo)' },
+  { cyr: 'Т', min: 'т', lat: 'T',  ej: 'normal' },
+  { cyr: 'Ц', min: 'ц', lat: 'TS', ej: 'CATS / PIZZA' },
+  { cyr: 'У', min: 'у', lat: 'U',  ej: 'normal' },
+  { cyr: 'В', min: 'в', lat: 'V',  ej: 'normal' },
+  { cyr: 'З', min: 'з', lat: 'Z',  ej: 'zumbido' },
+  { cyr: 'Ж', min: 'ж', lat: 'ZH', ej: '"sho" / "shema"' }
 ];
 
 function renderTarjetaAbecedarioRuso(mesa) {
@@ -7766,7 +7872,7 @@ function renderTarjetaAbecedarioRuso(mesa) {
 
   const filaHtml = it => `
     <tr>
-      <td class="${it.hablar === false ? '' : 'hablar'}" ${it.hablar === false ? '' : `data-hablar="${it.cyr}"`} style="font-weight:700; font-size:17px;">${it.cyr}</td>
+      <td class="${it.hablar === false ? '' : 'hablar'}" ${it.hablar === false ? '' : `data-hablar="${it.min}"`} style="font-weight:700; font-size:17px;">${it.cyr} <span style="font-weight:400; color:#b0b0ae;">${it.min}</span></td>
       <td style="color:#888886;">${it.lat}</td>
       <td style="color:#aaaaa8; font-size:13.5px;">${it.ej}</td>
     </tr>`;
@@ -8410,7 +8516,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 15px Quicksand, sans-serif';
+        ctx.font = '700 15px Nunito, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('¡?', 0, 0);
@@ -8422,7 +8528,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 16px Quicksand, sans-serif';
+        ctx.font = '700 16px Nunito, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('?', 0, 0);
@@ -8434,7 +8540,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 16px Quicksand, sans-serif';
+        ctx.font = '700 16px Nunito, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('...', 0, 0);
@@ -8446,7 +8552,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 17px Quicksand, sans-serif';
+        ctx.font = '700 17px Nunito, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('X', 0, 0);
@@ -8476,7 +8582,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 17px Quicksand, sans-serif';
+        ctx.font = '700 17px Nunito, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(p.signo, 0, 0);
