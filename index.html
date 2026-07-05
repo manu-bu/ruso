@@ -6685,11 +6685,11 @@ const VERBOS_DATA = {
 // la paleta cuando se revise el resto de la app.
 // ═══════════════════════════════════════════════════════════════════════
 const TIEMPOS_RUSO = [
-  { titulo: 'Presente (imperfectivo)',              color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Pasado — imperfectivo',                color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Pasado — perfectivo',                  color1: '#9a9a98', color2: '#7a7a78' },
-  { titulo: 'Futuro — imperfectivo (compuesto)',     color1: '#9a9a98', color2: '#7a7a78' },
+  { titulo: 'Presente (imperfectivo)',              color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Futuro — perfectivo (simple)',          color1: '#9a9a98', color2: '#7a7a78' },
+  { titulo: 'Futuro — imperfectivo (compuesto)',     color1: '#9a9a98', color2: '#7a7a78' },
   { titulo: 'Imperativo / Condicional',              color1: '#9a9a98', color2: '#7a7a78' }
 ];
 
@@ -6700,7 +6700,6 @@ const VERBOS_DATA_RUSO = {
   // ── J1 Auxiliares ──────────────────────────────────────────────────
   'byt': {
     tiempos: [
-      { subtitulo: '(se omite)', filas: [], nota: 'En presente, "ser/estar" casi siempre se omite: "Я администратор" (Yo [soy] recepcionista). "Есть" existe pero se usa poco, sobre todo para "hay/existe".' },
       { subtitulo: 'yo era/estaba, etc.', filas: [
           { p: 'masc.',   f: 'был' },
           { p: 'fem.',    f: 'была' },
@@ -6708,7 +6707,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'plural',  f: 'были' }
         ], nota: 'Concuerda en género/número del sujeto, no en persona.' },
       { subtitulo: '(no aplica)', filas: [], nota: 'быть no tiene perfectivo — no hay "pasado perfectivo" separado.' },
-      { subtitulo: '(no aplica)', filas: [], nota: 'быть no forma futuro compuesto con otro auxiliar — su propio futuro ya es la forma simple (ver próxima tarjeta).' },
+      { subtitulo: '(se omite)', filas: [], nota: 'En presente, "ser/estar" casi siempre se omite: "Я администратор" (Yo [soy] recepcionista). "Есть" existe pero se usa poco, sobre todo para "hay/existe".' },
       { subtitulo: 'yo seré/estaré, etc.', filas: [
           { p: 'я',            f: 'буду' },
           { p: 'ты',           f: 'будешь' },
@@ -6717,6 +6716,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',           f: 'будете' },
           { p: 'они',          f: 'будут' }
         ], nota: 'Este mismo futuro de быть es el auxiliar que arma el futuro compuesto de los verbos imperfectivos (ver Futuro imperf. de los demás verbos).' },
+      { subtitulo: '(no aplica)', filas: [], nota: 'быть no forma futuro compuesto con otro auxiliar — su propio futuro ya es la forma simple (ver próxima tarjeta).' },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',       f: 'Будь!' },
           { p: 'ustedes',  f: 'Будьте!' }
@@ -6726,14 +6726,6 @@ const VERBOS_DATA_RUSO = {
 
   'moch': {
     tiempos: [
-      { subtitulo: 'yo puedo, etc.', filas: [
-          { p: 'я',           f: 'могу' },
-          { p: 'ты',          f: 'можешь' },
-          { p: 'он/она/оно',  f: 'может' },
-          { p: 'мы',          f: 'можем' },
-          { p: 'вы',          f: 'можете' },
-          { p: 'они',         f: 'могут' }
-        ] },
       { subtitulo: 'yo podía, etc.', filas: [
           { p: 'masc.',  f: 'мог' },
           { p: 'fem.',   f: 'могла' },
@@ -6746,7 +6738,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'смогло' },
           { p: 'plural', f: 'смогли' }
         ] },
-      { subtitulo: '(raro)', filas: [], nota: 'El futuro compuesto (буду мочь) casi no se usa — para "podré" se prefiere directamente el futuro simple de смочь (ver próxima tarjeta).' },
+      { subtitulo: 'yo puedo, etc.', filas: [
+          { p: 'я',           f: 'могу' },
+          { p: 'ты',          f: 'можешь' },
+          { p: 'он/она/оно',  f: 'может' },
+          { p: 'мы',          f: 'можем' },
+          { p: 'вы',          f: 'можете' },
+          { p: 'они',         f: 'могут' }
+        ] },
       { subtitulo: 'podré, etc.', filas: [
           { p: 'я',           f: 'смогу' },
           { p: 'ты',          f: 'сможешь' },
@@ -6755,19 +6754,12 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'сможете' },
           { p: 'они',         f: 'смогут' }
         ] },
+      { subtitulo: '(raro)', filas: [], nota: 'El futuro compuesto (буду мочь) casi no se usa — para "podré" se prefiere directamente el futuro simple de смочь (ver próxima tarjeta).' },
       { subtitulo: '(no aplica)', filas: [], nota: 'мочь es un verbo modal — no tiene imperativo natural (no se dice "¡puede!" en ruso tampoco). — Condicional: бы + este mismo pasado (ej. "мог бы" = habría/sería...).' }
     ]
   },
   'khotet': {
     tiempos: [
-      { subtitulo: 'yo quiero, etc.', filas: [
-          { p: 'я',           f: 'хочу' },
-          { p: 'ты',          f: 'хочешь' },
-          { p: 'он/она/оно',  f: 'хочет' },
-          { p: 'мы',          f: 'хотим' },
-          { p: 'вы',          f: 'хотите' },
-          { p: 'они',         f: 'хотят' }
-        ], nota: 'Único verbo con esta mezcla: хочу/хочешь/хочет (patrón 1ª conj.) pero хотим/хотите/хотят (patrón 2ª conj.)' },
       { subtitulo: 'yo quería, etc.', filas: [
           { p: 'masc.',  f: 'хотел' },
           { p: 'fem.',   f: 'хотела' },
@@ -6780,7 +6772,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'захотело' },
           { p: 'plural', f: 'захотели' }
         ] },
-      { subtitulo: '(raro)', filas: [], nota: 'El futuro compuesto (буду хотеть) casi no se usa — хотеть describe un estado, no una acción que se repite en el tiempo.' },
+      { subtitulo: 'yo quiero, etc.', filas: [
+          { p: 'я',           f: 'хочу' },
+          { p: 'ты',          f: 'хочешь' },
+          { p: 'он/она/оно',  f: 'хочет' },
+          { p: 'мы',          f: 'хотим' },
+          { p: 'вы',          f: 'хотите' },
+          { p: 'они',         f: 'хотят' }
+        ], nota: 'Único verbo con esta mezcla: хочу/хочешь/хочет (patrón 1ª conj.) pero хотим/хотите/хотят (patrón 2ª conj.)' },
       { subtitulo: 'querré / se me antojará, etc.', filas: [
           { p: 'я',           f: 'захочу' },
           { p: 'ты',          f: 'захочешь' },
@@ -6789,6 +6788,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'захотите' },
           { p: 'они',         f: 'захотят' }
         ] },
+      { subtitulo: '(raro)', filas: [], nota: 'El futuro compuesto (буду хотеть) casi no se usa — хотеть describe un estado, no una acción que se repite en el tiempo.' },
       { subtitulo: '(no aplica)', filas: [], nota: 'хотеть es modal — no tiene imperativo real ("¡quiere!" no existe en ruso tampoco). — Condicional: бы + este mismo pasado (ej. "хотел бы" = habría/sería...).' }
     ]
   },
@@ -6796,14 +6796,6 @@ const VERBOS_DATA_RUSO = {
   // ── J2 1ª Conjugación ──────────────────────────────────────────────
   'delat': {
     tiempos: [
-      { subtitulo: 'yo hago, etc. (proceso/habitual)', filas: [
-          { p: 'я',           f: 'делаю' },
-          { p: 'ты',          f: 'делаешь' },
-          { p: 'он/она/оно',  f: 'делает' },
-          { p: 'мы',          f: 'делаем' },
-          { p: 'вы',          f: 'делаете' },
-          { p: 'они',         f: 'делают' }
-        ] },
       { subtitulo: 'yo hacía, etc.', filas: [
           { p: 'masc.',  f: 'делал' },
           { p: 'fem.',   f: 'делала' },
@@ -6816,14 +6808,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'сделало' },
           { p: 'plural', f: 'сделали' }
         ] },
-      { subtitulo: 'yo voy a hacer, etc. (proceso futuro)', filas: [
-          { p: 'я',           f: 'буду делать' },
-          { p: 'ты',          f: 'будешь делать' },
-          { p: 'он/она/оно',  f: 'будет делать' },
-          { p: 'мы',          f: 'будем делать' },
-          { p: 'вы',          f: 'будете делать' },
-          { p: 'они',         f: 'будут делать' }
-        ], nota: 'быть en futuro + infinitivo imperfectivo' },
+      { subtitulo: 'yo hago, etc. (proceso/habitual)', filas: [
+          { p: 'я',           f: 'делаю' },
+          { p: 'ты',          f: 'делаешь' },
+          { p: 'он/она/оно',  f: 'делает' },
+          { p: 'мы',          f: 'делаем' },
+          { p: 'вы',          f: 'делаете' },
+          { p: 'они',         f: 'делают' }
+        ] },
       { subtitulo: 'yo haré, etc. (acción puntual)', filas: [
           { p: 'я',           f: 'сделаю' },
           { p: 'ты',          f: 'сделаешь' },
@@ -6832,6 +6824,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'сделаете' },
           { p: 'они',         f: 'сделают' }
         ], nota: 'Se conjuga como el presente, pero del verbo perfectivo' },
+      { subtitulo: 'yo voy a hacer, etc. (proceso futuro)', filas: [
+          { p: 'я',           f: 'буду делать' },
+          { p: 'ты',          f: 'будешь делать' },
+          { p: 'он/она/оно',  f: 'будет делать' },
+          { p: 'мы',          f: 'будем делать' },
+          { p: 'вы',          f: 'будете делать' },
+          { p: 'они',         f: 'будут делать' }
+        ], nota: 'быть en futuro + infinitivo imperfectivo' },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Делай! / Сделай!' },
           { p: 'ustedes', f: 'Делайте! / Сделайте!' }
@@ -6840,14 +6840,6 @@ const VERBOS_DATA_RUSO = {
   },
   'davat': {
     tiempos: [
-      { subtitulo: 'yo doy, etc.', filas: [
-          { p: 'я',           f: 'даю' },
-          { p: 'ты',          f: 'даёшь' },
-          { p: 'он/она/оно',  f: 'даёт' },
-          { p: 'мы',          f: 'даём' },
-          { p: 'вы',          f: 'даёте' },
-          { p: 'они',         f: 'дают' }
-        ] },
       { subtitulo: 'yo daba, etc.', filas: [
           { p: 'masc.',  f: 'давал' },
           { p: 'fem.',   f: 'давала' },
@@ -6860,13 +6852,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'дало' },
           { p: 'plural', f: 'дали' }
         ] },
-      { subtitulo: 'yo voy a dar, etc.', filas: [
-          { p: 'я',           f: 'буду давать' },
-          { p: 'ты',          f: 'будешь давать' },
-          { p: 'он/она/оно',  f: 'будет давать' },
-          { p: 'мы',          f: 'будем давать' },
-          { p: 'вы',          f: 'будете давать' },
-          { p: 'они',         f: 'будут давать' }
+      { subtitulo: 'yo doy, etc.', filas: [
+          { p: 'я',           f: 'даю' },
+          { p: 'ты',          f: 'даёшь' },
+          { p: 'он/она/оно',  f: 'даёт' },
+          { p: 'мы',          f: 'даём' },
+          { p: 'вы',          f: 'даёте' },
+          { p: 'они',         f: 'дают' }
         ] },
       { subtitulo: 'yo daré, etc.', filas: [
           { p: 'я',           f: 'дам' },
@@ -6876,6 +6868,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'дадите' },
           { p: 'они',         f: 'дадут' }
         ], nota: 'дать se conjuga irregular (como "dar" en pequeños grupos de verbos con -ам/-ашь/-аст)' },
+      { subtitulo: 'yo voy a dar, etc.', filas: [
+          { p: 'я',           f: 'буду давать' },
+          { p: 'ты',          f: 'будешь давать' },
+          { p: 'он/она/оно',  f: 'будет давать' },
+          { p: 'мы',          f: 'будем давать' },
+          { p: 'вы',          f: 'будете давать' },
+          { p: 'они',         f: 'будут давать' }
+        ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Давай! / Дай!' },
           { p: 'ustedes', f: 'Давайте! / Дайте!' }
@@ -6884,14 +6884,6 @@ const VERBOS_DATA_RUSO = {
   },
   'rabotat': {
     tiempos: [
-      { subtitulo: 'yo trabajo, etc.', filas: [
-          { p: 'я',           f: 'работаю' },
-          { p: 'ты',          f: 'работаешь' },
-          { p: 'он/она/оно',  f: 'работает' },
-          { p: 'мы',          f: 'работаем' },
-          { p: 'вы',          f: 'работаете' },
-          { p: 'они',         f: 'работают' }
-        ] },
       { subtitulo: 'yo trabajaba, etc.', filas: [
           { p: 'masc.',  f: 'работал' },
           { p: 'fem.',   f: 'работала' },
@@ -6904,13 +6896,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'поработало' },
           { p: 'plural', f: 'поработали' }
         ], nota: 'поработать sugiere "trabajar un rato" o completar una sesión de trabajo, no "trabajar" como profesión permanente' },
-      { subtitulo: 'yo voy a trabajar, etc.', filas: [
-          { p: 'я',           f: 'буду работать' },
-          { p: 'ты',          f: 'будешь работать' },
-          { p: 'он/она/оно',  f: 'будет работать' },
-          { p: 'мы',          f: 'будем работать' },
-          { p: 'вы',          f: 'будете работать' },
-          { p: 'они',         f: 'будут работать' }
+      { subtitulo: 'yo trabajo, etc.', filas: [
+          { p: 'я',           f: 'работаю' },
+          { p: 'ты',          f: 'работаешь' },
+          { p: 'он/она/оно',  f: 'работает' },
+          { p: 'мы',          f: 'работаем' },
+          { p: 'вы',          f: 'работаете' },
+          { p: 'они',         f: 'работают' }
         ] },
       { subtitulo: 'trabajaré (un rato), etc.', filas: [
           { p: 'я',           f: 'поработаю' },
@@ -6920,6 +6912,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'поработаете' },
           { p: 'они',         f: 'поработают' }
         ] },
+      { subtitulo: 'yo voy a trabajar, etc.', filas: [
+          { p: 'я',           f: 'буду работать' },
+          { p: 'ты',          f: 'будешь работать' },
+          { p: 'он/она/оно',  f: 'будет работать' },
+          { p: 'мы',          f: 'будем работать' },
+          { p: 'вы',          f: 'будете работать' },
+          { p: 'они',         f: 'будут работать' }
+        ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Работай! / Поработай!' },
           { p: 'ustedes', f: 'Работайте! / Поработайте!' }
@@ -6928,14 +6928,6 @@ const VERBOS_DATA_RUSO = {
   },
   'chitat': {
     tiempos: [
-      { subtitulo: 'yo leo, etc.', filas: [
-          { p: 'я',           f: 'читаю' },
-          { p: 'ты',          f: 'читаешь' },
-          { p: 'он/она/оно',  f: 'читает' },
-          { p: 'мы',          f: 'читаем' },
-          { p: 'вы',          f: 'читаете' },
-          { p: 'они',         f: 'читают' }
-        ] },
       { subtitulo: 'yo leía, etc.', filas: [
           { p: 'masc.',  f: 'читал' },
           { p: 'fem.',   f: 'читала' },
@@ -6948,13 +6940,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'прочитало' },
           { p: 'plural', f: 'прочитали' }
         ] },
-      { subtitulo: 'yo voy a leer, etc.', filas: [
-          { p: 'я',           f: 'буду читать' },
-          { p: 'ты',          f: 'будешь читать' },
-          { p: 'он/она/оно',  f: 'будет читать' },
-          { p: 'мы',          f: 'будем читать' },
-          { p: 'вы',          f: 'будете читать' },
-          { p: 'они',         f: 'будут читать' }
+      { subtitulo: 'yo leo, etc.', filas: [
+          { p: 'я',           f: 'читаю' },
+          { p: 'ты',          f: 'читаешь' },
+          { p: 'он/она/оно',  f: 'читает' },
+          { p: 'мы',          f: 'читаем' },
+          { p: 'вы',          f: 'читаете' },
+          { p: 'они',         f: 'читают' }
         ] },
       { subtitulo: 'leeré, etc.', filas: [
           { p: 'я',           f: 'прочитаю' },
@@ -6963,6 +6955,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'мы',          f: 'прочитаем' },
           { p: 'вы',          f: 'прочитаете' },
           { p: 'они',         f: 'прочитают' }
+        ] },
+      { subtitulo: 'yo voy a leer, etc.', filas: [
+          { p: 'я',           f: 'буду читать' },
+          { p: 'ты',          f: 'будешь читать' },
+          { p: 'он/она/оно',  f: 'будет читать' },
+          { p: 'мы',          f: 'будем читать' },
+          { p: 'вы',          f: 'будете читать' },
+          { p: 'они',         f: 'будут читать' }
         ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Читай! / Прочитай!' },
@@ -6974,14 +6974,6 @@ const VERBOS_DATA_RUSO = {
   // ── J3 2ª Conjugación ──────────────────────────────────────────────
   'govorit': {
     tiempos: [
-      { subtitulo: 'yo hablo, etc.', filas: [
-          { p: 'я',           f: 'говорю' },
-          { p: 'ты',          f: 'говоришь' },
-          { p: 'он/она/оно',  f: 'говорит' },
-          { p: 'мы',          f: 'говорим' },
-          { p: 'вы',          f: 'говорите' },
-          { p: 'они',         f: 'говорят' }
-        ] },
       { subtitulo: 'yo hablaba, etc.', filas: [
           { p: 'masc.',  f: 'говорил' },
           { p: 'fem.',   f: 'говорила' },
@@ -6994,13 +6986,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'сказало' },
           { p: 'plural', f: 'сказали' }
         ] },
-      { subtitulo: 'yo voy a hablar, etc.', filas: [
-          { p: 'я',           f: 'буду говорить' },
-          { p: 'ты',          f: 'будешь говорить' },
-          { p: 'он/она/оно',  f: 'будет говорить' },
-          { p: 'мы',          f: 'будем говорить' },
-          { p: 'вы',          f: 'будете говорить' },
-          { p: 'они',         f: 'будут говорить' }
+      { subtitulo: 'yo hablo, etc.', filas: [
+          { p: 'я',           f: 'говорю' },
+          { p: 'ты',          f: 'говоришь' },
+          { p: 'он/она/оно',  f: 'говорит' },
+          { p: 'мы',          f: 'говорим' },
+          { p: 'вы',          f: 'говорите' },
+          { p: 'они',         f: 'говорят' }
         ] },
       { subtitulo: 'yo diré, etc.', filas: [
           { p: 'я',           f: 'скажу' },
@@ -7010,6 +7002,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'скажете' },
           { p: 'они',         f: 'скажут' }
         ] },
+      { subtitulo: 'yo voy a hablar, etc.', filas: [
+          { p: 'я',           f: 'буду говорить' },
+          { p: 'ты',          f: 'будешь говорить' },
+          { p: 'он/она/оно',  f: 'будет говорить' },
+          { p: 'мы',          f: 'будем говорить' },
+          { p: 'вы',          f: 'будете говорить' },
+          { p: 'они',         f: 'будут говорить' }
+        ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Говори! / Скажи!' },
           { p: 'ustedes', f: 'Говорите! / Скажите!' }
@@ -7018,14 +7018,6 @@ const VERBOS_DATA_RUSO = {
   },
   'videt': {
     tiempos: [
-      { subtitulo: 'yo veo, etc.', filas: [
-          { p: 'я',           f: 'вижу' },
-          { p: 'ты',          f: 'видишь' },
-          { p: 'он/она/оно',  f: 'видит' },
-          { p: 'мы',          f: 'видим' },
-          { p: 'вы',          f: 'видите' },
-          { p: 'они',         f: 'видят' }
-        ], nota: 'Consonante д cambia a ж solo en "я" (вижу)' },
       { subtitulo: 'yo veía, etc.', filas: [
           { p: 'masc.',  f: 'видел' },
           { p: 'fem.',   f: 'видела' },
@@ -7038,14 +7030,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'увидело' },
           { p: 'plural', f: 'увидели' }
         ] },
-      { subtitulo: 'yo voy a ver, etc.', filas: [
-          { p: 'я',           f: 'буду видеть' },
-          { p: 'ты',          f: 'будешь видеть' },
-          { p: 'он/она/оно',  f: 'будет видеть' },
-          { p: 'мы',          f: 'будем видеть' },
-          { p: 'вы',          f: 'будете видеть' },
-          { p: 'они',         f: 'будут видеть' }
-        ] },
+      { subtitulo: 'yo veo, etc.', filas: [
+          { p: 'я',           f: 'вижу' },
+          { p: 'ты',          f: 'видишь' },
+          { p: 'он/она/оно',  f: 'видит' },
+          { p: 'мы',          f: 'видим' },
+          { p: 'вы',          f: 'видите' },
+          { p: 'они',         f: 'видят' }
+        ], nota: 'Consonante д cambia a ж solo en "я" (вижу)' },
       { subtitulo: 'yo veré, etc.', filas: [
           { p: 'я',           f: 'увижу' },
           { p: 'ты',          f: 'увидишь' },
@@ -7054,19 +7046,19 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'увидите' },
           { p: 'они',         f: 'увидят' }
         ] },
+      { subtitulo: 'yo voy a ver, etc.', filas: [
+          { p: 'я',           f: 'буду видеть' },
+          { p: 'ты',          f: 'будешь видеть' },
+          { p: 'он/она/оно',  f: 'будет видеть' },
+          { p: 'мы',          f: 'будем видеть' },
+          { p: 'вы',          f: 'будете видеть' },
+          { p: 'они',         f: 'будут видеть' }
+        ] },
       { subtitulo: '(poco usado)', filas: [], nota: 'видеть es un verbo de percepción — el imperativo directo es raro/forzado en ruso (parecido a "¡ve!" en español, casi no se usa así). — Condicional: бы + este mismo pasado (ej. "видел бы" = habría/sería...).' }
     ]
   },
   'lyubit': {
     tiempos: [
-      { subtitulo: 'yo amo/me gusta, etc.', filas: [
-          { p: 'я',           f: 'люблю' },
-          { p: 'ты',          f: 'любишь' },
-          { p: 'он/она/оно',  f: 'любит' },
-          { p: 'мы',          f: 'любим' },
-          { p: 'вы',          f: 'любите' },
-          { p: 'они',         f: 'любят' }
-        ], nota: 'Se inserta -л- solo en "я" (люблю)' },
       { subtitulo: 'yo amaba, etc.', filas: [
           { p: 'masc.',  f: 'любил' },
           { p: 'fem.',   f: 'любила' },
@@ -7079,14 +7071,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'полюбило' },
           { p: 'plural', f: 'полюбили' }
         ] },
-      { subtitulo: 'yo voy a amar, etc.', filas: [
-          { p: 'я',           f: 'буду любить' },
-          { p: 'ты',          f: 'будешь любить' },
-          { p: 'он/она/оно',  f: 'будет любить' },
-          { p: 'мы',          f: 'будем любить' },
-          { p: 'вы',          f: 'будете любить' },
-          { p: 'они',         f: 'будут любить' }
-        ] },
+      { subtitulo: 'yo amo/me gusta, etc.', filas: [
+          { p: 'я',           f: 'люблю' },
+          { p: 'ты',          f: 'любишь' },
+          { p: 'он/она/оно',  f: 'любит' },
+          { p: 'мы',          f: 'любим' },
+          { p: 'вы',          f: 'любите' },
+          { p: 'они',         f: 'любят' }
+        ], nota: 'Se inserta -л- solo en "я" (люблю)' },
       { subtitulo: 'llegaré a querer/me encariñaré, etc.', filas: [
           { p: 'я',           f: 'полюблю' },
           { p: 'ты',          f: 'полюбишь' },
@@ -7094,6 +7086,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'мы',          f: 'полюбим' },
           { p: 'вы',          f: 'полюбите' },
           { p: 'они',         f: 'полюбят' }
+        ] },
+      { subtitulo: 'yo voy a amar, etc.', filas: [
+          { p: 'я',           f: 'буду любить' },
+          { p: 'ты',          f: 'будешь любить' },
+          { p: 'он/она/оно',  f: 'будет любить' },
+          { p: 'мы',          f: 'будем любить' },
+          { p: 'вы',          f: 'будете любить' },
+          { p: 'они',         f: 'будут любить' }
         ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Люби! / Полюби!' },
@@ -7103,14 +7103,6 @@ const VERBOS_DATA_RUSO = {
   },
   'prosit': {
     tiempos: [
-      { subtitulo: 'yo pido, etc.', filas: [
-          { p: 'я',           f: 'прошу' },
-          { p: 'ты',          f: 'просишь' },
-          { p: 'он/она/оно',  f: 'просит' },
-          { p: 'мы',          f: 'просим' },
-          { p: 'вы',          f: 'просите' },
-          { p: 'они',         f: 'просят' }
-        ], nota: 'Consonante с cambia a ш solo en "я" (прошу)' },
       { subtitulo: 'yo pedía, etc.', filas: [
           { p: 'masc.',  f: 'просил' },
           { p: 'fem.',   f: 'просила' },
@@ -7123,14 +7115,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'попросило' },
           { p: 'plural', f: 'попросили' }
         ] },
-      { subtitulo: 'yo voy a pedir, etc.', filas: [
-          { p: 'я',           f: 'буду просить' },
-          { p: 'ты',          f: 'будешь просить' },
-          { p: 'он/она/оно',  f: 'будет просить' },
-          { p: 'мы',          f: 'будем просить' },
-          { p: 'вы',          f: 'будете просить' },
-          { p: 'они',         f: 'будут просить' }
-        ] },
+      { subtitulo: 'yo pido, etc.', filas: [
+          { p: 'я',           f: 'прошу' },
+          { p: 'ты',          f: 'просишь' },
+          { p: 'он/она/оно',  f: 'просит' },
+          { p: 'мы',          f: 'просим' },
+          { p: 'вы',          f: 'просите' },
+          { p: 'они',         f: 'просят' }
+        ], nota: 'Consonante с cambia a ш solo en "я" (прошу)' },
       { subtitulo: 'pediré, etc.', filas: [
           { p: 'я',           f: 'попрошу' },
           { p: 'ты',          f: 'попросишь' },
@@ -7138,6 +7130,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'мы',          f: 'попросим' },
           { p: 'вы',          f: 'попросите' },
           { p: 'они',         f: 'попросят' }
+        ] },
+      { subtitulo: 'yo voy a pedir, etc.', filas: [
+          { p: 'я',           f: 'буду просить' },
+          { p: 'ты',          f: 'будешь просить' },
+          { p: 'он/она/оно',  f: 'будет просить' },
+          { p: 'мы',          f: 'будем просить' },
+          { p: 'вы',          f: 'будете просить' },
+          { p: 'они',         f: 'будут просить' }
         ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Проси! / Попроси!' },
@@ -7147,14 +7147,6 @@ const VERBOS_DATA_RUSO = {
   },
   'smotret': {
     tiempos: [
-      { subtitulo: 'yo miro, etc.', filas: [
-          { p: 'я',           f: 'смотрю' },
-          { p: 'ты',          f: 'смотришь' },
-          { p: 'он/она/оно',  f: 'смотрит' },
-          { p: 'мы',          f: 'смотрим' },
-          { p: 'вы',          f: 'смотрите' },
-          { p: 'они',         f: 'смотрят' }
-        ] },
       { subtitulo: 'yo miraba, etc.', filas: [
           { p: 'masc.',  f: 'смотрел' },
           { p: 'fem.',   f: 'смотрела' },
@@ -7167,13 +7159,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'посмотрело' },
           { p: 'plural', f: 'посмотрели' }
         ] },
-      { subtitulo: 'yo voy a mirar, etc.', filas: [
-          { p: 'я',           f: 'буду смотреть' },
-          { p: 'ты',          f: 'будешь смотреть' },
-          { p: 'он/она/оно',  f: 'будет смотреть' },
-          { p: 'мы',          f: 'будем смотреть' },
-          { p: 'вы',          f: 'будете смотреть' },
-          { p: 'они',         f: 'будут смотреть' }
+      { subtitulo: 'yo miro, etc.', filas: [
+          { p: 'я',           f: 'смотрю' },
+          { p: 'ты',          f: 'смотришь' },
+          { p: 'он/она/оно',  f: 'смотрит' },
+          { p: 'мы',          f: 'смотрим' },
+          { p: 'вы',          f: 'смотрите' },
+          { p: 'они',         f: 'смотрят' }
         ] },
       { subtitulo: 'miraré, etc.', filas: [
           { p: 'я',           f: 'посмотрю' },
@@ -7183,6 +7175,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'посмотрите' },
           { p: 'они',         f: 'посмотрят' }
         ] },
+      { subtitulo: 'yo voy a mirar, etc.', filas: [
+          { p: 'я',           f: 'буду смотреть' },
+          { p: 'ты',          f: 'будешь смотреть' },
+          { p: 'он/она/оно',  f: 'будет смотреть' },
+          { p: 'мы',          f: 'будем смотреть' },
+          { p: 'вы',          f: 'будете смотреть' },
+          { p: 'они',         f: 'будут смотреть' }
+        ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Смотри! / Посмотри!' },
           { p: 'ustedes', f: 'Смотрите! / Посмотрите!' }
@@ -7191,14 +7191,6 @@ const VERBOS_DATA_RUSO = {
   },
   'platit': {
     tiempos: [
-      { subtitulo: 'yo pago, etc.', filas: [
-          { p: 'я',           f: 'плачу' },
-          { p: 'ты',          f: 'платишь' },
-          { p: 'он/она/оно',  f: 'платит' },
-          { p: 'мы',          f: 'платим' },
-          { p: 'вы',          f: 'платите' },
-          { p: 'они',         f: 'платят' }
-        ], nota: 'Consonante т cambia a ч solo en "я" (плачу)' },
       { subtitulo: 'yo pagaba, etc.', filas: [
           { p: 'masc.',  f: 'платил' },
           { p: 'fem.',   f: 'платила' },
@@ -7211,14 +7203,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'заплатило' },
           { p: 'plural', f: 'заплатили' }
         ] },
-      { subtitulo: 'yo voy a pagar, etc.', filas: [
-          { p: 'я',           f: 'буду платить' },
-          { p: 'ты',          f: 'будешь платить' },
-          { p: 'он/она/оно',  f: 'будет платить' },
-          { p: 'мы',          f: 'будем платить' },
-          { p: 'вы',          f: 'будете платить' },
-          { p: 'они',         f: 'будут платить' }
-        ] },
+      { subtitulo: 'yo pago, etc.', filas: [
+          { p: 'я',           f: 'плачу' },
+          { p: 'ты',          f: 'платишь' },
+          { p: 'он/она/оно',  f: 'платит' },
+          { p: 'мы',          f: 'платим' },
+          { p: 'вы',          f: 'платите' },
+          { p: 'они',         f: 'платят' }
+        ], nota: 'Consonante т cambia a ч solo en "я" (плачу)' },
       { subtitulo: 'pagaré, etc.', filas: [
           { p: 'я',           f: 'заплачу' },
           { p: 'ты',          f: 'заплатишь' },
@@ -7226,6 +7218,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'мы',          f: 'заплатим' },
           { p: 'вы',          f: 'заплатите' },
           { p: 'они',         f: 'заплатят' }
+        ] },
+      { subtitulo: 'yo voy a pagar, etc.', filas: [
+          { p: 'я',           f: 'буду платить' },
+          { p: 'ты',          f: 'будешь платить' },
+          { p: 'он/она/оно',  f: 'будет платить' },
+          { p: 'мы',          f: 'будем платить' },
+          { p: 'вы',          f: 'будете платить' },
+          { p: 'они',         f: 'будут платить' }
         ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Плати! / Заплати!' },
@@ -7241,14 +7241,6 @@ const VERBOS_DATA_RUSO = {
   // aprender de cero, son estas mismas conjugaciones + la piecita.
   'nazyvat': {
     tiempos: [
-      { subtitulo: 'yo llamo/nombro, etc.', filas: [
-          { p: 'я',           f: 'называю' },
-          { p: 'ты',          f: 'называешь' },
-          { p: 'он/она/оно',  f: 'называет' },
-          { p: 'мы',          f: 'называем' },
-          { p: 'вы',          f: 'называете' },
-          { p: 'они',         f: 'называют' }
-        ] },
       { subtitulo: 'yo llamaba/nombraba, etc.', filas: [
           { p: 'masc.',  f: 'называл' },
           { p: 'fem.',   f: 'называла' },
@@ -7261,13 +7253,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'назвало' },
           { p: 'plural', f: 'назвали' }
         ] },
-      { subtitulo: 'yo voy a llamar/nombrar, etc.', filas: [
-          { p: 'я',           f: 'буду называть' },
-          { p: 'ты',          f: 'будешь называть' },
-          { p: 'он/она/оно',  f: 'будет называть' },
-          { p: 'мы',          f: 'будем называть' },
-          { p: 'вы',          f: 'будете называть' },
-          { p: 'они',         f: 'будут называть' }
+      { subtitulo: 'yo llamo/nombro, etc.', filas: [
+          { p: 'я',           f: 'называю' },
+          { p: 'ты',          f: 'называешь' },
+          { p: 'он/она/оно',  f: 'называет' },
+          { p: 'мы',          f: 'называем' },
+          { p: 'вы',          f: 'называете' },
+          { p: 'они',         f: 'называют' }
         ] },
       { subtitulo: 'llamaré/nombraré, etc.', filas: [
           { p: 'я',           f: 'назову' },
@@ -7277,6 +7269,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'назовёте' },
           { p: 'они',         f: 'назовут' }
         ] },
+      { subtitulo: 'yo voy a llamar/nombrar, etc.', filas: [
+          { p: 'я',           f: 'буду называть' },
+          { p: 'ты',          f: 'будешь называть' },
+          { p: 'он/она/оно',  f: 'будет называть' },
+          { p: 'мы',          f: 'будем называть' },
+          { p: 'вы',          f: 'будете называть' },
+          { p: 'они',         f: 'будут называть' }
+        ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Называй! / Назови!' },
           { p: 'ustedes', f: 'Называйте! / Назовите!' }
@@ -7285,14 +7285,6 @@ const VERBOS_DATA_RUSO = {
   },
   'odevat': {
     tiempos: [
-      { subtitulo: 'yo visto (a alguien), etc.', filas: [
-          { p: 'я',           f: 'одеваю' },
-          { p: 'ты',          f: 'одеваешь' },
-          { p: 'он/она/оно',  f: 'одевает' },
-          { p: 'мы',          f: 'одеваем' },
-          { p: 'вы',          f: 'одеваете' },
-          { p: 'они',         f: 'одевают' }
-        ] },
       { subtitulo: 'yo vestía (a alguien), etc.', filas: [
           { p: 'masc.',  f: 'одевал' },
           { p: 'fem.',   f: 'одевала' },
@@ -7305,13 +7297,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'одело' },
           { p: 'plural', f: 'одели' }
         ] },
-      { subtitulo: 'yo voy a vestir (a alguien), etc.', filas: [
-          { p: 'я',           f: 'буду одевать' },
-          { p: 'ты',          f: 'будешь одевать' },
-          { p: 'он/она/оно',  f: 'будет одевать' },
-          { p: 'мы',          f: 'будем одевать' },
-          { p: 'вы',          f: 'будете одевать' },
-          { p: 'они',         f: 'будут одевать' }
+      { subtitulo: 'yo visto (a alguien), etc.', filas: [
+          { p: 'я',           f: 'одеваю' },
+          { p: 'ты',          f: 'одеваешь' },
+          { p: 'он/она/оно',  f: 'одевает' },
+          { p: 'мы',          f: 'одеваем' },
+          { p: 'вы',          f: 'одеваете' },
+          { p: 'они',         f: 'одевают' }
         ] },
       { subtitulo: 'vestiré (a alguien), etc.', filas: [
           { p: 'я',           f: 'одену' },
@@ -7321,6 +7313,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'оденете' },
           { p: 'они',         f: 'оденут' }
         ] },
+      { subtitulo: 'yo voy a vestir (a alguien), etc.', filas: [
+          { p: 'я',           f: 'буду одевать' },
+          { p: 'ты',          f: 'будешь одевать' },
+          { p: 'он/она/оно',  f: 'будет одевать' },
+          { p: 'мы',          f: 'будем одевать' },
+          { p: 'вы',          f: 'будете одевать' },
+          { p: 'они',         f: 'будут одевать' }
+        ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Одевай! / Одень!' },
           { p: 'ustedes', f: 'Одевайте! / Оденьте!' }
@@ -7329,14 +7329,6 @@ const VERBOS_DATA_RUSO = {
   },
   'vstrechat': {
     tiempos: [
-      { subtitulo: 'yo recibo/encuentro, etc.', filas: [
-          { p: 'я',           f: 'встречаю' },
-          { p: 'ты',          f: 'встречаешь' },
-          { p: 'он/она/оно',  f: 'встречает' },
-          { p: 'мы',          f: 'встречаем' },
-          { p: 'вы',          f: 'встречаете' },
-          { p: 'они',         f: 'встречают' }
-        ] },
       { subtitulo: 'yo recibía/encontraba, etc.', filas: [
           { p: 'masc.',  f: 'встречал' },
           { p: 'fem.',   f: 'встречала' },
@@ -7349,13 +7341,13 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'встретило' },
           { p: 'plural', f: 'встретили' }
         ] },
-      { subtitulo: 'yo voy a recibir, etc.', filas: [
-          { p: 'я',           f: 'буду встречать' },
-          { p: 'ты',          f: 'будешь встречать' },
-          { p: 'он/она/оно',  f: 'будет встречать' },
-          { p: 'мы',          f: 'будем встречать' },
-          { p: 'вы',          f: 'будете встречать' },
-          { p: 'они',         f: 'будут встречать' }
+      { subtitulo: 'yo recibo/encuentro, etc.', filas: [
+          { p: 'я',           f: 'встречаю' },
+          { p: 'ты',          f: 'встречаешь' },
+          { p: 'он/она/оно',  f: 'встречает' },
+          { p: 'мы',          f: 'встречаем' },
+          { p: 'вы',          f: 'встречаете' },
+          { p: 'они',         f: 'встречают' }
         ] },
       { subtitulo: 'recibiré/encontraré, etc.', filas: [
           { p: 'я',           f: 'встречу' },
@@ -7364,6 +7356,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'мы',          f: 'встретим' },
           { p: 'вы',          f: 'встретите' },
           { p: 'они',         f: 'встретят' }
+        ] },
+      { subtitulo: 'yo voy a recibir, etc.', filas: [
+          { p: 'я',           f: 'буду встречать' },
+          { p: 'ты',          f: 'будешь встречать' },
+          { p: 'он/она/оно',  f: 'будет встречать' },
+          { p: 'мы',          f: 'будем встречать' },
+          { p: 'вы',          f: 'будете встречать' },
+          { p: 'они',         f: 'будут встречать' }
         ] },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Встречай! / Встреть!' },
@@ -7376,6 +7376,13 @@ const VERBOS_DATA_RUSO = {
   // versión "base" con otro sentido. Por eso van aparte de los de arriba.
   'nakhoditsya': {
     tiempos: [
+      { subtitulo: 'estaba ubicado, etc.', filas: [
+          { p: 'masc.',  f: 'находился' },
+          { p: 'fem.',   f: 'находилась' },
+          { p: 'neutro', f: 'находилось' },
+          { p: 'plural', f: 'находились' }
+        ] },
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente — no hay "pasado perfectivo" para este verbo en este sentido.' },
       { subtitulo: 'está ubicado, etc.', filas: [
           { p: 'я',           f: 'нахожусь' },
           { p: 'ты',          f: 'находишься' },
@@ -7384,13 +7391,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'находитесь' },
           { p: 'они',         f: 'находятся' }
         ], nota: 'Casi siempre en 3ª persona: "отель находится..." (el hotel está ubicado...)' },
-      { subtitulo: 'estaba ubicado, etc.', filas: [
-          { p: 'masc.',  f: 'находился' },
-          { p: 'fem.',   f: 'находилась' },
-          { p: 'neutro', f: 'находилось' },
-          { p: 'plural', f: 'находились' }
-        ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente — no hay "pasado perfectivo" para este verbo en este sentido.' },
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
       { subtitulo: 'va a estar ubicado, etc.', filas: [
           { p: 'я',           f: 'буду находиться' },
           { p: 'ты',          f: 'будешь находиться' },
@@ -7399,20 +7400,11 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'будете находиться' },
           { p: 'они',         f: 'будут находиться' }
         ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
       { subtitulo: '(no se usa)', filas: [], nota: 'Verbo de estado/ubicación — no tiene imperativo real ("estate ubicado" no se dice). — Condicional: бы + este mismo pasado (ej. "находился бы" = habría/sería...).' }
     ]
   },
   'nravitsya': {
     tiempos: [
-      { subtitulo: 'me gusta, etc. (dativo + nravitsya)', filas: [
-          { p: 'мне',           f: 'нравлюсь' },
-          { p: 'тебе',          f: 'нравишься' },
-          { p: 'ему/ей',        f: 'нравится' },
-          { p: 'нам',           f: 'нравимся' },
-          { p: 'вам',           f: 'нравитесь' },
-          { p: 'им',            f: 'нравятся' }
-        ], nota: 'La forma concuerda con LO QUE gusta, no con quién lo disfruta: "Мне нравится отель" (el hotel, singular) / "Мне нравятся номера" (las habitaciones, plural)' },
       { subtitulo: 'me gustaba, etc.', filas: [
           { p: 'masc.',  f: 'нравился' },
           { p: 'fem.',   f: 'нравилась' },
@@ -7425,18 +7417,33 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'понравилось' },
           { p: 'plural', f: 'понравились' }
         ] },
-      { subtitulo: '(raro)', filas: [], nota: 'буду нравиться casi no se usa — para "va a gustar" se prefiere el futuro simple de понравиться.' },
+      { subtitulo: 'me gusta, etc. (dativo + nravitsya)', filas: [
+          { p: 'мне',           f: 'нравлюсь' },
+          { p: 'тебе',          f: 'нравишься' },
+          { p: 'ему/ей',        f: 'нравится' },
+          { p: 'нам',           f: 'нравимся' },
+          { p: 'вам',           f: 'нравитесь' },
+          { p: 'им',            f: 'нравятся' }
+        ], nota: 'La forma concuerda con LO QUE gusta, no con quién lo disfruta: "Мне нравится отель" (el hotel, singular) / "Мне нравятся номера" (las habitaciones, plural)' },
       { subtitulo: 'me gustará, etc.', filas: [
           { p: 'masc.',  f: 'понравится' },
           { p: 'fem.',   f: 'понравится' },
           { p: 'neutro', f: 'понравится' },
           { p: 'plural', f: 'понравятся' }
         ], nota: 'De nuevo concuerda con lo que va a gustar, no con la persona' },
+      { subtitulo: '(raro)', filas: [], nota: 'буду нравиться casi no se usa — para "va a gustar" se prefiere el futuro simple de понравиться.' },
       { subtitulo: '(no aplica)', filas: [], nota: 'Verbo de sentimiento — no tiene imperativo real ("¡gusta!" no existe). — Condicional: бы + este mismo pasado (ej. "нравился бы" = habría/sería...).' }
     ]
   },
   'boyatsya': {
     tiempos: [
+      { subtitulo: 'tenía miedo, etc.', filas: [
+          { p: 'masc.',  f: 'боялся' },
+          { p: 'fem.',   f: 'боялась' },
+          { p: 'neutro', f: 'боялось' },
+          { p: 'plural', f: 'боялись' }
+        ] },
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo.' },
       { subtitulo: 'tengo miedo, etc.', filas: [
           { p: 'я',           f: 'боюсь' },
           { p: 'ты',          f: 'боишься' },
@@ -7445,12 +7452,6 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'боитесь' },
           { p: 'они',         f: 'боятся' }
         ], nota: 'Rige GENITIVO de lo que se teme: "бояться темноты" (temer a la oscuridad)' },
-      { subtitulo: 'tenía miedo, etc.', filas: [
-          { p: 'masc.',  f: 'боялся' },
-          { p: 'fem.',   f: 'боялась' },
-          { p: 'neutro', f: 'боялось' },
-          { p: 'plural', f: 'боялись' }
-        ] },
       { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo.' },
       { subtitulo: 'voy a tener miedo, etc.', filas: [
           { p: 'я',           f: 'буду бояться' },
@@ -7460,7 +7461,6 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'будете бояться' },
           { p: 'они',         f: 'будут бояться' }
         ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo.' },
       { subtitulo: 'tú / ustedes (negativo)', filas: [
           { p: 'tú',      f: 'Не бойся!' },
           { p: 'ustedes', f: 'Не бойтесь!' }
@@ -7472,14 +7472,6 @@ const VERBOS_DATA_RUSO = {
   // ── J5 Movimiento — a pie/en vehículo, unidireccional vs. habitual ──
   'idti_poyti': {
     tiempos: [
-      { subtitulo: 'voy/vas... (ahora, en curso)', filas: [
-          { p: 'я',           f: 'иду' },
-          { p: 'ты',          f: 'идёшь' },
-          { p: 'он/она/оно',  f: 'идёт' },
-          { p: 'мы',          f: 'идём' },
-          { p: 'вы',          f: 'идёте' },
-          { p: 'они',         f: 'идут' }
-        ] },
       { subtitulo: 'iba, etc.', filas: [
           { p: 'masc.',  f: 'шёл' },
           { p: 'fem.',   f: 'шла' },
@@ -7492,7 +7484,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'пошло' },
           { p: 'plural', f: 'пошли' }
         ] },
-      { subtitulo: '(raro)', filas: [], nota: 'буду идти casi no se usa — para "voy a ir" se prefiere el futuro simple de пойти.' },
+      { subtitulo: 'voy/vas... (ahora, en curso)', filas: [
+          { p: 'я',           f: 'иду' },
+          { p: 'ты',          f: 'идёшь' },
+          { p: 'он/она/оно',  f: 'идёт' },
+          { p: 'мы',          f: 'идём' },
+          { p: 'вы',          f: 'идёте' },
+          { p: 'они',         f: 'идут' }
+        ] },
       { subtitulo: 'iré / me iré, etc.', filas: [
           { p: 'я',           f: 'пойду' },
           { p: 'ты',          f: 'пойдёшь' },
@@ -7501,6 +7500,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'пойдёте' },
           { p: 'они',         f: 'пойдут' }
         ] },
+      { subtitulo: '(raro)', filas: [], nota: 'буду идти casi no se usa — para "voy a ir" se prefiere el futuro simple de пойти.' },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Иди! / Пойди!' },
           { p: 'ustedes', f: 'Идите! / Пойдите!' }
@@ -7509,6 +7509,13 @@ const VERBOS_DATA_RUSO = {
   },
   'hodit': {
     tiempos: [
+      { subtitulo: 'iba (habitualmente), etc.', filas: [
+          { p: 'masc.',  f: 'ходил' },
+          { p: 'fem.',   f: 'ходила' },
+          { p: 'neutro', f: 'ходило' },
+          { p: 'plural', f: 'ходили' }
+        ] },
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este sentido habitual.' },
       { subtitulo: 'voy (habitualmente), etc.', filas: [
           { p: 'я',           f: 'хожу' },
           { p: 'ты',          f: 'ходишь' },
@@ -7517,13 +7524,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'ходите' },
           { p: 'они',         f: 'ходят' }
         ], nota: 'Consonante д cambia a ж solo en "я" (хожу)' },
-      { subtitulo: 'iba (habitualmente), etc.', filas: [
-          { p: 'masc.',  f: 'ходил' },
-          { p: 'fem.',   f: 'ходила' },
-          { p: 'neutro', f: 'ходило' },
-          { p: 'plural', f: 'ходили' }
-        ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este sentido habitual.' },
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
       { subtitulo: 'voy a ir (habitualmente), etc.', filas: [
           { p: 'я',           f: 'буду ходить' },
           { p: 'ты',          f: 'будешь ходить' },
@@ -7532,7 +7533,6 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'будете ходить' },
           { p: 'они',         f: 'будут ходить' }
         ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Ходи!' },
           { p: 'ustedes', f: 'Ходите!' }
@@ -7541,14 +7541,6 @@ const VERBOS_DATA_RUSO = {
   },
   'ekhat_poekhat': {
     tiempos: [
-      { subtitulo: 'voy/vas... (ahora, en vehículo)', filas: [
-          { p: 'я',           f: 'еду' },
-          { p: 'ты',          f: 'едешь' },
-          { p: 'он/она/оно',  f: 'едет' },
-          { p: 'мы',          f: 'едем' },
-          { p: 'вы',          f: 'едете' },
-          { p: 'они',         f: 'едут' }
-        ] },
       { subtitulo: 'iba (en vehículo), etc.', filas: [
           { p: 'masc.',  f: 'ехал' },
           { p: 'fem.',   f: 'ехала' },
@@ -7561,7 +7553,14 @@ const VERBOS_DATA_RUSO = {
           { p: 'neutro', f: 'поехало' },
           { p: 'plural', f: 'поехали' }
         ] },
-      { subtitulo: '(raro)', filas: [], nota: 'буду ехать casi no se usa — para "voy a ir" se prefiere el futuro simple de поехать.' },
+      { subtitulo: 'voy/vas... (ahora, en vehículo)', filas: [
+          { p: 'я',           f: 'еду' },
+          { p: 'ты',          f: 'едешь' },
+          { p: 'он/она/оно',  f: 'едет' },
+          { p: 'мы',          f: 'едем' },
+          { p: 'вы',          f: 'едете' },
+          { p: 'они',         f: 'едут' }
+        ] },
       { subtitulo: 'iré (en vehículo), etc.', filas: [
           { p: 'я',           f: 'поеду' },
           { p: 'ты',          f: 'поедешь' },
@@ -7570,6 +7569,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'поедете' },
           { p: 'они',         f: 'поедут' }
         ] },
+      { subtitulo: '(raro)', filas: [], nota: 'буду ехать casi no se usa — para "voy a ir" se prefiere el futuro simple de поехать.' },
       { subtitulo: 'tú / ustedes', filas: [
           { p: 'tú',      f: 'Поезжай!' },
           { p: 'ustedes', f: 'Поезжайте!' }
@@ -7578,6 +7578,13 @@ const VERBOS_DATA_RUSO = {
   },
   'ezdit': {
     tiempos: [
+      { subtitulo: 'iba (habitualmente, en vehículo), etc.', filas: [
+          { p: 'masc.',  f: 'ездил' },
+          { p: 'fem.',   f: 'ездила' },
+          { p: 'neutro', f: 'ездило' },
+          { p: 'plural', f: 'ездили' }
+        ] },
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este sentido habitual.' },
       { subtitulo: 'voy (habitualmente, en vehículo), etc.', filas: [
           { p: 'я',           f: 'езжу' },
           { p: 'ты',          f: 'ездишь' },
@@ -7586,13 +7593,7 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'ездите' },
           { p: 'они',         f: 'ездят' }
         ] },
-      { subtitulo: 'iba (habitualmente, en vehículo), etc.', filas: [
-          { p: 'masc.',  f: 'ездил' },
-          { p: 'fem.',   f: 'ездила' },
-          { p: 'neutro', f: 'ездило' },
-          { p: 'plural', f: 'ездили' }
-        ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este sentido habitual.' },
+      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
       { subtitulo: 'voy a ir (habitualmente, en vehículo), etc.', filas: [
           { p: 'я',           f: 'буду ездить' },
           { p: 'ты',          f: 'будешь ездить' },
@@ -7601,7 +7602,6 @@ const VERBOS_DATA_RUSO = {
           { p: 'вы',          f: 'будете ездить' },
           { p: 'они',         f: 'будут ездить' }
         ] },
-      { subtitulo: '(no aplica)', filas: [], nota: 'Sin perfectivo de uso corriente para este verbo/sentido.' },
       { subtitulo: '(poco usado)', filas: [], nota: 'Rara vez se usa como pedido directo — más como descripción de hábito. — Condicional: бы + este mismo pasado (ej. "ездил бы" = habría/sería...).' }
     ]
   }
