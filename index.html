@@ -777,13 +777,13 @@ header {
    Se aplica al sujeto en tarjetas de columnas y variables.
    Colores definidos en la unidad de Personas (placeholder por ahora).
 ===================================================================== */
-.g-masc   { color: #90B0C8; }
-.g-fem    { color: #D0A8B8; }
-.g-plural { color: #C8D0B0; }
-.g-elidido { color: #C0A8D8; }
+.g-masc   { color: #2F6FA0; }
+.g-fem    { color: #B5507A; }
+.g-plural { color: #758C3D; }
+.g-elidido { color: #8C5FD1; }
 /* Género neutro: no existe en francés, lo necesita el ruso. Color nuevo,
    sin pisar los 4 ya definidos (masc/fem/plural/elidido). */
-.g-neutro { color: #D8C088; }
+.g-neutro { color: #A3822E; }
 
 /* =====================================================================
    TARJETA: VARIABLE / CONTENIDO ELEGIBLE
@@ -7693,21 +7693,36 @@ function renderMesaFijaVerbosRuso(mesa) {
   TIEMPOS_RUSO.forEach((t, i) => {
     const card = document.createElement('div');
     card.className = 'tarjeta-fija';
-    card.style.background = '#ffffff';
-    card.style.border = `var(--card-border-w) solid ${t.color1}`;
+    if (t.titulo === 'Imperativo / Condicional') {
+      // Única tarjeta con degradé de color (los dos modos que no son
+      // tiempo): naranja clarito/brillante (tira a amarillo) + lila
+      // brillante, en diagonal — mismo mecanismo que ya usa el resto
+      // de la app para bordes con degradé.
+      card.style.border = 'var(--card-border-w) solid transparent';
+      card.style.background =
+        'linear-gradient(#ffffff, #ffffff) padding-box, ' +
+        'linear-gradient(135deg, #FFC168, #B892F0) border-box';
+    } else {
+      card.style.background = '#ffffff';
+      card.style.border = `var(--card-border-w) solid ${t.color1}`;
+    }
     card.style.borderRadius = `var(--card-radius)`;
 
     if (datosVerbo) {
       const d = datosVerbo.tiempos[i];
+      const esImperativoCondicional = t.titulo === 'Imperativo / Condicional';
       const filasHtml = d.filas.map(fila =>
-        `<tr><td class="persona">${coloredPersona(fila.p)}</td><td class="hablar" data-hablar="${fila.f}" style="white-space:nowrap;">${fila.f}</td></tr>`
+        `<tr><td class="persona">${coloredPersona(fila.p)}</td><td class="hablar" data-hablar="${fila.f}" style="white-space:nowrap;${esImperativoCondicional ? ' color:#D98B1E;' : ''}">${fila.f}</td></tr>`
       ).join('');
+      const tituloHtml = esImperativoCondicional
+        ? '<span style="color:#D98B1E;">Imperativo</span> / <span style="color:#8C5FD1;">Condicional</span>'
+        : t.titulo;
       card.innerHTML = `
-        <div class="tarjeta-titulo" style="color: #6a6a68;">${t.titulo}</div>
+        <div class="tarjeta-titulo" style="color: #6a6a68;">${tituloHtml}</div>
         <div class="tarjeta-fija-subtitulo">${d.subtitulo}</div>
         <div class="tarjeta-cuerpo">
           ${d.filas.length ? `<table class="tabla-conjugacion">${filasHtml}</table>` : ''}
-          ${d.nota ? `<div class="tarjeta-fija-nota">${d.nota}</div>` : ''}
+          ${d.nota ? `<div class="tarjeta-fija-nota"${esImperativoCondicional ? ' style="color:#8C5FD1;"' : ''}>${d.nota}</div>` : ''}
         </div>`;
     } else {
       card.innerHTML = `
