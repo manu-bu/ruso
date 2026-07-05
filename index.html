@@ -7667,6 +7667,23 @@ function renderMesaFijaVerbos(mesa) {
 // la app. Además, para TTS solo se lee la forma rusa (fila.f) — el
 // label de la izquierda (masc./fem./tú/ustedes) es una etiqueta
 // gramatical, no una palabra rusa, así que no se concatena para hablar.
+// Colorea la etiqueta de persona/sujeto con el mismo sistema de colores
+// que ya usa el resto de la app para género (masc=celeste, fem=rosa,
+// neutro=amarillo, plural=verde) + violeta para "yo/tú" (pueden ser
+// masc. o fem. según quién habla, no tienen género fijo propio).
+function coloredPersona(p) {
+  const violeta = ['я', 'ты', 'tú'];
+  const verde = ['мы', 'вы', 'они', 'ustedes', 'plural'];
+  const mapaDirecto = { 'masc.': 'masc', 'fem.': 'fem', 'neutro': 'neutro' };
+  if (p === 'он/она/оно') {
+    return '<span class="g-masc">он</span>/<span class="g-fem">она</span>/<span class="g-neutro">оно</span>';
+  }
+  if (violeta.includes(p)) return `<span class="g-elidido">${p}</span>`;
+  if (verde.includes(p)) return `<span class="g-plural">${p}</span>`;
+  if (mapaDirecto[p]) return `<span class="g-${mapaDirecto[p]}">${p}</span>`;
+  return p;
+}
+
 function renderMesaFijaVerbosRuso(mesa) {
   const grid = document.createElement('div');
   grid.className = 'mesa-fija mesa-fija-ruso';
@@ -7683,7 +7700,7 @@ function renderMesaFijaVerbosRuso(mesa) {
     if (datosVerbo) {
       const d = datosVerbo.tiempos[i];
       const filasHtml = d.filas.map(fila =>
-        `<tr><td class="persona">${fila.p}</td><td class="hablar" data-hablar="${fila.f}" style="white-space:nowrap;">${fila.f}</td></tr>`
+        `<tr><td class="persona">${coloredPersona(fila.p)}</td><td class="hablar" data-hablar="${fila.f}" style="white-space:nowrap;">${fila.f}</td></tr>`
       ).join('');
       card.innerHTML = `
         <div class="tarjeta-titulo" style="color: #6a6a68;">${t.titulo}</div>
