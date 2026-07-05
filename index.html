@@ -68,11 +68,13 @@ html, body {
   user-select: none;
 }
 
-/* Fondo propio de la unidad Verbos — blanco puro en vez del gris neutro.
-   El header ya es transparente (ver más abajo), así que solo hace
-   falta pintar el body — el header hereda lo que se vea detrás. */
+/* Fondo propio de las unidades de Verbos (francés y ruso) — gris
+   oscuro, para que las tarjetas blancas y los colores de cada tiempo
+   resalten más que sobre blanco o sobre el gris claro neutro de la
+   app. El header ya es transparente (ver más abajo), así que solo
+   hace falta pintar el body — el header hereda lo que se vea detrás. */
 body.unidad-verbos {
-  background: #ffffff;
+  background: #928c78;
 }
 
 /* Cultura tiene 3 temas (Chamonix, Actividades, País) + Abecedario
@@ -274,6 +276,27 @@ header {
       #7242CC 257deg,
       #E85CA0 308deg,
       #E8392B 360deg
+    ) border-box;
+}
+
+/* Verbos en ruso — los 6 colores de las tarjetas, en rueda (se salta
+   el negro de Presente porque no se ve como "color" en un degradé):
+   rojo (pasado imperf.) → amarillo (pasado perf.) → verde (futuro
+   perf.) → celeste (futuro imperf.) → naranja/violeta (imp./cond.) */
+.selector.verbos-ruso-activo {
+  color: #6a4a1e;
+  font-weight: 600;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    conic-gradient(
+      from 0deg,
+      #E63946,
+      #FFC93C 60deg,
+      #6FCF3D 120deg,
+      #17B8CE 180deg,
+      #FFC168 240deg,
+      #B892F0 300deg,
+      #E63946 360deg
     ) border-box;
 }
 
@@ -689,7 +712,7 @@ header {
 ===================================================================== */
 .hablar {
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 500;
 }
 .hablar:active {
   opacity: 0.5;
@@ -1208,7 +1231,7 @@ body.unidad-personas .tarjeta-titulo {
   font-size: 15px;
   font-style: italic;
   text-align: center;
-  color: #aaaaa8;
+  color: #7a7a78;
 }
 
 .tarjeta-fija table.tabla-conjugacion {
@@ -1236,7 +1259,7 @@ body.unidad-personas .tarjeta-titulo {
   border-top: 1px dashed #e0e0de;
   font-size: 14px;
   line-height: 1.4;
-  color: #b4b4b2;
+  color: #8a8a88;
 }
 
 /* =====================================================================
@@ -4236,6 +4259,17 @@ function actualizarSelectores() {
     });
   }
 
+  // Verbos en ruso — mismo mecanismo, con el naranja/violeta de la
+  // tarjeta de Imperativo/Condicional en vez del arcoíris francés.
+  if (estado.unidad === 'J') {
+    [s1, s2, s3].forEach(s => {
+      if (s.classList.contains('activo')) {
+        s.classList.remove('activo');
+        s.classList.add('verbos-ruso-activo');
+      }
+    });
+  }
+
   // País (B3) + Abecedario (unidad A) son los ÚNICOS que de verdad
   // comparten identidad: Abecedario es el alfabeto del idioma/país que
   // se estudia, así que tiene sentido que copie la paleta de País —
@@ -4459,7 +4493,7 @@ function elegirUnidad(key, nombre, tipo) {
   estado.subtema  = null;
   estado.tipoMesa = tipo;
 
-  document.body.classList.toggle('unidad-verbos', key === 'G');
+  document.body.classList.toggle('unidad-verbos', key === 'G' || key === 'J');
 
   if (estado.editor) apagarEditor();
 
@@ -6685,11 +6719,11 @@ const VERBOS_DATA = {
 // la paleta cuando se revise el resto de la app.
 // ═══════════════════════════════════════════════════════════════════════
 const TIEMPOS_RUSO = [
-  { titulo: 'Pasado — imperfectivo',                color1: '#9a9a98', color2: '#7a7a78' },
-  { titulo: 'Pasado — perfectivo',                  color1: '#9a9a98', color2: '#7a7a78' },
-  { titulo: 'Presente (imperfectivo)',              color1: '#9a9a98', color2: '#7a7a78' },
-  { titulo: 'Futuro — perfectivo (simple)',          color1: '#9a9a98', color2: '#7a7a78' },
-  { titulo: 'Futuro — imperfectivo (compuesto)',     color1: '#9a9a98', color2: '#7a7a78' },
+  { titulo: 'Pasado — imperfectivo',                color1: '#E63946', color2: '#F7B8BE' },
+  { titulo: 'Pasado — perfectivo',                  color1: '#FFC93C', color2: '#FFE9A8' },
+  { titulo: 'Presente (imperfectivo)',              color1: '#2A2A2A', color2: '#B8B8B8' },
+  { titulo: 'Futuro — perfectivo (simple)',          color1: '#6FCF3D', color2: '#C5EBA8' },
+  { titulo: 'Futuro — imperfectivo (compuesto)',     color1: '#17B8CE', color2: '#A8E8F0' },
   { titulo: 'Imperativo / Condicional',              color1: '#9a9a98', color2: '#7a7a78' }
 ];
 
@@ -7694,17 +7728,19 @@ function renderMesaFijaVerbosRuso(mesa) {
     const card = document.createElement('div');
     card.className = 'tarjeta-fija';
     if (t.titulo === 'Imperativo / Condicional') {
-      // Única tarjeta con degradé de color (los dos modos que no son
-      // tiempo): naranja clarito/brillante (tira a amarillo) + lila
-      // brillante, en diagonal — mismo mecanismo que ya usa el resto
-      // de la app para bordes con degradé.
+      // Único caso con DOS colores a la par (no 70/30): mitad naranja,
+      // mitad violeta en el borde — sin resplandor (se sacó, quedaba raro).
       card.style.border = 'var(--card-border-w) solid transparent';
       card.style.background =
         'linear-gradient(#ffffff, #ffffff) padding-box, ' +
-        'linear-gradient(135deg, #FFC168, #B892F0) border-box';
+        'linear-gradient(135deg, #FFC168 0%, #FFC168 50%, #B892F0 50%, #B892F0 100%) border-box';
     } else {
-      card.style.background = '#ffffff';
-      card.style.border = `var(--card-border-w) solid ${t.color1}`;
+      // Las 5 tarjetas de tiempo real: degradé 70/30 (color base + su
+      // versión pastel) en el borde — sin resplandor (se sacó, quedaba raro).
+      card.style.border = 'var(--card-border-w) solid transparent';
+      card.style.background =
+        'linear-gradient(#ffffff, #ffffff) padding-box, ' +
+        `linear-gradient(135deg, ${t.color1} 0%, ${t.color1} 70%, ${t.color2} 100%) border-box`;
     }
     card.style.borderRadius = `var(--card-radius)`;
 
@@ -7718,7 +7754,7 @@ function renderMesaFijaVerbosRuso(mesa) {
         ? '<span style="color:#D98B1E;">Imperativo</span> / <span style="color:#8C5FD1;">Condicional</span>'
         : t.titulo;
       card.innerHTML = `
-        <div class="tarjeta-titulo" style="color: #6a6a68;">${tituloHtml}</div>
+        <div class="tarjeta-titulo" style="color: ${esImperativoCondicional ? '#6a6a68' : t.color1};">${tituloHtml}</div>
         <div class="tarjeta-fija-subtitulo">${d.subtitulo}</div>
         <div class="tarjeta-cuerpo">
           ${d.filas.length ? `<table class="tabla-conjugacion">${filasHtml}</table>` : ''}
@@ -8064,6 +8100,10 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
   // por la paleta bandera en Cultura → Actividades/País.
   const GRISES = ['#b0b0ae','#989896','#c8c8c6','#a0a0a0','#d0d0ce','#888886'];
   const COLORES_VERBOS = ['#E8392B','#D88436','#DEC648','#3FB84A','#4278D8','#7242CC','#E85CA0'];
+  // Verbos en ruso — los 6 colores de las tarjetas de tiempo, en
+  // versión pastel (más clara/suave para el fondo), sin el negro de
+  // Presente (no se ve como "color" salpicado de fondo).
+  const COLORES_VERBOS_RUSO = ['#F2A0A8','#FFE29A','#C3EBA6','#A8E4EE','#FFDFB0','#DCC9FA'];
   const COLORES_CULTURA_FR_MARINO  = '#2C4A6E';
   const COLORES_CULTURA_FR_VERDE   = '#3F5D3A';
   const COLORES_CULTURA_FR_ARENA   = '#D9C39A';
@@ -8200,6 +8240,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
   function paletaActual() {
     if (typeof estado === 'undefined') return GRISES;
     if (estado.unidad === 'G') return COLORES_VERBOS;
+    if (estado.unidad === 'J') return COLORES_VERBOS_RUSO;
     if (esActividades()) return COLORES_ACTIVIDADES;
     if (esVocabulario()) return COLORES_VOCABULARIO;
     if (esImperativo()) return COLORES_IMPERATIVO;
@@ -8325,7 +8366,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
       base.signo = ['+', '−', '×', '÷'][Math.floor(Math.random() * 4)];
     } else {
       base.color = paleta[Math.floor(Math.random() * paleta.length)];
-      base.radio = 2 + Math.random() * 1.5;
+      base.radio = 4 + Math.random() * 2.5;
     }
     return base;
   }
@@ -8622,7 +8663,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
       } else {
         ctx.save();
         ctx.globalAlpha = alpha * 0.9;
-        ctx.shadowBlur  = 10;
+        ctx.shadowBlur  = 20;
         ctx.shadowColor = p.color;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radio, 0, Math.PI * 2);
