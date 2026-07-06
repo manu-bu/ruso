@@ -1448,7 +1448,10 @@ const UNIDADES = {
   'A': {
     nombre: 'Abecedario',
     tipo: 'fija',
-    temas: null
+    temas: {
+      'A1': { nombre: 'Letras', subtemas: null },
+      'A2': { nombre: 'Instrucciones', subtemas: null }
+    }
   },
   'B': {
     nombre: 'Cultura',
@@ -4713,6 +4716,8 @@ function renderMesaFija(mesa) {
     renderMesaFijaVerbos(mesa);
   } else if (estado.unidad === 'J') {
     renderMesaFijaVerbosRuso(mesa);
+  } else if (estado.unidad === 'A' && estado.tema === 'A2') {
+    renderTarjetaAbecedarioInstrucciones(mesa);
   } else if (estado.unidad === 'A') {
     renderTarjetaAbecedarioRuso(mesa);
   } else if (estado.unidad === 'B' && estado.tema === 'B3') {
@@ -7941,7 +7946,7 @@ const ABECEDARIO_COL_B = [
 
 function renderTarjetaAbecedarioRuso(mesa) {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; height:100%; padding:14px 16px; box-sizing:border-box; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr auto; gap:12px;';
+  wrap.style.cssText = 'width:100%; height:100%; padding:14px 16px; box-sizing:border-box; display:flex; gap:16px; align-items:flex-start;';
 
   const DORADAS = ['Ь', 'Ъ', 'Х', 'О'];
   const VERDES = ['Ш', 'Щ', 'Ж'];
@@ -7951,44 +7956,55 @@ function renderTarjetaAbecedarioRuso(mesa) {
     else if (VERDES.includes(it.cyr)) { fuerte = 'var(--tema-c5)'; suave = '#8FB595'; }
     return `
     <tr>
-      <td class="${it.hablar === false ? '' : 'hablar'}" ${it.hablar === false ? '' : `data-hablar="${it.min}"`} style="font-weight:700; font-size:22px; color:${fuerte}; padding:3px 6px 3px 0; border-bottom:1px solid #ececea;">${it.cyr} <span style="font-weight:400; color:${suave};">${it.min}</span></td>
-      <td style="color:#5a5a58; font-size:15px; padding:3px 6px; border-bottom:1px solid #ececea;">${it.lat}</td>
-      <td style="color:#8a8a86; font-size:13px; padding:3px 0 3px 6px; border-bottom:1px solid #ececea;">${it.ej}</td>
+      <td class="${it.hablar === false ? '' : 'hablar'}" ${it.hablar === false ? '' : `data-hablar="${it.min}"`} style="font-weight:700; font-size:22px; color:${fuerte}; padding:3px 14px; text-align:center; border-bottom:1px solid #ececea;">${it.cyr} <span style="font-weight:400; color:${suave};">${it.min}</span></td>
+      <td style="color:#5a5a58; font-size:15px; padding:3px 14px; text-align:center; border-bottom:1px solid #ececea;">${it.lat}</td>
+      <td style="color:#8a8a86; font-size:13px; padding:3px 14px; text-align:center; border-bottom:1px solid #ececea;">${it.ej}</td>
     </tr>`;
   };
 
   const colAHtml = ABECEDARIO_COL_A.map(filaHtml).join('');
   const colBHtml = ABECEDARIO_COL_B.map(filaHtml).join('');
 
-  // Tarjeta 1 — columna A de letras (arriba, izquierda)
+  // Tarjeta 1 — columna A de letras, ancho al contenido
   const cardA = document.createElement('div');
   cardA.className = 'tarjeta-fija tarjeta-informatica';
-  cardA.style.cssText = 'grid-column:1; grid-row:1;';
-  cardA.innerHTML = `<div class="tarjeta-cuerpo" style="overflow:auto;"><table style="width:100%;">${colAHtml}</table></div>`;
+  cardA.style.cssText = 'width:max-content;';
+  cardA.innerHTML = `<div class="tarjeta-cuerpo" style="overflow:auto;"><table>${colAHtml}</table></div>`;
 
-  // Tarjeta 2 — columna B de letras (arriba, derecha)
+  // Tarjeta 2 — columna B de letras, ancho al contenido
   const cardB = document.createElement('div');
   cardB.className = 'tarjeta-fija tarjeta-informatica';
-  cardB.style.cssText = 'grid-column:2; grid-row:1;';
-  cardB.innerHTML = `<div class="tarjeta-cuerpo" style="overflow:auto;"><table style="width:100%;">${colBHtml}</table></div>`;
+  cardB.style.cssText = 'width:max-content;';
+  cardB.innerHTML = `<div class="tarjeta-cuerpo" style="overflow:auto;"><table>${colBHtml}</table></div>`;
 
-  // Tarjeta 3 — notas/aclaraciones (abajo, larga, ocupa las dos columnas)
-  const cardNotas = document.createElement('div');
-  cardNotas.className = 'tarjeta-fija tarjeta-informatica';
-  cardNotas.style.cssText = 'grid-column:1 / -1; grid-row:2;';
-  cardNotas.innerHTML = `
+  wrap.appendChild(cardA);
+  wrap.appendChild(cardB);
+  mesa.appendChild(wrap);
+}
+
+// Abecedario → Instrucciones (A2): las aclaraciones de sonido que antes
+// vivían pegadas a las listas de letras. Con esto de tema aparte queda
+// espacio de sobra para sumar después ejemplos de palabras reales,
+// combinaciones de sonido, o casos de práctica.
+function renderTarjetaAbecedarioInstrucciones(mesa) {
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'width:100%; height:100%; padding:14px 16px; box-sizing:border-box;';
+
+  const card = document.createElement('div');
+  card.className = 'tarjeta-fija tarjeta-informatica';
+  card.style.width = '100%';
+  card.style.height = '100%';
+  card.innerHTML = `
     <div class="tarjeta-cuerpo" style="overflow:auto;">
       <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px;"><strong style="color:var(--tema-c2);">① Ь (signo blando):</strong> ablanda/suaviza la consonante anterior — la vuelve "blanda", con un toque de sonido "i" pegado.</div>
       <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px;"><strong style="color:var(--tema-c2);">② Ъ (signo duro):</strong> mantiene DURA la consonante anterior y separa, con un pequeño corte, la vocal que sigue.</div>
       <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px;"><strong style="color:var(--tema-c2);">③ Х = J:</strong> un raspado suave, no tan fuerte/bruto como la jota española.</div>
       <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px;"><strong style="color:var(--tema-c2);">④ О:</strong> se pronuncia "O" si lleva el acento (la fuerza de la palabra) — se relaja hacia "A" si no la lleva.</div>
-      <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px; line-height:1.25; margin-top:4px;"><strong style="color:var(--tema-c5);">Ш vs Щ:</strong> Ш es un "sh" más duro/plano; Щ es más largo y suave, casi "sh-sh" pegado (a veces se transcribe "shch").</div>
+      <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px; line-height:1.25; margin-top:10px;"><strong style="color:var(--tema-c5);">Ш vs Щ:</strong> Ш es un "sh" más duro/plano; Щ es más largo y suave, casi "sh-sh" pegado (a veces se transcribe "shch").</div>
       <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px; line-height:1.25;"><strong style="color:var(--tema-c5);">Ж:</strong> parecido a la "j" francesa de "bonjour", o a la "s" del inglés "measure"/"pleasure".</div>
     </div>`;
 
-  wrap.appendChild(cardA);
-  wrap.appendChild(cardB);
-  wrap.appendChild(cardNotas);
+  wrap.appendChild(card);
   mesa.appendChild(wrap);
 }
 const ESQUINA = 20; // separación desde el borde de la mesa al aparecer por primera vez
