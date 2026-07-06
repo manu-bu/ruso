@@ -7951,9 +7951,9 @@ function renderTarjetaAbecedarioRuso(mesa) {
     else if (VERDES.includes(it.cyr)) { fuerte = 'var(--tema-c5)'; suave = '#8FB595'; }
     return `
     <tr>
-      <td class="${it.hablar === false ? '' : 'hablar'}" ${it.hablar === false ? '' : `data-hablar="${it.min}"`} style="font-weight:700; font-size:24px; color:${fuerte};">${it.cyr} <span style="font-weight:400; color:${suave};">${it.min}</span></td>
-      <td style="color:#5a5a58; font-size:17px;">${it.lat}</td>
-      <td style="color:#8a8a86; font-size:15px;">${it.ej}</td>
+      <td class="${it.hablar === false ? '' : 'hablar'}" ${it.hablar === false ? '' : `data-hablar="${it.min}"`} style="font-weight:700; font-size:22px; color:${fuerte};">${it.cyr} <span style="font-weight:400; color:${suave};">${it.min}</span></td>
+      <td style="color:#5a5a58; font-size:15px;">${it.lat}</td>
+      <td style="color:#8a8a86; font-size:13px;">${it.ej}</td>
     </tr>`;
   };
 
