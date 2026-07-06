@@ -9,7 +9,7 @@
 <title>Plantilla Idiomas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
 /* =====================================================================
@@ -53,9 +53,10 @@
   --card-border-w: 3px;
 
   /* Fuente */
-  /* Una sola fuente para toda la app (latino + cirílico), sin fallback
-     mezclado — Nunito cubre bien los dos alfabetos. */
-  --font: 'Nunito', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  /* Quicksand para lo nuestro (no cubre cirílico); el navegador cae
+     automáticamente a Nunito letra por letra para el ruso, sin marcar
+     idioma a mano. */
+  --font: 'Quicksand', 'Nunito', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
 
 html, body {
@@ -93,12 +94,12 @@ body.unidad-verbos {
    compartida que lee estas variables, así no hace falta triplicar el
    degradé — solo los valores de color están separados por tema. */
 body.tema-pais-fr {
-  --tema-c1: #2C4A6E;
-  --tema-c2: #3F5D3A;
-  --tema-c3: #D9C39A;
-  --tema-c4: #B98A5E;
-  --tema-c5: #6B4C7A;
-  background: #dcedfa;
+  --tema-c1: #A83232;
+  --tema-c2: #C9A227;
+  --tema-c3: #E8DFC8;
+  --tema-c4: #2C4570;
+  --tema-c5: #3B5F3F;
+  background: #f3ecdb;
 }
 body.tema-chamonix-fr {
   --tema-c1: #2C4A6E;
@@ -316,10 +317,10 @@ header {
     conic-gradient(
       from 0deg,
       var(--tema-c1) 0deg,
-      var(--tema-c2) 72deg,
-      var(--tema-c3) 144deg,
-      var(--tema-c4) 216deg,
-      var(--tema-c5) 288deg,
+      var(--tema-c2) 40deg,
+      var(--tema-c3) 70deg,
+      var(--tema-c4) 180deg,
+      var(--tema-c5) 290deg,
       var(--tema-c1) 360deg
     ) border-box;
 }
@@ -958,7 +959,7 @@ body.tema-actividadesvalle-fr .tarjeta, body.tema-actividadesvalle-fr .tarjeta-f
     linear-gradient(#ffffff, #ffffff) padding-box,
     linear-gradient(
       135deg,
-      var(--tema-c1) 0%, var(--tema-c2) 25%, var(--tema-c3) 50%, var(--tema-c4) 75%, var(--tema-c5) 100%
+      var(--tema-c1) 0%, var(--tema-c2) 11%, var(--tema-c3) 19%, var(--tema-c4) 50%, var(--tema-c5) 80%
     ) border-box !important;
 }
 
@@ -7853,41 +7854,45 @@ function renderTarjetaPaisFrancia(mesa) {
   mesa.appendChild(wrap);
 }
 
-// Mesa fija de Cultura → País (B3) para ruso: mismo componente y misma
-// paleta (tema-pais-fr) que Francia — el usuario pidió no tocar colores,
-// solo reusar la estructura. Contenido más denso que el francés, por eso
-// suma la clase "tarjeta-pais-compacta" (fuente más chica, sin scroll).
+// Mesa fija de Cultura → País (B3) para ruso: en vez de una sola
+// tarjeta con scroll, se reparte el contenido en cartelitos chicos
+// distribuidos por toda la mesa — usa el mismo mecanismo de grilla
+// que la unidad de Verbos, con la paleta de tema-pais-fr rotando
+// color por cartelito (c1..c5, repite desde c1 al pasar de 5).
+const CARTELITOS_PAIS_RUSIA = [
+  { titulo: 'Saludo formal', texto: '<strong>Здравствуйте</strong> — con desconocidos, mayores, contexto laboral.' },
+  { titulo: 'Saludo informal', texto: '<strong>Привет</strong> — entre conocidos. Apretón firme entre hombres; con mujer, que ella lo proponga.' },
+  { titulo: 'Tú (informal)', texto: '<strong>ты</strong> — con amigos, familia, gente de tu edad o menor confianza cercana.' },
+  { titulo: 'Usted (formal)', texto: '<strong>вы</strong> — con desconocidos, mayores, en lo laboral. También sirve de plural.' },
+  { titulo: 'Cómo dirigirse', texto: 'Nombre + patronímico (ej. <strong>Иван Петрович</strong>) en lo formal — se arma del nombre del padre.' },
+  { titulo: 'Temas prohibidos', texto: 'Sueldo, edad (de mujeres), comentarios livianos sobre política, frente a desconocidos.' },
+  { titulo: 'Familia', texto: 'Vínculo muy fuerte entre generaciones — las abuelas (<strong>бабушка</strong>) suelen tener un rol activo en la crianza.' },
+  { titulo: 'Religión', texto: 'Mayoría histórica ortodoxa (Iglesia Ortodoxa Rusa), con presencia visible en la cultura.' },
+  { titulo: 'Comida: el anfitrión', texto: 'Sirve él/ella; no se llega con las manos vacías a una casa.' },
+  { titulo: 'Comida: las flores', texto: 'Siempre en número impar — los pares son solo para funerales.' },
+  { titulo: 'El brindis', texto: 'Con vodka, mirando a los ojos de la otra persona.' },
+  { titulo: 'Fecha nacional', texto: '<strong>12 de junio</strong> — Día de Rusia.' },
+  { titulo: 'Moneda', texto: 'Rublo (₽).' },
+  { titulo: 'Deportes', texto: 'Hockey sobre hielo (el más popular), fútbol, y el ajedrez como tradición cultural.' },
+  { titulo: 'Animal símbolo', texto: 'El oso (<strong>медведь</strong>).' },
+  { titulo: 'Símbolo del escudo', texto: 'El águila bicéfala.' }
+];
+
 function renderTarjetaPaisRusia(mesa) {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; height:100%; padding:14px 16px; box-sizing:border-box;';
+  wrap.style.cssText = 'width:100%; height:100%; padding:14px 16px; box-sizing:border-box; display:grid; grid-template-columns:repeat(4, 1fr); grid-template-rows:repeat(4, 1fr); gap:10px;';
 
-  const card = crearTarjetaInformatica({
-    titulo: 'País — Rusia',
-    bloques: [
-      { tipo: 'subtitulo', contenido: 'Trato social' },
-      { tipo: 'parrafo', contenido: '<strong>Carácter y trato:</strong> al principio pueden parecer serios o secos con desconocidos — sonreír sin motivo se puede leer como poco sincero. Con confianza son muy cálidos y hospitalarios.' },
-      { tipo: 'parrafo', contenido: '<strong>Saludo:</strong> <strong>Здравствуйте</strong> (formal) o <strong>Привет</strong> (informal). Apretón de manos firme entre hombres; con una mujer se espera que ella lo proponga primero.' },
-      { tipo: 'parrafo', contenido: '<strong>Tú/Usted:</strong> distinguen <strong>ты</strong> (informal) de <strong>вы</strong> (formal/plural) — igual función que tu/vous en francés. Usar <strong>вы</strong> con desconocidos, mayores y en lo laboral.' },
-      { tipo: 'parrafo', contenido: '<strong>Cómo dirigirse:</strong> nombre + patronímico (ej. <strong>Иван Петрович</strong>) en contexto formal — el patronímico se arma del nombre del padre, sin equivalente en francés.' },
-      { tipo: 'parrafo', contenido: '<strong>Temas prohibidos:</strong> sueldo, edad (de mujeres), comentarios livianos sobre política — igual criterio que en Francia con dinero/política frente a desconocidos.' },
-
-      { tipo: 'subtitulo', contenido: 'Vida y sociedad' },
-      { tipo: 'parrafo', contenido: '<strong>Familia:</strong> vínculo muy fuerte entre generaciones — las abuelas (<strong>бабушка</strong>) suelen tener un rol activo en la crianza de los nietos.' },
-      { tipo: 'parrafo', contenido: '<strong>Religión:</strong> mayoría histórica ortodoxa (Iglesia Ortodoxa Rusa), con presencia visible en la cultura aunque no todos practiquen.' },
-      { tipo: 'parrafo', contenido: '<strong>Comida y mesa:</strong> el anfitrión sirve; no llegar con las manos vacías — flores siempre en número impar (los pares son para funerales). Se brinda con vodka mirando a los ojos.' },
-
-      { tipo: 'subtitulo', contenido: 'El país en datos' },
-      { tipo: 'parrafo', contenido: '<strong>Fecha nacional:</strong> <strong>12 de junio</strong> — Día de Rusia.' },
-      { tipo: 'parrafo', contenido: '<strong>Moneda:</strong> Rublo (₽).' },
-      { tipo: 'parrafo', contenido: '<strong>Deportes:</strong> el hockey sobre hielo es el más popular, seguido de fútbol y el ajedrez como tradición cultural.' },
-      { tipo: 'parrafo', contenido: '<strong>Animal/Símbolo:</strong> el oso (<strong>медведь</strong>) y el águila bicéfala del escudo nacional.' }
-    ]
+  const colores = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  CARTELITOS_PAIS_RUSIA.forEach((c, i) => {
+    const color = `var(--tema-${colores[i % colores.length]})`;
+    const cartelito = document.createElement('div');
+    cartelito.style.cssText = `background:#fff; border:2px solid ${color}; border-radius:var(--card-radius); padding:12px 14px; display:flex; flex-direction:column; gap:8px; overflow:auto;`;
+    cartelito.innerHTML = `
+      <div style="font-weight:700; font-size:22px; color:${color};">${c.titulo}</div>
+      <div style="font-size:20px; line-height:1.35; color:#3a3a38;">${c.texto}</div>`;
+    wrap.appendChild(cartelito);
   });
-  card.style.width = '100%';
-  card.style.height = '100%';
-  card.classList.add('tarjeta-pais-francia', 'tarjeta-pais-compacta');
 
-  wrap.appendChild(card);
   mesa.appendChild(wrap);
 }
 
@@ -7938,12 +7943,19 @@ function renderTarjetaAbecedarioRuso(mesa) {
   const wrap = document.createElement('div');
   wrap.style.cssText = 'width:100%; height:100%; padding:14px 16px; box-sizing:border-box;';
 
-  const filaHtml = it => `
+  const DORADAS = ['Ь', 'Ъ', 'Х', 'О'];
+  const VERDES = ['Ш', 'Щ', 'Ж'];
+  const filaHtml = it => {
+    let fuerte = 'var(--tema-c1)', suave = '#D98F8F';
+    if (DORADAS.includes(it.cyr)) { fuerte = 'var(--tema-c2)'; suave = '#E0C878'; }
+    else if (VERDES.includes(it.cyr)) { fuerte = 'var(--tema-c5)'; suave = '#8FB595'; }
+    return `
     <tr>
-      <td class="${it.hablar === false ? '' : 'hablar'}" ${it.hablar === false ? '' : `data-hablar="${it.min}"`} style="font-weight:700; font-size:17px;">${it.cyr} <span style="font-weight:400; color:#b0b0ae;">${it.min}</span></td>
-      <td style="color:#888886;">${it.lat}</td>
-      <td style="color:#aaaaa8; font-size:13.5px;">${it.ej}</td>
+      <td class="${it.hablar === false ? '' : 'hablar'}" ${it.hablar === false ? '' : `data-hablar="${it.min}"`} style="font-weight:700; font-size:24px; color:${fuerte};">${it.cyr} <span style="font-weight:400; color:${suave};">${it.min}</span></td>
+      <td style="color:#5a5a58; font-size:17px;">${it.lat}</td>
+      <td style="color:#8a8a86; font-size:15px;">${it.ej}</td>
     </tr>`;
+  };
 
   const colAHtml = ABECEDARIO_COL_A.map(filaHtml).join('');
   const colBHtml = ABECEDARIO_COL_B.map(filaHtml).join('');
@@ -7956,13 +7968,13 @@ function renderTarjetaAbecedarioRuso(mesa) {
       <table style="flex:1;">${colAHtml}</table>
       <table style="flex:1;">${colBHtml}</table>
     </div>
-    <div class="bloque-info-parrafo" style="margin-top:12px;"><strong>① Ь (signo blando):</strong> ablanda/suaviza la consonante anterior — la vuelve "blanda", con un toque de sonido "i" pegado.</div>
-    <div class="bloque-info-parrafo"><strong>② Ъ (signo duro):</strong> mantiene DURA la consonante anterior y separa, con un pequeño corte, la vocal que sigue.</div>
-    <div class="bloque-info-parrafo"><strong>③ Х = J:</strong> un raspado suave, no tan fuerte/bruto como la jota española.</div>
-    <div class="bloque-info-parrafo"><strong>④ О:</strong> se pronuncia "O" si lleva el acento (la fuerza de la palabra) — se relaja hacia "A" si no la lleva.</div>
-    <div class="bloque-info-subtitulo" style="margin-top:10px;">Extra (dos que pueden confundirse)</div>
-    <div class="bloque-info-parrafo"><strong>Ш vs Щ:</strong> Ш es un "sh" más duro/plano; Щ es más largo y suave, casi "sh-sh" pegado (a veces se transcribe "shch").</div>
-    <div class="bloque-info-parrafo"><strong>Ж:</strong> parecido a la "j" francesa de "bonjour", o a la "s" del inglés "measure"/"pleasure".</div>`;
+    <div class="bloque-info-parrafo" style="margin-top:12px; font-size:16px;"><strong style="color:var(--tema-c2);">① Ь (signo blando):</strong> ablanda/suaviza la consonante anterior — la vuelve "blanda", con un toque de sonido "i" pegado.</div>
+    <div class="bloque-info-parrafo" style="font-size:16px;"><strong style="color:var(--tema-c2);">② Ъ (signo duro):</strong> mantiene DURA la consonante anterior y separa, con un pequeño corte, la vocal que sigue.</div>
+    <div class="bloque-info-parrafo" style="font-size:16px;"><strong style="color:var(--tema-c2);">③ Х = J:</strong> un raspado suave, no tan fuerte/bruto como la jota española.</div>
+    <div class="bloque-info-parrafo" style="font-size:16px;"><strong style="color:var(--tema-c2);">④ О:</strong> se pronuncia "O" si lleva el acento (la fuerza de la palabra) — se relaja hacia "A" si no la lleva.</div>
+    <div class="bloque-info-subtitulo" style="margin-top:10px; font-size:16px;">Extra (dos que pueden confundirse)</div>
+    <div class="bloque-info-parrafo" style="font-size:16px;"><strong style="color:var(--tema-c5);">Ш vs Щ:</strong> Ш es un "sh" más duro/plano; Щ es más largo y suave, casi "sh-sh" pegado (a veces se transcribe "shch").</div>
+    <div class="bloque-info-parrafo" style="font-size:16px;"><strong style="color:var(--tema-c5);">Ж:</strong> parecido a la "j" francesa de "bonjour", o a la "s" del inglés "measure"/"pleasure".</div>`;
   card.style.width = '100%';
   card.style.height = '100%';
 
@@ -8589,7 +8601,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 15px Nunito, sans-serif';
+        ctx.font = '700 15px Quicksand, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('¡?', 0, 0);
@@ -8601,7 +8613,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 16px Nunito, sans-serif';
+        ctx.font = '700 16px Quicksand, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('?', 0, 0);
@@ -8613,7 +8625,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 16px Nunito, sans-serif';
+        ctx.font = '700 16px Quicksand, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('...', 0, 0);
@@ -8625,7 +8637,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 17px Nunito, sans-serif';
+        ctx.font = '700 17px Quicksand, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('X', 0, 0);
@@ -8655,7 +8667,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
         ctx.rotate(p.rot * Math.PI / 180);
         ctx.scale(p.escala, p.escala);
         ctx.fillStyle = p.color;
-        ctx.font = '700 17px Nunito, sans-serif';
+        ctx.font = '700 17px Quicksand, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(p.signo, 0, 0);
