@@ -125,6 +125,12 @@ body.tema-terreno {
   background: #b8be9b;
 }
 
+/* Fondo propio de Números y el Tiempo → Días y Meses — crema neutro
+   clarito, para que el degradé de las 4 estaciones resalte encima. */
+body.tema-diasmeses {
+  background: #ede8dc;
+}
+
 /* Fondo propio de Geografía y el Clima → Actividades — celeste muy
    clarito, para que la tarjeta/selectores blancos con borde naranja/
    fucsia/violeta resalten encima. Aplica a los dos sub-temas
@@ -341,6 +347,24 @@ header {
       #a6a79c 180deg,
       #f3f1e7 270deg,
       #3f6b4a 360deg
+    ) border-box;
+}
+
+/* Números y el Tiempo → Días y Meses — borde con las 4 estaciones:
+   invierno (azul hielo), primavera (verde brote), verano (dorado sol),
+   otoño (óxido/ámbar). */
+.selector.diasmeses-activo {
+  color: #2C4A70;
+  font-weight: 600;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    conic-gradient(
+      from 0deg,
+      #2C4A70 0deg,
+      #6B9B5D 90deg,
+      #E0B23C 180deg,
+      #B85C2E 270deg,
+      #2C4A70 360deg
     ) border-box;
 }
 
@@ -975,6 +999,18 @@ body.tema-terreno .tarjeta-fija {
     ) border-box !important;
 }
 
+/* Números y el Tiempo → Días y Meses — mismo mecanismo, con las 4
+   estaciones mezcladas de punta a punta. */
+body.tema-diasmeses .tarjeta,
+body.tema-diasmeses .tarjeta-fija {
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(
+      135deg,
+      #2C4A70 0%, #6B9B5D 33%, #E0B23C 66%, #B85C2E 100%
+    ) border-box !important;
+}
+
 /* Geografía y el Clima → Actividades — mismo mecanismo, naranja/
    fucsia/violeta con cyan, mezclado de punta a punta. El cyan queda al
    final con menos recorrido para que siga siendo la banda chica. */
@@ -1482,8 +1518,9 @@ const UNIDADES = {
     nombre: 'Los Números y el Tiempo',
     tipo: 'libre',
     temas: {
-      'D1': { nombre: 'Números',    subtemas: null },
-      'D2': { nombre: 'El Tiempo',  subtemas: null }
+      'D1': { nombre: 'Números',       subtemas: null },
+      'D2': { nombre: 'La Hora',       subtemas: null },
+      'D3': { nombre: 'Días y Meses',  subtemas: null }
     }
   },
   'E': {
@@ -1635,14 +1672,16 @@ const CONTENIDO_TARJETAS = {
   ],
   'D-D2': [
     { id: 'relojes',           tipo: 'relojes',  titulo: 'Relojes',                              render: renderTarjetaRelojesEjemplo },
-    { id: 'meses-del-anio',    tipo: 'columnas', titulo: 'Meses del año',                        render: renderTarjetaMesesDelAnio },
-    { id: 'avant-apres',       tipo: 'columnas', titulo: 'Avant / après',                        render: renderTarjetaAvantApres },
-    { id: 'preposicion-a',     tipo: 'columnas', titulo: '"A qué hora": la preposición "à"',      render: renderTarjetaPreposicionA },
+    { id: 'preposicion-a',     tipo: 'columnas', titulo: '"A qué hora": la preposición "в"',      render: renderTarjetaPreposicionA },
     { id: 'sistema-informal',  tipo: 'columnas', titulo: 'Sistema informal (reloj de 12 horas)', render: renderTarjetaSistemaInformal },
-    { id: 'dias-semana',       tipo: 'columnas', titulo: 'Días de la semana',                     render: renderTarjetaDiasSemana },
-    { id: 'momentos-imprecisos', tipo: 'columnas', titulo: 'Momentos imprecisos',                 render: renderTarjetaMomentosImprecisos },
-    { id: 'dias-concretos',    tipo: 'columnas', titulo: 'Días concretos respecto a hoy',         render: renderTarjetaDiasConcretos },
     { id: 'mediodia-medianoche', tipo: 'columnas', titulo: 'Mediodía y medianoche',                render: renderTarjetaMediodiaMedianoche }
+  ],
+  'D-D3': [
+    { id: 'meses-del-anio',    tipo: 'columnas', titulo: 'Meses del año',                        render: renderTarjetaMesesDelAnio },
+    { id: 'dias-semana',       tipo: 'columnas', titulo: 'Días de la semana',                     render: renderTarjetaDiasSemana },
+    { id: 'dias-concretos',    tipo: 'columnas', titulo: 'Días concretos respecto a hoy',         render: renderTarjetaDiasConcretos },
+    { id: 'momentos-imprecisos', tipo: 'columnas', titulo: 'Momentos imprecisos',                 render: renderTarjetaMomentosImprecisos },
+    { id: 'avant-apres',       tipo: 'columnas', titulo: 'Antes / Después (до / после)',          render: renderTarjetaAvantApres }
   ],
   'B-B1': [
     { id: 'historia-alpinismo',   tipo: 'columnas', titulo: 'Historia del alpinismo',    render: renderTarjetaHistoriaAlpinismo },
@@ -2580,7 +2619,7 @@ function crearTarjetaVocabularioSimple(def) {
   div.className = 'tarjeta tarjeta-columnas';
   const filasHtml = def.filas.map(it => `
     <tr>
-      <td class="hablar" data-hablar="${it.fr}">${it.fr}</td>
+      <td class="hablar" data-hablar="${it.fr}"${it.color ? ` style="color:${it.color}; font-weight:700;"` : ''}>${it.fr}</td>
       <td>${it.es}</td>
     </tr>`).join('');
   div.innerHTML = `
@@ -2681,18 +2720,18 @@ function renderTarjetaMesesDelAnio() {
   return crearTarjetaVocabularioSimple({
     titulo: 'Meses del año',
     filas: [
-      { fr: 'январь',   es: 'enero' },
-      { fr: 'февраль',  es: 'febrero' },
-      { fr: 'март',     es: 'marzo' },
-      { fr: 'апрель',   es: 'abril' },
-      { fr: 'май',      es: 'mayo' },
-      { fr: 'июнь',     es: 'junio' },
-      { fr: 'июль',     es: 'julio' },
-      { fr: 'август',   es: 'agosto' },
-      { fr: 'сентябрь', es: 'septiembre' },
-      { fr: 'октябрь',  es: 'octubre' },
-      { fr: 'ноябрь',   es: 'noviembre' },
-      { fr: 'декабрь',  es: 'diciembre' }
+      { fr: 'январь',   es: 'enero',      color: '#2C4A70' },
+      { fr: 'февраль',  es: 'febrero',    color: '#2C4A70' },
+      { fr: 'март',     es: 'marzo',      color: '#6B9B5D' },
+      { fr: 'апрель',   es: 'abril',      color: '#6B9B5D' },
+      { fr: 'май',      es: 'mayo',       color: '#6B9B5D' },
+      { fr: 'июнь',     es: 'junio',      color: '#E0B23C' },
+      { fr: 'июль',     es: 'julio',      color: '#E0B23C' },
+      { fr: 'август',   es: 'agosto',     color: '#E0B23C' },
+      { fr: 'сентябрь', es: 'septiembre', color: '#B85C2E' },
+      { fr: 'октябрь',  es: 'octubre',    color: '#B85C2E' },
+      { fr: 'ноябрь',   es: 'noviembre',  color: '#B85C2E' },
+      { fr: 'декабрь',  es: 'diciembre',  color: '#2C4A70' }
     ]
   });
 }
@@ -4333,6 +4372,20 @@ function actualizarSelectores() {
       if (s.classList.contains('activo')) {
         s.classList.remove('activo');
         s.classList.add('actividades-activo');
+      }
+    });
+  }
+
+  // Números y el Tiempo → Días y Meses (D3) — estética propia: 4
+  // colores de estación (invierno/primavera/verano/otoño), rotando en
+  // el mismo mecanismo de degradé.
+  const esDiasMeses = estado.unidad === 'D' && estado.tema === 'D3';
+  document.body.classList.toggle('tema-diasmeses', esDiasMeses);
+  if (esDiasMeses) {
+    [s1, s2, s3].forEach(s => {
+      if (s.classList.contains('activo')) {
+        s.classList.remove('activo');
+        s.classList.add('diasmeses-activo');
       }
     });
   }
@@ -8212,6 +8265,9 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
   // de arena — combina con la paleta arena/ocre/marrón/bordó y con el
   // contenido (la hora, el reloj).
   const COLORES_ELTIEMPO = ['#D9C39A', '#C4993A', '#7A4A21', '#7A2E3A'];
+  // Números y el Tiempo → Días y Meses — mismas 4 estaciones que ya usan
+  // el borde/tarjetas/meses (invierno/primavera/verano/otoño).
+  const COLORES_DIASMESES = ['#2C4A70', '#6B9B5D', '#E0B23C', '#B85C2E'];
   // Personas usa el modo 'circulo' de siempre (puntito con glow, sin
   // forma nueva) — lo único que cambia es de qué paleta saca el color:
   // los mismos 4 colores de género que ya usan las tarjetas.
@@ -8268,6 +8324,9 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
   function esElTiempo() {
     return typeof estado !== 'undefined' && estado.unidad === 'D' && estado.tema === 'D2';
   }
+  function esDiasMeses() {
+    return typeof estado !== 'undefined' && estado.unidad === 'D' && estado.tema === 'D3';
+  }
   function esPersonas() {
     return typeof estado !== 'undefined' && estado.unidad === 'F';
   }
@@ -8287,6 +8346,7 @@ elegirUnidad(primeraKey, primeraUnidad.nombre, primeraUnidad.tipo);
     if (esFrases()) return COLORES_FRASES;
     if (esNegacion()) return COLORES_NEGACION;
     if (esElTiempo()) return COLORES_ELTIEMPO;
+    if (esDiasMeses()) return COLORES_DIASMESES;
     if (esPersonas()) return COLORES_PERSONAS;
     return GRISES;
   }
