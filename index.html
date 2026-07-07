@@ -742,6 +742,7 @@ header {
   width: max-content;
   min-width: 160px;
   max-width: var(--w);
+  touch-action: none;
 }
 
 .tarjeta-fija {
@@ -8250,48 +8251,118 @@ function renderMesaLibre(mesa) {
     const ny = Math.min(Math.max(0, pos.top),  maxY);
     card.style.left = nx + 'px';
     card.style.top  = ny + 'px';
+    if (pos.escala && pos.escala !== 1) {
+      card.style.transform = `scale(${pos.escala})`;
+      card.style.transformOrigin = 'top left';
+    }
 
     activarArrastre(card, id);
   });
 }
 
 // ── Arrastre de tarjetas ──────────────────────────────────────────────
-// Se aplica al título de cada tarjeta en mesa libre
+// Se aplica al título de cada tarjeta en mesa libre (arrastre, 1 dedo)
+// y a toda la tarjeta (pellizco de escala, 2 dedos). El techo del
+// pellizco es el tamaño normal de la tarjeta (escala 1, nunca más
+// grande que eso); el piso es MIN_ESCALA, para que no desaparezca.
 function activarArrastre(tarjeta, id) {
   const titulo = tarjeta.querySelector('.tarjeta-titulo');
   if (!titulo) return;
 
-  titulo.addEventListener('pointerdown', ev => {
+  const MIN_ESCALA = 0.5;
+  const MAX_ESCALA = 1;
+
+  const pointers = new Map(); // pointerId -> {x, y}
+  let modo = null;            // 'arrastre' | 'pellizco'
+  let dragInfo = null;
+  let pinchInicial = null;    // { distancia, escala }
+
+  function escalaGuardada() {
+    const pos = estado.tarjetas[id];
+    return (pos && pos.escala) || 1;
+  }
+
+  function escalaActual() {
+    const m = /scale\(([\d.]+)\)/.exec(tarjeta.style.transform || '');
+    return m ? parseFloat(m[1]) : escalaGuardada();
+  }
+
+  function aplicarEscala(e) {
+    tarjeta.style.transform = `scale(${e})`;
+    tarjeta.style.transformOrigin = 'top left';
+  }
+
+  function distanciaEntre(p1, p2) {
+    return Math.hypot(p1.x - p2.x, p1.y - p2.y);
+  }
+
+  function onPointerDown(ev) {
     if (!estado.editor) return;
-    ev.preventDefault();
-    tarjeta.style.zIndex = 50;
-    const mesa = document.getElementById('mesa');
-    const rectMesa = mesa.getBoundingClientRect();
-    const rectCard = tarjeta.getBoundingClientRect();
+    const esTitulo = ev.target.closest('.tarjeta-titulo');
+    pointers.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
 
-    const ox = ev.clientX - rectCard.left;
-    const oy = ev.clientY - rectCard.top;
-    const maxX = rectMesa.width  - rectCard.width;
-    const maxY = rectMesa.height - rectCard.height;
+    if (pointers.size === 1 && esTitulo) {
+      ev.preventDefault();
+      modo = 'arrastre';
+      tarjeta.style.zIndex = 50;
+      const mesa = document.getElementById('mesa');
+      const rectMesa = mesa.getBoundingClientRect();
+      const rectCard = tarjeta.getBoundingClientRect();
+      dragInfo = {
+        ox: ev.clientX - rectCard.left,
+        oy: ev.clientY - rectCard.top,
+        maxX: rectMesa.width  - rectCard.width,
+        maxY: rectMesa.height - rectCard.height,
+        rectMesa
+      };
+    } else if (pointers.size === 2) {
+      ev.preventDefault();
+      modo = 'pellizco';
+      const pts = Array.from(pointers.values());
+      pinchInicial = { distancia: distanciaEntre(pts[0], pts[1]), escala: escalaActual() };
+    }
+  }
 
-    function mover(ev2) {
-      const nx = Math.min(Math.max(0, ev2.clientX - rectMesa.left - ox), maxX);
-      const ny = Math.min(Math.max(0, ev2.clientY - rectMesa.top  - oy), maxY);
+  function onPointerMove(ev) {
+    if (!pointers.has(ev.pointerId)) return;
+    pointers.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+
+    if (modo === 'arrastre' && pointers.size === 1) {
+      const nx = Math.min(Math.max(0, ev.clientX - dragInfo.rectMesa.left - dragInfo.ox), dragInfo.maxX);
+      const ny = Math.min(Math.max(0, ev.clientY - dragInfo.rectMesa.top  - dragInfo.oy), dragInfo.maxY);
       tarjeta.style.left = nx + 'px';
       tarjeta.style.top  = ny + 'px';
+    } else if (modo === 'pellizco' && pointers.size === 2) {
+      const pts = Array.from(pointers.values());
+      const factor = distanciaEntre(pts[0], pts[1]) / pinchInicial.distancia;
+      const nueva = Math.min(MAX_ESCALA, Math.max(MIN_ESCALA, pinchInicial.escala * factor));
+      aplicarEscala(nueva);
     }
-    function soltar() {
-      document.removeEventListener('pointermove', mover);
-      document.removeEventListener('pointerup', soltar);
+  }
+
+  function onPointerUp(ev) {
+    pointers.delete(ev.pointerId);
+
+    if (modo === 'arrastre') {
       estado.tarjetas[id] = {
+        ...(estado.tarjetas[id] || {}),
         left: parseInt(tarjeta.style.left),
         top:  parseInt(tarjeta.style.top)
       };
+    } else if (modo === 'pellizco') {
+      estado.tarjetas[id] = {
+        ...(estado.tarjetas[id] || {}),
+        escala: escalaActual()
+      };
     }
 
-    document.addEventListener('pointermove', mover);
-    document.addEventListener('pointerup', soltar);
-  });
+    if (pointers.size < 2) modo = null;
+  }
+
+  tarjeta.addEventListener('pointerdown', onPointerDown);
+  document.addEventListener('pointermove', onPointerMove);
+  document.addEventListener('pointerup', onPointerUp);
+  document.addEventListener('pointercancel', onPointerUp);
 }
 
 // ── Inicialización al cargar ──────────────────────────────────────────
