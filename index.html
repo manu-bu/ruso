@@ -131,17 +131,20 @@ body.tema-diasmeses {
   background: #ede8dc;
 }
 
-/* Los Casos — tema Clue: fondo propio por personaje/color.
-   Nominativo=Scarlet(rosado), Genitivo=Sra.Blanco(hueso/crema),
-   Dativo=Mora(oscuro, para que brillen como luciérnagas),
-   Acusativo=Verdi(verde salvia), Instrumental=Mostaza(crema dorado),
-   Prepositivo=Celeste(celeste clarito). */
-body.tema-nominativo   { background: #f7dede; }
-body.tema-genitivo     { background: #ece9e2; }
+/* Los Casos — tema Clue: fondo propio por personaje/color. Los 6
+   fondos van oscuros, al mismo nivel de oscuridad que Dativo (Mora),
+   cada uno conservando su identidad de color/tono:
+   Nominativo=Scarlet(rojo oscuro), Genitivo=Sra.Blanco(hueso oscuro),
+   Dativo=Mora(violeta oscuro, para que brillen como luciérnagas),
+   Acusativo=Verdi(verde oscuro), Instrumental=Mostaza(dorado oscuro),
+   Prepositivo=Celeste(celeste oscuro). Las tarjetas siguen blancas con
+   borde/título de color — solo cambia el fondo de la mesa. */
+body.tema-nominativo   { background: #451f1f; }
+body.tema-genitivo     { background: #362f28; }
 body.tema-dativo       { background: #2b2440; }
-body.tema-acusativo    { background: #e6efe2; }
-body.tema-instrumental { background: #f5eed9; }
-body.tema-prepositivo  { background: #dff3f6; }
+body.tema-acusativo    { background: #1f3d26; }
+body.tema-instrumental { background: #4a3a12; }
+body.tema-prepositivo  { background: #143a42; }
 
 /* Fondo propio de Geografía y el Clima → Actividades — celeste muy
    clarito, para que la tarjeta/selectores blancos con borde naranja/
@@ -1566,10 +1569,7 @@ const UNIDADES = {
   'A': {
     nombre: 'Abecedario',
     tipo: 'fija',
-    temas: {
-      'A1': { nombre: 'Letras', subtemas: null },
-      'A2': { nombre: 'Instrucciones', subtemas: null }
-    }
+    temas: null
   },
   'B': {
     nombre: 'Cultura',
@@ -4933,8 +4933,6 @@ function renderMesaFija(mesa) {
     renderMesaFijaVerbos(mesa);
   } else if (estado.unidad === 'J') {
     renderMesaFijaVerbosRuso(mesa);
-  } else if (estado.unidad === 'A' && estado.tema === 'A2') {
-    renderTarjetaAbecedarioInstrucciones(mesa);
   } else if (estado.unidad === 'A') {
     renderTarjetaAbecedarioRuso(mesa);
   } else if (estado.unidad === 'B' && estado.tema === 'B3') {
@@ -8161,6 +8159,10 @@ const ABECEDARIO_COL_B = [
   { cyr: 'Ж', min: 'ж', lat: 'ZH', ej: '"sho" / "shema"' }
 ];
 
+// Abecedario: antes Letras e Instrucciones vivían en 2 temas separados
+// (A1/A2). Ahora es una sola pantalla — las 2 columnas de letras más la
+// tarjeta de instrucciones (aclaraciones de sonido), esta última a la
+// mitad del ancho de la mesa, todo visible junto sin cambiar de tema.
 function renderTarjetaAbecedarioRuso(mesa) {
   const wrap = document.createElement('div');
   wrap.style.cssText = 'width:100%; height:100%; padding:14px 16px; box-sizing:border-box; display:flex; gap:16px; align-items:flex-start;';
@@ -8185,33 +8187,21 @@ function renderTarjetaAbecedarioRuso(mesa) {
   // Tarjeta 1 — columna A de letras, ancho al contenido
   const cardA = document.createElement('div');
   cardA.className = 'tarjeta-fija tarjeta-informatica';
-  cardA.style.cssText = 'width:max-content;';
+  cardA.style.cssText = 'width:max-content; flex-shrink:0;';
   cardA.innerHTML = `<div class="tarjeta-cuerpo" style="overflow:auto;"><table>${colAHtml}</table></div>`;
 
   // Tarjeta 2 — columna B de letras, ancho al contenido
   const cardB = document.createElement('div');
   cardB.className = 'tarjeta-fija tarjeta-informatica';
-  cardB.style.cssText = 'width:max-content;';
+  cardB.style.cssText = 'width:max-content; flex-shrink:0;';
   cardB.innerHTML = `<div class="tarjeta-cuerpo" style="overflow:auto;"><table>${colBHtml}</table></div>`;
 
-  wrap.appendChild(cardA);
-  wrap.appendChild(cardB);
-  mesa.appendChild(wrap);
-}
-
-// Abecedario → Instrucciones (A2): las aclaraciones de sonido que antes
-// vivían pegadas a las listas de letras. Con esto de tema aparte queda
-// espacio de sobra para sumar después ejemplos de palabras reales,
-// combinaciones de sonido, o casos de práctica.
-function renderTarjetaAbecedarioInstrucciones(mesa) {
-  const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; height:100%; padding:14px 16px; box-sizing:border-box;';
-
-  const card = document.createElement('div');
-  card.className = 'tarjeta-fija tarjeta-informatica';
-  card.style.width = '100%';
-  card.style.height = '100%';
-  card.innerHTML = `
+  // Tarjeta 3 — instrucciones (aclaraciones de sonido), a la mitad del
+  // ancho de la mesa, junto a las columnas de letras en la misma pantalla.
+  const cardC = document.createElement('div');
+  cardC.className = 'tarjeta-fija tarjeta-informatica';
+  cardC.style.cssText = 'width:50%; height:100%; flex-shrink:0;';
+  cardC.innerHTML = `
     <div class="tarjeta-cuerpo" style="overflow:auto;">
       <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px;"><strong style="color:var(--tema-c2);">① Ь (signo blando):</strong> ablanda/suaviza la consonante anterior — la vuelve "blanda", con un toque de sonido "i" pegado.</div>
       <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px;"><strong style="color:var(--tema-c2);">② Ъ (signo duro):</strong> mantiene DURA la consonante anterior y separa, con un pequeño corte, la vocal que sigue.</div>
@@ -8221,7 +8211,9 @@ function renderTarjetaAbecedarioInstrucciones(mesa) {
       <div class="bloque-info-parrafo" style="font-size:16px; padding-left:10px; line-height:1.25;"><strong style="color:var(--tema-c5);">Ж:</strong> parecido a la "j" francesa de "bonjour", o a la "s" del inglés "measure"/"pleasure".</div>
     </div>`;
 
-  wrap.appendChild(card);
+  wrap.appendChild(cardA);
+  wrap.appendChild(cardB);
+  wrap.appendChild(cardC);
   mesa.appendChild(wrap);
 }
 const ESQUINA = 20; // separación desde el borde de la mesa al aparecer por primera vez
