@@ -2714,7 +2714,7 @@ function crearTarjetaVocabularioFijo(def) {
 // color, el resto en gris medio). Borde propio de CADA caso (2 tonos
 // de su color), no el degradé de los 6 juntos — así la tarjeta queda
 // integrada al resto de tarjetas de ese mismo caso.
-function crearTarjetaPeonFrase(colorFuerte, colorClaro) {
+function crearTarjetaPeonFrase(nombre, caso, colorFuerte, colorClaro) {
   const div = document.createElement('div');
   div.className = 'tarjeta';
   div.style.border = 'var(--card-border-w) solid transparent';
@@ -2722,16 +2722,17 @@ function crearTarjetaPeonFrase(colorFuerte, colorClaro) {
     'linear-gradient(#ffffff, #ffffff) padding-box, ' +
     `linear-gradient(135deg, ${colorFuerte} 0%, ${colorClaro} 100%) border-box`;
   div.innerHTML = `
-    <div class="tarjeta-cuerpo" style="display:flex; flex-direction:column; align-items:center; gap:10px; padding:10px 14px;">
-      <svg width="40" height="52" viewBox="0 0 40 52">
+    <div class="tarjeta-titulo" style="color:${colorFuerte};">${nombre} — ${caso}</div>
+    <div class="tarjeta-cuerpo" style="display:flex; align-items:center; gap:12px; padding:8px 14px;">
+      <svg width="34" height="44" viewBox="0 0 40 52" style="flex-shrink:0;">
         <circle cx="20" cy="12" r="10" fill="${colorFuerte}"></circle>
         <path d="M12 24 Q20 18 28 24 L34 48 Q20 54 6 48 Z" fill="${colorFuerte}"></path>
       </svg>
-      <div style="font-size:15px; line-height:1.5; color:#6a6a68; text-align:center;">
+      <div style="font-size:13.5px; line-height:1.4; color:#6a6a68;">
         <span style="color:#A82E2E; font-weight:700;">Scarlet</span> mató a
         <span style="color:#2F5233; font-weight:700;">Verdi</span> con el candelabro
         (<span style="color:#8a6a10; font-weight:700;">Mostaza</span>) en la sala de
-        <span style="color:#2E8B9E; font-weight:700;">Celeste</span> —
+        <span style="color:#2E8B9E; font-weight:700;">Celeste</span> —<br>
         las huellas son de la <span style="color:#6a6a66; font-weight:700;">Sra. Blanco</span>,
         y a <span style="color:#6B3FA0; font-weight:700;">Mora</span> le dan la información.
       </div>
@@ -2739,12 +2740,12 @@ function crearTarjetaPeonFrase(colorFuerte, colorClaro) {
   return div;
 }
 
-function renderTarjetaPeonFraseNominativo()   { return crearTarjetaPeonFrase('#C23B3B', '#E8A5A5'); }
-function renderTarjetaPeonFraseGenitivo()     { return crearTarjetaPeonFrase('#8a8a86', '#e8e8e4'); }
-function renderTarjetaPeonFraseDativo()       { return crearTarjetaPeonFrase('#6B3FA0', '#D9C2FA'); }
-function renderTarjetaPeonFraseAcusativo()    { return crearTarjetaPeonFrase('#2F5233', '#A8C8A0'); }
-function renderTarjetaPeonFraseInstrumental() { return crearTarjetaPeonFrase('#A8841E', '#F0D272'); }
-function renderTarjetaPeonFrasePrepositivo()  { return crearTarjetaPeonFrase('#2E8B9E', '#A8E4EE'); }
+function renderTarjetaPeonFraseNominativo()   { return crearTarjetaPeonFrase('Scarlet', 'Nominativo', '#C23B3B', '#E8A5A5'); }
+function renderTarjetaPeonFraseGenitivo()     { return crearTarjetaPeonFrase('Sra. Blanco', 'Genitivo', '#8a8a86', '#e8e8e4'); }
+function renderTarjetaPeonFraseDativo()       { return crearTarjetaPeonFrase('Mora', 'Dativo', '#6B3FA0', '#D9C2FA'); }
+function renderTarjetaPeonFraseAcusativo()    { return crearTarjetaPeonFrase('Verdi', 'Acusativo', '#2F5233', '#A8C8A0'); }
+function renderTarjetaPeonFraseInstrumental() { return crearTarjetaPeonFrase('Mostaza', 'Instrumental', '#A8841E', '#F0D272'); }
+function renderTarjetaPeonFrasePrepositivo()  { return crearTarjetaPeonFrase('Celeste', 'Prepositivo', '#2E8B9E', '#A8E4EE'); }
 
 function crearTarjetaVocabularioSimple(def) {
   const div = document.createElement('div');
