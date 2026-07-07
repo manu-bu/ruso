@@ -4705,7 +4705,18 @@ function elegirUnidad(key, nombre, tipo) {
 
   document.body.classList.toggle('unidad-verbos', key === 'G' || key === 'J');
 
-  if (estado.editor) apagarEditor();
+  // Mesa libre: los 3 botones (lápiz/cajita/guardar) quedan prendidos
+  // siempre por defecto, sin tener que activarlos a mano — no hay
+  // riesgo real de "escribir algo sin querer", así que no hace falta
+  // el paso extra. Mesa fija: siguen apagados, como siempre.
+  if (tipo === 'libre') {
+    estado.editor = true;
+    ['btnLapiz', 'btnTarjetas', 'btnGuardar'].forEach(id => {
+      document.getElementById(id).classList.add('activo');
+    });
+  } else {
+    apagarEditor();
+  }
 
   // Llenar dropdown de temas
   const dropTema = document.getElementById('dropTema');
