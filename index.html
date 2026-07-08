@@ -876,6 +876,7 @@ header {
 ===================================================================== */
 .g-masc   { color: #2F6FA0; }
 .g-fem    { color: #B5507A; }
+.g-ambos  { color: #8259A0; } /* fem./masc.: la palabra vale para los dos géneros — violeta para distinguirla de fem. puro (rosa) */
 .g-plural { color: #758C3D; }
 .g-elidido { color: #8C5FD1; }
 /* Género neutro: no existe en francés, lo necesita el ruso. Color nuevo,
@@ -3640,8 +3641,8 @@ function renderTarjetaCasoNominativoTerminaciones() {
       ['Masc. blando',      { texto: '-ь / -й',      hablar: false, color: 'masc' },   { texto: 'гость',   hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-о',           hablar: false, color: 'neutro' }, { texto: 'окно',    hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-е',           hablar: false, color: 'neutro' }, { texto: 'море',    hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-а',           hablar: false, color: 'fem' },    { texto: 'комната', hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-я',           hablar: false, color: 'fem' },    { texto: 'неделя',  hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-а',           hablar: false, color: 'ambos' },    { texto: 'комната', hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-я',           hablar: false, color: 'ambos' },    { texto: 'неделя',  hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-ь',      hablar: false, color: 'fem' },    { texto: 'дверь',   hablar: true, color: 'fem' }]
     ]
   });
@@ -3656,8 +3657,8 @@ function renderTarjetaCasoNominativoPlural() {
       ['Masc. blando',      { texto: '-и', hablar: false, color: 'masc' },   { texto: 'гости',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-а', hablar: false, color: 'neutro' }, { texto: 'окна',     hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-я', hablar: false, color: 'neutro' }, { texto: 'моря',     hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-ы', hablar: false, color: 'fem' },    { texto: 'комнаты',  hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-и', hablar: false, color: 'fem' },    { texto: 'недели',   hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-ы', hablar: false, color: 'ambos' },    { texto: 'комнаты',  hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-и', hablar: false, color: 'ambos' },    { texto: 'недели',   hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-и', hablar: false, color: 'fem' }, { texto: 'двери',  hablar: true, color: 'fem' }]
     ]
   });
@@ -3699,8 +3700,8 @@ function renderTarjetaCasoGenitivoTerminaciones() {
       ['Masc. blando',      { texto: '-я', hablar: false, color: 'masc' },   { texto: 'гостя',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-а', hablar: false, color: 'neutro' }, { texto: 'окна',     hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-я', hablar: false, color: 'neutro' }, { texto: 'моря',     hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-ы', hablar: false, color: 'fem' },    { texto: 'комнаты',  hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-и', hablar: false, color: 'fem' },    { texto: 'недели',   hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-ы', hablar: false, color: 'ambos' },    { texto: 'комнаты',  hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-и', hablar: false, color: 'ambos' },    { texto: 'недели',   hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-и', hablar: false, color: 'fem' }, { texto: 'двери',  hablar: true, color: 'fem' }]
     ]
   });
@@ -3715,8 +3716,8 @@ function renderTarjetaCasoGenitivoPlural() {
       ['Masc. blando',      { texto: '-ей', hablar: false, color: 'masc' },   { texto: 'гостей',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '(vacía, + vocal)', hablar: false, color: 'neutro' }, { texto: 'окон', hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-ей', hablar: false, color: 'neutro' }, { texto: 'морей',     hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '(vacía)', hablar: false, color: 'fem' }, { texto: 'комнат',   hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-ь',  hablar: false, color: 'fem' },    { texto: 'недель',    hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '(vacía)', hablar: false, color: 'ambos' }, { texto: 'комнат',   hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-ь',  hablar: false, color: 'ambos' },    { texto: 'недель',    hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-ей', hablar: false, color: 'fem' }, { texto: 'дверей', hablar: true, color: 'fem' }]
     ]
   });
@@ -3756,8 +3757,8 @@ function renderTarjetaCasoDativoTerminaciones() {
       ['Masc. blando',      { texto: '-ю', hablar: false, color: 'masc' },   { texto: 'гостю',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-у', hablar: false, color: 'neutro' }, { texto: 'окну',     hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-ю', hablar: false, color: 'neutro' }, { texto: 'морю',     hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-е', hablar: false, color: 'fem' },    { texto: 'комнате',  hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-е', hablar: false, color: 'fem' },    { texto: 'неделе',   hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-е', hablar: false, color: 'ambos' },    { texto: 'комнате',  hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-е', hablar: false, color: 'ambos' },    { texto: 'неделе',   hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-и', hablar: false, color: 'fem' }, { texto: 'двери', hablar: true, color: 'fem' }]
     ]
   });
@@ -3772,8 +3773,8 @@ function renderTarjetaCasoDativoPlural() {
       ['Masc. blando',      { texto: '-ям', hablar: false, color: 'masc' },   { texto: 'гостям',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-ам', hablar: false, color: 'neutro' }, { texto: 'окнам',     hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-ям', hablar: false, color: 'neutro' }, { texto: 'морям',     hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-ам', hablar: false, color: 'fem' },    { texto: 'комнатам',  hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-ям', hablar: false, color: 'fem' },    { texto: 'неделям',   hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-ам', hablar: false, color: 'ambos' },    { texto: 'комнатам',  hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-ям', hablar: false, color: 'ambos' },    { texto: 'неделям',   hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-ям', hablar: false, color: 'fem' }, { texto: 'дверям', hablar: true, color: 'fem' }]
     ]
   });
@@ -3812,8 +3813,8 @@ function renderTarjetaCasoAcusativoTerminaciones() {
       ['Masc. blando ANIMADO',  { texto: '= genitivo',   hablar: false, color: 'masc' },   { texto: 'гостя',   hablar: true, color: 'masc' }],
       ['Neutro duro',           { texto: '= nominativo', hablar: false, color: 'neutro' }, { texto: 'окно',    hablar: true, color: 'neutro' }],
       ['Neutro blando',         { texto: '= nominativo', hablar: false, color: 'neutro' }, { texto: 'море',    hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',       { texto: '-у',           hablar: false, color: 'fem' },    { texto: 'комнату', hablar: true, color: 'fem' }],
-      ['Fem./masc. blando',     { texto: '-ю',           hablar: false, color: 'fem' },    { texto: 'неделю',  hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',       { texto: '-у',           hablar: false, color: 'ambos' },    { texto: 'комнату', hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando',     { texto: '-ю',           hablar: false, color: 'ambos' },    { texto: 'неделю',  hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '= nominativo', hablar: false, color: 'fem' },   { texto: 'дверь',   hablar: true, color: 'fem' }]
     ]
   });
@@ -3869,8 +3870,8 @@ function renderTarjetaCasoInstrumentalTerminaciones() {
       ['Masc. blando',      { texto: '-ем', hablar: false, color: 'masc' },   { texto: 'гостем',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-ом', hablar: false, color: 'neutro' }, { texto: 'окном',     hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-ем', hablar: false, color: 'neutro' }, { texto: 'морем',     hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-ой', hablar: false, color: 'fem' },    { texto: 'комнатой',  hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-ей', hablar: false, color: 'fem' },    { texto: 'неделей',   hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-ой', hablar: false, color: 'ambos' },    { texto: 'комнатой',  hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-ей', hablar: false, color: 'ambos' },    { texto: 'неделей',   hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-ью', hablar: false, color: 'fem' }, { texto: 'дверью', hablar: true, color: 'fem' }]
     ]
   });
@@ -3885,8 +3886,8 @@ function renderTarjetaCasoInstrumentalPlural() {
       ['Masc. blando',      { texto: '-ями', hablar: false, color: 'masc' },   { texto: 'гостями',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-ами', hablar: false, color: 'neutro' }, { texto: 'окнами',     hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-ями', hablar: false, color: 'neutro' }, { texto: 'морями',     hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-ами', hablar: false, color: 'fem' },    { texto: 'комнатами',  hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-ями', hablar: false, color: 'fem' },    { texto: 'неделями',   hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-ами', hablar: false, color: 'ambos' },    { texto: 'комнатами',  hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-ями', hablar: false, color: 'ambos' },    { texto: 'неделями',   hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-ями', hablar: false, color: 'fem' }, { texto: 'дверями', hablar: true, color: 'fem' }]
     ]
   });
@@ -3927,8 +3928,8 @@ function renderTarjetaCasoPrepositivoTerminaciones() {
       ['Masc. blando',      { texto: '-е', hablar: false, color: 'masc' },   { texto: 'госте',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-е', hablar: false, color: 'neutro' }, { texto: 'окне',     hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '= nominativo', hablar: false, color: 'neutro' }, { texto: 'море', hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-е', hablar: false, color: 'fem' },    { texto: 'комнате',  hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-е', hablar: false, color: 'fem' },    { texto: 'неделе',   hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-е', hablar: false, color: 'ambos' },    { texto: 'комнате',  hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-е', hablar: false, color: 'ambos' },    { texto: 'неделе',   hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-и', hablar: false, color: 'fem' }, { texto: 'двери', hablar: true, color: 'fem' }]
     ]
   });
@@ -3943,8 +3944,8 @@ function renderTarjetaCasoPrepositivoPlural() {
       ['Masc. blando',      { texto: '-ях', hablar: false, color: 'masc' },   { texto: 'гостях',    hablar: true, color: 'masc' }],
       ['Neutro duro',       { texto: '-ах', hablar: false, color: 'neutro' }, { texto: 'окнах',     hablar: true, color: 'neutro' }],
       ['Neutro blando',     { texto: '-ях', hablar: false, color: 'neutro' }, { texto: 'морях',     hablar: true, color: 'neutro' }],
-      ['Fem./masc. duro',   { texto: '-ах', hablar: false, color: 'fem' },    { texto: 'комнатах',  hablar: true, color: 'fem' }],
-      ['Fem./masc. blando', { texto: '-ях', hablar: false, color: 'fem' },    { texto: 'неделях',   hablar: true, color: 'fem' }],
+      ['Fem./masc. duro',   { texto: '-ах', hablar: false, color: 'ambos' },    { texto: 'комнатах',  hablar: true, color: 'ambos' }],
+      ['Fem./masc. blando', { texto: '-ях', hablar: false, color: 'ambos' },    { texto: 'неделях',   hablar: true, color: 'ambos' }],
       ['Fem. blando (3ª decl.)', { texto: '-ях', hablar: false, color: 'fem' }, { texto: 'дверях', hablar: true, color: 'fem' }]
     ]
   });
