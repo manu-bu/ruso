@@ -1479,6 +1479,69 @@ body.unidad-personas .tarjeta-titulo {
   text-transform: none;
 }
 
+/* ===== ESTILOS PARA TARJETAS RESUMEN (CASOS) ===== */
+
+:root {
+  --color-scarlet: #C23B3B;    /* Nominativo */
+  --color-verdi: #2F5233;      /* Acusativo */
+  --color-mora: #6B3FA0;       /* Dativo */
+  --color-mostaza: #A8841E;    /* Instrumental */
+  --color-celeste: #2E8B9E;    /* Prepositivo */
+  --color-blanco: #8a8a86;     /* Genitivo */
+  
+  --gender-masc: #17B8CE;      /* Celeste - masculino */
+  --gender-fem: #E8A5D5;       /* Rosa - femenino */
+  --gender-neutro: #F0D272;    /* Amarillo - neutro */
+  --gender-ambos: #8259A0;     /* Violeta - indistinto/ambos */
+}
+
+.terminacion-item {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gender-label {
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 120px;
+  color: #333;
+}
+
+.gender-label .masc {
+  color: var(--gender-masc);
+  font-weight: 600;
+}
+
+.gender-label .fem {
+  color: var(--gender-fem);
+  font-weight: 600;
+}
+
+.gender-label .neutro {
+  color: var(--gender-neutro);
+  font-weight: 600;
+}
+
+.gender-label .ambos {
+  color: var(--gender-ambos);
+  font-weight: 600;
+}
+
+.palabra-base {
+  color: var(--color-scarlet);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.palabra-transformada {
+  color: var(--color-verdi);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
 </style>
 </head>
 <body>
@@ -3744,11 +3807,11 @@ function renderTarjetaCasoGenitivoAdjetivos() {
 // NOMINATIVO (Scarlet) — Resumen
 function renderTarjetaCasoNominativoResumen() {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; padding:14px 16px; box-sizing:border-box;';
+  wrap.style.cssText = 'display:inline-block; padding:14px 16px; box-sizing:border-box; max-width:900px;';
   
   const card = document.createElement('div');
   card.className = 'tarjeta-fija tarjeta-informatica';
-  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #C23B3B 0%, #E8A5A5 100%) border-box; width:100%;';
+  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #C23B3B 0%, #E8A5A5 100%) border-box; ';
   
   card.innerHTML = `
     <div class="tarjeta-titulo" style="color: #C23B3B; margin-bottom:14px;">Resumen — Nominativo (Scarlet)</div>
@@ -3805,7 +3868,7 @@ function renderTarjetaCasoNominativoResumen() {
       </div>
       <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
         <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
-        <div style="line-height:1.4; margin:4px 0;">Scarlet es el "estado de reposo" — todos los otros 5 personajes salen de acá.</div>
+        <div style="line-height:1.4; margin:4px 0;"><span style="color: #C23B3B; font-weight:600;">Scarlet</span> es el "estado de reposo" — todos los otros 5 personajes salen de acá.</div>
       </div>
     </div>`;
   
@@ -3829,11 +3892,11 @@ function renderTarjetaCasoGenitivoUso() {
 // GENITIVO (Sra. Blanco) — Resumen
 function renderTarjetaCasoGenitivoResumen() {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; padding:14px 16px; box-sizing:border-box;';
+  wrap.style.cssText = 'display:inline-block; padding:14px 16px; box-sizing:border-box; max-width:900px;';
   
   const card = document.createElement('div');
   card.className = 'tarjeta-fija tarjeta-informatica';
-  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #8a8a86 0%, #d4d4d0 100%) border-box; width:100%;';
+  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #8a8a86 0%, #d4d4d0 100%) border-box; ';
   
   card.innerHTML = `
     <div class="tarjeta-titulo" style="color: #8a8a86; margin-bottom:14px;">Resumen — Genitivo (Sra. Blanco)</div>
@@ -3957,11 +4020,11 @@ function renderTarjetaCasoDativoUso() {
 // DATIVO (Mora) — Resumen
 function renderTarjetaCasoDativoResumen() {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; padding:14px 16px; box-sizing:border-box;';
+  wrap.style.cssText = 'display:inline-block; padding:14px 16px; box-sizing:border-box; max-width:900px;';
   
   const card = document.createElement('div');
   card.className = 'tarjeta-fija tarjeta-informatica';
-  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #6B3FA0 0%, #D9C2FA 100%) border-box; width:100%;';
+  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #6B3FA0 0%, #D9C2FA 100%) border-box; ';
   
   card.innerHTML = `
     <div class="tarjeta-titulo" style="color: #6B3FA0; margin-bottom:14px;">Resumen — Dativo (Mora)</div>
@@ -4018,7 +4081,7 @@ function renderTarjetaCasoDativoResumen() {
       </div>
       <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
         <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
-        <div style="line-height:1.4; margin:4px 0;">Mora casi siempre aparece con Verdi (la cosa que se entrega) — son pareja. Verbos típicos: dar, mostrar, decir, prometer, ayudar, escribir (a alguien).</div>
+        <div style="line-height:1.4; margin:4px 0;"><span style="color: #6B3FA0; font-weight:600;">Mora</span> casi siempre aparece con <span style="color: #2F5233; font-weight:600;">Verdi</span> (la cosa que se entrega) — son pareja. Verbos típicos: dar, mostrar, decir, prometer, ayudar, escribir (a alguien).</div>
       </div>
     </div>`;
   
@@ -4086,11 +4149,11 @@ function renderTarjetaCasoAcusativoUso() {
 // ACUSATIVO (Verdi) — Resumen
 function renderTarjetaCasoAcusativoResumen() {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; padding:14px 16px; box-sizing:border-box;';
+  wrap.style.cssText = 'display:inline-block; padding:14px 16px; box-sizing:border-box; max-width:900px;';
   
   const card = document.createElement('div');
   card.className = 'tarjeta-fija tarjeta-informatica';
-  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #2F5233 0%, #8FB595 100%) border-box; width:100%;';
+  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #2F5233 0%, #8FB595 100%) border-box; ';
   
   card.innerHTML = `
     <div class="tarjeta-titulo" style="color: #2F5233; margin-bottom:14px;">Resumen — Acusativo (Verdi)</div>
@@ -4147,7 +4210,7 @@ function renderTarjetaCasoAcusativoResumen() {
       </div>
       <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
         <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
-        <div style="line-height:1.4; margin:4px 0;">Si es animado (persona/animal), copia la forma de Sra. Blanco. Si es inanimado (cosa), se queda como Scarlet. Esto distingue quién hace qué.</div>
+        <div style="line-height:1.4; margin:4px 0;">Si es animado (persona/animal), copia la forma de <span style="color: #8a8a86; font-weight:600;">Sra. Blanco</span>. Si es inanimado (cosa), se queda como <span style="color: #C23B3B; font-weight:600;">Scarlet</span>. Esto distingue quién hace qué.</div>
       </div>
     </div>`;
   
@@ -4216,11 +4279,11 @@ function renderTarjetaCasoInstrumentalUso() {
 // INSTRUMENTAL (Mostaza) — Resumen
 function renderTarjetaCasoInstrumentalResumen() {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; padding:14px 16px; box-sizing:border-box;';
+  wrap.style.cssText = 'display:inline-block; padding:14px 16px; box-sizing:border-box; max-width:900px;';
   
   const card = document.createElement('div');
   card.className = 'tarjeta-fija tarjeta-informatica';
-  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #A8841E 0%, #F0D272 100%) border-box; width:100%;';
+  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #A8841E 0%, #F0D272 100%) border-box; ';
   
   card.innerHTML = `
     <div class="tarjeta-titulo" style="color: #A8841E; margin-bottom:14px;">Resumen — Instrumental (Mostaza)</div>
@@ -4277,7 +4340,7 @@ function renderTarjetaCasoInstrumentalResumen() {
       </div>
       <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
         <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
-        <div style="line-height:1.4; margin:4px 0;">Hay dos usos: herramienta (sin preposición, ключом = "con la llave") y compañía (con "с", с гостем = "con el huésped"). Ambos usan Mostaza.</div>
+        <div style="line-height:1.4; margin:4px 0;">Hay dos usos: herramienta (sin preposición, ключом = "con la llave") y compañía (con "с", с гостем = "con el huésped"). Ambos usan <span style="color: #A8841E; font-weight:600;">Mostaza</span>.</div>
       </div>
     </div>`;
   
@@ -4344,11 +4407,11 @@ function renderTarjetaCasoPrepositivoUso() {
 // PREPOSITIVO (Celeste) — Resumen
 function renderTarjetaCasoPrepositivoResumen() {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'width:100%; padding:14px 16px; box-sizing:border-box;';
+  wrap.style.cssText = 'display:inline-block; padding:14px 16px; box-sizing:border-box; max-width:900px;';
   
   const card = document.createElement('div');
   card.className = 'tarjeta-fija tarjeta-informatica';
-  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #2E8B9E 0%, #A8E4EE 100%) border-box; width:100%;';
+  card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #2E8B9E 0%, #A8E4EE 100%) border-box; ';
   
   card.innerHTML = `
     <div class="tarjeta-titulo" style="color: #2E8B9E; margin-bottom:14px;">Resumen — Prepositivo (Celeste)</div>
@@ -4405,7 +4468,7 @@ function renderTarjetaCasoPrepositivoResumen() {
       </div>
       <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
         <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
-        <div style="line-height:1.4; margin:4px 0;">SIEMPRE va con preposición. Las más comunes: в (en), на (sobre), о (sobre/de qué se habla). Sin preposición delante NO es Celeste.</div>
+        <div style="line-height:1.4; margin:4px 0;">SIEMPRE va con preposición. Las más comunes: в (en), на (sobre), о (sobre/de qué se habla). Sin preposición delante NO es <span style="color: #2E8B9E; font-weight:600;">Celeste</span>.</div>
       </div>
     </div>`;
   
