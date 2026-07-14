@@ -3750,7 +3750,6 @@ function renderTarjetaCasoNominativoResumen() {
   card.className = 'tarjeta-fija tarjeta-informatica';
   card.style.cssText = 'border: 3px solid transparent; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #C23B3B 0%, #E8A5A5 100%) border-box; width:100%;';
   
-  
   card.innerHTML = `
     <div class="tarjeta-titulo" style="color: #C23B3B; margin-bottom:14px;">Resumen — Nominativo (Scarlet)</div>
     <div class="tarjeta-cuerpo" style="font-size:16px; line-height:1.6; color:#333;">
@@ -3762,21 +3761,51 @@ function renderTarjetaCasoNominativoResumen() {
       </div>
       <div style="margin-bottom:12px;">
         <strong style="color:#C23B3B;">Terminación (singular):</strong><br>
-        • Masc. duro: <span style="color:#C23B3B; font-weight:600;">паспорт</span> → consonante pelada<br>
-        • Masc. blando: <span style="color:#C23B3B; font-weight:600;">гость</span> → -ь / -й<br>
-        • Neutro duro: <span style="color:#C23B3B; font-weight:600;">окно</span> → -о<br>
-        • Neutro blando: <span style="color:#C23B3B; font-weight:600;">море</span> → -е<br>
-        • Fem./masc. duro: <span style="color:#C23B3B; font-weight:600;">комната</span> → -а<br>
-        • Fem./masc. blando: <span style="color:#C23B3B; font-weight:600;">неделя</span> → -я
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> дuro:</span>
+                    <span class="palabra-base">паспорт</span>
+                    <span>→</span>
+                    <span class="palabra-base">паспорт</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> blando:</span>
+                    <span class="palabra-base">гость</span>
+                    <span>→</span>
+                    <span class="palabra-base">гость</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> duro:</span>
+                    <span class="palabra-base">окно</span>
+                    <span>→</span>
+                    <span class="palabra-base">окно</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> blando:</span>
+                    <span class="palabra-base">море</span>
+                    <span>→</span>
+                    <span class="palabra-base">море</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> duro:</span>
+                    <span class="palabra-base">комната</span>
+                    <span>→</span>
+                    <span class="palabra-base">комната</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> blando:</span>
+                    <span class="palabra-base">неделя</span>
+                    <span>→</span>
+                    <span class="palabra-base">неделя</span>
+                </div>
       </div>
       <div style="background:#f9f9f7; border-left:3px solid #C23B3B; padding:10px; margin:10px 0; border-radius:4px; font-family:'Courier New', monospace; font-size:14px;">
-        <div><span style="color:#C23B3B; font-weight:600;">Я</span> читаю книгу.</div>
+        <div><span style="color: #C23B3B; font-weight:600;">Я</span> [читаю] <span style="color: #C23B3B; font-weight:600;">[...]</span>.</div>
         <div style="color:#666; font-style:italic; font-size:13px; margin-top:4px;">Literal: yo leer libro</div>
         <div style="color:#333; font-weight:500; margin-top:4px;">→ Yo leo el libro.</div>
       </div>
-      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div><strong>⚠️ Nota especial:</strong></div>
-        <div>Scarlet es el "estado de reposo" — todos los otros 5 personajes salen de acá.</div>
+      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
+        <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
+        <div style="line-height:1.4; margin:4px 0;">Scarlet es el "estado de reposo" — todos los otros 5 personajes salen de acá.</div>
       </div>
     </div>`;
   
@@ -3817,21 +3846,51 @@ function renderTarjetaCasoGenitivoResumen() {
       </div>
       <div style="margin-bottom:12px;">
         <strong style="color:#8a8a86;">Terminación (singular):</strong><br>
-        • Masc. duro: <span style="color:#8a8a86; font-weight:600;">паспорт</span> → -а<br>
-        • Masc. blando: <span style="color:#8a8a86; font-weight:600;">гость</span> → -я<br>
-        • Neutro duro: <span style="color:#8a8a86; font-weight:600;">окно</span> → -а<br>
-        • Neutro blando: <span style="color:#8a8a86; font-weight:600;">море</span> → -я<br>
-        • Fem./masc. duro: <span style="color:#8a8a86; font-weight:600;">комната</span> → -ы<br>
-        • Fem./masc. blando: <span style="color:#8a8a86; font-weight:600;">неделя</span> → -и
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> duro:</span>
+                    <span class="palabra-base">паспорт</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">паспорта</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> blando:</span>
+                    <span class="palabra-base">гость</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">гостя</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> duro:</span>
+                    <span class="palabra-base">окно</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">окна</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> blando:</span>
+                    <span class="palabra-base">море</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">моря</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> duro:</span>
+                    <span class="palabra-base">комната</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">комнаты</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> blando:</span>
+                    <span class="palabra-base">неделя</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">недели</span>
+                </div>
       </div>
       <div style="background:#f9f9f7; border-left:3px solid #8a8a86; padding:10px; margin:10px 0; border-radius:4px; font-family:'Courier New', monospace; font-size:14px;">
-        <div>Это ключ <span style="color:#8a8a86; font-weight:600;">друга</span>.</div>
+        <div><span style="color: #8a8a86; font-weight:600;">Я</span> [ключ] <span style="color: #8a8a86; font-weight:600;">[...]</span>.</div>
         <div style="color:#666; font-style:italic; font-size:13px; margin-top:4px;">Literal: esto llave amigo</div>
         <div style="color:#333; font-weight:500; margin-top:4px;">→ Esta es la llave del amigo.</div>
       </div>
-      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div><strong>⚠️ Nota especial:</strong></div>
-        <div><strong>TRAMPA:</strong> "tener positivo" (у + <span style="color:#C23B3B; font-weight:600;">есть</span>) usa <span style="color:#C23B3B; font-weight:600;">Nominativo</span> en la cosa, NO Genitivo. Pero "tener negativo" (у + нет) usa <span style="color:#8a8a86; font-weight:600;">Genitivo</span>. Esta es la más rara de todas.</div>
+      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
+        <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
+        <div style="line-height:1.4; margin:4px 0;">TRAMPA: "tener positivo" (у + есть) usa Nominativo en la cosa, NO Genitivo. Pero "tener negativo" (у + нет) usa Genitivo. La más rara de todas.</div>
       </div>
     </div>`;
   
@@ -3915,21 +3974,51 @@ function renderTarjetaCasoDativoResumen() {
       </div>
       <div style="margin-bottom:12px;">
         <strong style="color:#6B3FA0;">Terminación (singular):</strong><br>
-        • Masc. duro: <span style="color:#6B3FA0; font-weight:600;">паспорт</span> → -у<br>
-        • Masc. blando: <span style="color:#6B3FA0; font-weight:600;">гость</span> → -ю<br>
-        • Neutro duro: <span style="color:#6B3FA0; font-weight:600;">окно</span> → -у<br>
-        • Neutro blando: <span style="color:#6B3FA0; font-weight:600;">море</span> → -ю<br>
-        • Fem./masc. duro: <span style="color:#6B3FA0; font-weight:600;">комната</span> → -е<br>
-        • Fem./masc. blando: <span style="color:#6B3FA0; font-weight:600;">неделя</span> → -е
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> duro:</span>
+                    <span class="palabra-base">паспорт</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">паспорту</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> blando:</span>
+                    <span class="palabra-base">гость</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">гостю</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> duro:</span>
+                    <span class="palabra-base">окно</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">окну</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> blando:</span>
+                    <span class="palabra-base">море</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">морю</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> duro:</span>
+                    <span class="palabra-base">комната</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">комнате</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> blando:</span>
+                    <span class="palabra-base">неделя</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">неделе</span>
+                </div>
       </div>
       <div style="background:#f9f9f7; border-left:3px solid #6B3FA0; padding:10px; margin:10px 0; border-radius:4px; font-family:'Courier New', monospace; font-size:14px;">
-        <div><span style="color:#C23B3B; font-weight:600;">Я</span> даю ключ <span style="color:#6B3FA0; font-weight:600;">другу</span>.</div>
+        <div><span style="color: #6B3FA0; font-weight:600;">Я</span> [даю] <span style="color: #6B3FA0; font-weight:600;">[...]</span>.</div>
         <div style="color:#666; font-style:italic; font-size:13px; margin-top:4px;">Literal: yo dar llave amigo</div>
         <div style="color:#333; font-weight:500; margin-top:4px;">→ Le doy la llave al amigo.</div>
       </div>
-      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div><strong>⚠️ Nota especial:</strong></div>
-        <div>Mora casi siempre aparece con <span style="color:#2F5233; font-weight:600;">Verdi</span> (la cosa que se entrega) — son pareja. Verbos típicos: dar, mostrar, decir, prometer, ayudar, escribir (a alguien).</div>
+      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
+        <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
+        <div style="line-height:1.4; margin:4px 0;">Mora casi siempre aparece con Verdi (la cosa que se entrega) — son pareja. Verbos típicos: dar, mostrar, decir, prometer, ayudar, escribir (a alguien).</div>
       </div>
     </div>`;
   
@@ -4014,21 +4103,51 @@ function renderTarjetaCasoAcusativoResumen() {
       </div>
       <div style="margin-bottom:12px;">
         <strong style="color:#2F5233;">Terminación (singular):</strong><br>
-        • Masc. duro inanimado: <span style="color:#C23B3B; font-weight:600;">паспорт</span> → = <span style="color:#C23B3B; font-weight:600;">Scarlet</span><br>
-        • Masc. duro animado: <span style="color:#C23B3B; font-weight:600;">друг</span> → copia a <span style="color:#8a8a86; font-weight:600;">Genitivo</span> (-а)<br>
-        • Neutro duro: <span style="color:#C23B3B; font-weight:600;">окно</span> → = <span style="color:#C23B3B; font-weight:600;">Scarlet</span><br>
-        • Neutro blando: <span style="color:#C23B3B; font-weight:600;">море</span> → = <span style="color:#C23B3B; font-weight:600;">Scarlet</span><br>
-        • Fem./masc. duro: <span style="color:#C23B3B; font-weight:600;">комната</span> → -у<br>
-        • Fem./masc. blando: <span style="color:#C23B3B; font-weight:600;">неделя</span> → -ю
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> duro inanimado:</span>
+                    <span class="palabra-base">паспорт</span>
+                    <span>→</span>
+                    <span class="palabra-base">паспорт</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> duro animado:</span>
+                    <span class="palabra-base">друг</span>
+                    <span>→</span>
+                    <span style="color: #8a8a86; font-weight:600; font-family:'Courier New', monospace;">друга</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> duro:</span>
+                    <span class="palabra-base">окно</span>
+                    <span>→</span>
+                    <span class="palabra-base">окно</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> blando:</span>
+                    <span class="palabra-base">море</span>
+                    <span>→</span>
+                    <span class="palabra-base">море</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> duro:</span>
+                    <span class="palabra-base">комната</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">комнату</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> blando:</span>
+                    <span class="palabra-base">неделя</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">неделю</span>
+                </div>
       </div>
       <div style="background:#f9f9f7; border-left:3px solid #2F5233; padding:10px; margin:10px 0; border-radius:4px; font-family:'Courier New', monospace; font-size:14px;">
-        <div><span style="color:#C23B3B; font-weight:600;">Я</span> вижу <span style="color:#2F5233; font-weight:600;">окно</span>.</div>
+        <div><span style="color: #2F5233; font-weight:600;">Я</span> [вижу] <span style="color: #2F5233; font-weight:600;">[...]</span>.</div>
         <div style="color:#666; font-style:italic; font-size:13px; margin-top:4px;">Literal: yo ver ventana</div>
         <div style="color:#333; font-weight:500; margin-top:4px;">→ Veo la ventana.</div>
       </div>
-      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div><strong>⚠️ Nota especial:</strong></div>
-        <div>Si es animado (persona/animal), copia la forma de <span style="color:#8a8a86; font-weight:600;">Sra. Blanco</span>. Si es inanimado (cosa), se queda como <span style="color:#C23B3B; font-weight:600;">Scarlet</span>. Esto distingue quién hace qué.</div>
+      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
+        <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
+        <div style="line-height:1.4; margin:4px 0;">Si es animado (persona/animal), copia la forma de Sra. Blanco. Si es inanimado (cosa), se queda como Scarlet. Esto distingue quién hace qué.</div>
       </div>
     </div>`;
   
@@ -4114,21 +4233,51 @@ function renderTarjetaCasoInstrumentalResumen() {
       </div>
       <div style="margin-bottom:12px;">
         <strong style="color:#A8841E;">Terminación (singular):</strong><br>
-        • Masc. duro: <span style="color:#A8841E; font-weight:600;">паспорт</span> → -ом<br>
-        • Masc. blando: <span style="color:#A8841E; font-weight:600;">гость</span> → -ем<br>
-        • Neutro duro: <span style="color:#A8841E; font-weight:600;">окно</span> → -ом<br>
-        • Neutro blando: <span style="color:#A8841E; font-weight:600;">море</span> → -ем<br>
-        • Fem./masc. duro: <span style="color:#A8841E; font-weight:600;">комната</span> → -ой<br>
-        • Fem./masc. blando: <span style="color:#A8841E; font-weight:600;">неделя</span> → -ей
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> duro:</span>
+                    <span class="palabra-base">паспорт</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">паспортом</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> blando:</span>
+                    <span class="palabra-base">гость</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">гостем</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> duro:</span>
+                    <span class="palabra-base">окно</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">окном</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> blando:</span>
+                    <span class="palabra-base">море</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">морем</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> duro:</span>
+                    <span class="palabra-base">комната</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">комнатой</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> blando:</span>
+                    <span class="palabra-base">неделя</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">неделей</span>
+                </div>
       </div>
       <div style="background:#f9f9f7; border-left:3px solid #A8841E; padding:10px; margin:10px 0; border-radius:4px; font-family:'Courier New', monospace; font-size:14px;">
-        <div><span style="color:#C23B3B; font-weight:600;">Я</span> открываю дверь <span style="color:#A8841E; font-weight:600;">ключом</span>.</div>
+        <div><span style="color: #A8841E; font-weight:600;">Я</span> [открываю] <span style="color: #A8841E; font-weight:600;">[...]</span>.</div>
         <div style="color:#666; font-style:italic; font-size:13px; margin-top:4px;">Literal: yo abrir puerta llave-con</div>
         <div style="color:#333; font-weight:500; margin-top:4px;">→ Abro la puerta con la llave.</div>
       </div>
-      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div><strong>⚠️ Nota especial:</strong></div>
-        <div>Hay dos usos: herramienta (sin preposición, <span style="color:#A8841E; font-weight:600;">ключом</span> = "con la llave") y compañía (con "с", <span style="color:#A8841E; font-weight:600;">с гостем</span> = "con el huésped"). Ambos usan Mostaza.</div>
+      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
+        <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
+        <div style="line-height:1.4; margin:4px 0;">Hay dos usos: herramienta (sin preposición, ключом = "con la llave") y compañía (con "с", с гостем = "con el huésped"). Ambos usan Mostaza.</div>
       </div>
     </div>`;
   
@@ -4212,21 +4361,51 @@ function renderTarjetaCasoPrepositivoResumen() {
       </div>
       <div style="margin-bottom:12px;">
         <strong style="color:#2E8B9E;">Terminación (singular):</strong><br>
-        • Masc. duro: <span style="color:#2E8B9E; font-weight:600;">паспорт</span> → -е<br>
-        • Masc. blando: <span style="color:#2E8B9E; font-weight:600;">гость</span> → -е<br>
-        • Neutro duro: <span style="color:#2E8B9E; font-weight:600;">окно</span> → -е<br>
-        • Neutro blando: <span style="color:#2E8B9E; font-weight:600;">море</span> → = <span style="color:#C23B3B; font-weight:600;">Scarlet</span> (-е)<br>
-        • Fem./masc. duro: <span style="color:#2E8B9E; font-weight:600;">комната</span> → -е<br>
-        • Fem./masc. blando: <span style="color:#2E8B9E; font-weight:600;">неделя</span> → -е
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> duro:</span>
+                    <span class="palabra-base">паспорт</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">паспорте</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="masc">Masc.</span> blando:</span>
+                    <span class="palabra-base">гость</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">госте</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> duro:</span>
+                    <span class="palabra-base">окно</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">окне</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="neutro">Neutro</span> blando:</span>
+                    <span class="palabra-base">море</span>
+                    <span>→</span>
+                    <span class="palabra-base">море</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> duro:</span>
+                    <span class="palabra-base">комната</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">комнате</span>
+                </div>
+                <div class="terminacion-item">
+                    <span class="gender-label"><span class="ambos">Fem./masc.</span> blando:</span>
+                    <span class="palabra-base">неделя</span>
+                    <span>→</span>
+                    <span class="palabra-transformada">неделе</span>
+                </div>
       </div>
       <div style="background:#f9f9f7; border-left:3px solid #2E8B9E; padding:10px; margin:10px 0; border-radius:4px; font-family:'Courier New', monospace; font-size:14px;">
-        <div><span style="color:#C23B3B; font-weight:600;">Я</span> читаю <span style="color:#2E8B9E; font-weight:600;">в номере</span>.</div>
+        <div><span style="color: #2E8B9E; font-weight:600;">Я</span> [читаю] <span style="color: #2E8B9E; font-weight:600;">[...]</span>.</div>
         <div style="color:#666; font-style:italic; font-size:13px; margin-top:4px;">Literal: yo leer en habitación</div>
         <div style="color:#333; font-weight:500; margin-top:4px;">→ Leo en la habitación.</div>
       </div>
-      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div><strong>⚠️ Nota especial:</strong></div>
-        <div><strong>SIEMPRE va con preposición</strong>. Las más comunes: <span style="color:#2E8B9E; font-weight:600;">в</span> (en), <span style="color:#2E8B9E; font-weight:600;">на</span> (sobre), <span style="color:#2E8B9E; font-weight:600;">о</span> (sobre/de qué se habla). Sin preposición delante NO es Celeste.</div>
+      <div style="background:#fff3cd; border-left:3px solid #ffc107; padding:10px; margin-top:12px; border-radius:4px; font-size:14px; color:#856404; display:inline-block; min-width:100%;">
+        <div style="font-weight:700; margin-bottom:8px;">⚠️ Nota especial:</div>
+        <div style="line-height:1.4; margin:4px 0;">SIEMPRE va con preposición. Las más comunes: в (en), на (sobre), о (sobre/de qué se habla). Sin preposición delante NO es Celeste.</div>
       </div>
     </div>`;
   
